@@ -13,20 +13,17 @@
 <faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
  xmlns:xi="http://www.w3.org/2001/XInclude"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="         http://java.sun.com/xml/ns/javaee         http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
- <!-- configuration of navigation rules LynxWork Build Sinergy-->
+
+    <!-- configuration of navigation rules LynxWork Build Sinergy-->
  <navigation-rule>
   <from-view-id>/index.xhtml</from-view-id>
   <navigation-case>
    <from-outcome>login</from-outcome>
-   <to-view-id>/view/main/main.xhtml</to-view-id>
+   <to-view-id>/view/social/publication/publication.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
    <from-outcome>validateLogin</from-outcome>
    <to-view-id>/view/security/access/validateLogin.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>profile</from-outcome>
-   <to-view-id>/view/hcm/profile/personProfile.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
    <from-outcome>addProfession</from-outcome>
@@ -41,7 +38,31 @@
    <to-view-id>/view/hcm/profile/test.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
+ 
+ <!-- Menu -->
+ <navigation-rule>
+  <from-view-id>*</from-view-id>
+  <navigation-case>
+   <from-outcome>profile</from-outcome>
+   <to-view-id>/view/hcm/profile/personProfile.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>alert</from-outcome>
+   <to-view-id>/view/social/alert/alert.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>message</from-outcome>
+   <to-view-id>/view/social/message/message.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>publication</from-outcome>
+   <to-view-id>/view/social/publication/publication.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ 
+ 
  <application>
   <message-bundle>messages_es</message-bundle>
  </application>
+ 
 </faces-config>

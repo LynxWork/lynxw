@@ -202,21 +202,32 @@ public class LoginController implements Serializable {
 	
 	
 	public String loginRegistration(){
+		log.debug("loginRegistration");
+		isLogin = true;
 		return "index";
 	}
-
-
+	
 	public String viewPublications(){
-		return "publications";
+		log.debug("viewPublications");
+		isLogin = true;
+		return "publication";
 	}
+	
 	public String viewMessages(){
-		return "messages";
+		log.debug("viewMessages");
+		isLogin = true;
+		return "message";
 	}	
+	
 	public String viewAlerts(){
-		return "alerts";
+		log.debug("viewAlerts");
+		isLogin = true;
+		return "alert";
 	}
+
 	public String viewProfile(){
 		log.debug("View Profile");
+		isLogin = true;
 		return "profile";
 	}
 
