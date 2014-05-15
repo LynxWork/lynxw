@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/templates/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:my="http://java.sun.com/jsf/composite/components">
+    <ui:define name="content">
+        <h:outputStylesheet name="app.css" library="css"/>
+        <h:outputScript target="head" name="showMessage.js" library="js"/>
+<h:form id="validateForm">
+				    <rich:panel>
+							<f:facet name="header">
+					            <h:outputText value="Entrar a LynxWork"></h:outputText>
+					        </f:facet>
+					        <div>
+					        	<div>
+					        		<p>Por favor vuelve a intruducir tu contraseña</p>
+					        		<p>La contraseña no es válida. Por favor, asegúrate de que el bloqueo de mayúsculas no está activado e inténtalo de nuevo.</p>
+					        		<p>¿Has olvidado tu contraseña? Solicita una nueva.</p>
+					        	</div>
+					        </div>
+			                    <h:panelGrid columns="1" columnClasses="titleCell">
+							    	<h:panelGrid columns="2">
+								        <h:outputLabel for="userEmail" value="Email:"  style="color: #0174DF" />
+								        <h:inputText id="userEmail" value="#{loginController.userEmail}"></h:inputText>
+									    <h:outputLabel for="password" value="Contraseña:" style="color: #0174DF"/>
+									    <h:inputSecret id="password" value="#{loginController.password}" ></h:inputSecret>
+							        </h:panelGrid>
+									<h:commandButton  id="btnLogin" value="Ingresar" action="#{loginController.login}" />
+									<h:commandButton  id="btnLoginRegister" value="Regístrate en LynxWork" action="#{loginController.loginRegistration}" />
+							    </h:panelGrid>
+				     </rich:panel>
+</h:form>
+	</ui:define>
+</ui:composition>

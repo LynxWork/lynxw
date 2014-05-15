@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#index.xhtml" PATH="/index.xhtml"
+  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#index.xhtml:0" NAME="item"
+   PATH="/index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#view#main#main.xhtml" NAME="output"
+    PATH="/view/main/main.xhtml" TARGET="rules:#view#main#main.xhtml"
+    TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="validateLogin::#view#security#access#validateLogin.xhtml"
+    NAME="output1" PATH="/view/security/access/validateLogin.xhtml"
+    TARGET="rules:#view#security#access#validateLogin.xhtml"
+    TITLE="validateLogin" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="profile::#view#hcm#profile#personProfile.xhtml" NAME="output2"
+    PATH="/view/hcm/profile/personProfile.xhtml"
+    TARGET="rules:#view#hcm#profile#personProfile.xhtml" TITLE="profile" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="addProfession::#view#hcm#profile#addProfession.xhtml"
+    NAME="output3" PATH="/view/hcm/profile/addProfession.xhtml"
+    TARGET="rules:#view#hcm#profile#addProfession.xhtml"
+    TITLE="addProfession" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="completeProfile::#view#hcm#profile#addProfession.xhtml"
+    NAME="output4" PATH="/view/hcm/profile/addProfession.xhtml"
+    TARGET="rules:#view#hcm#profile#addProfession.xhtml"
+    TITLE="completeProfile" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="test::#view#hcm#profile#test.xhtml"
+    NAME="output5" PATH="/view/hcm/profile/test.xhtml"
+    TARGET="rules:#view#hcm#profile#test.xhtml" TITLE="test" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#view#security#access#validateLogin.xhtml"
+  PATH="/view/security/access/validateLogin.xhtml" SHAPE="272,209,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#view#main#main.xhtml"
+  PATH="/view/main/main.xhtml" SHAPE="272,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#view#hcm#profile#personProfile.xhtml"
+  PATH="/view/hcm/profile/personProfile.xhtml" SHAPE="272,321,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#view#hcm#profile#addProfession.xhtml"
+  PATH="/view/hcm/profile/addProfession.xhtml" SHAPE="304,529,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#view#hcm#profile#test.xhtml"
+  PATH="/view/hcm/profile/test.xhtml" SHAPE="304,641,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

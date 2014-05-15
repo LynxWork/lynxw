@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/templates/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:my="http://java.sun.com/jsf/composite/components">
+	<ui:define name="content">
+		<h:outputStylesheet name="app.css" library="css" />
+		<h:outputScript target="head" name="showMessage.js" library="js" />
+
+		<h:outputStylesheet>
+        .top {vertical-align: top;} 
+        .info {height: 202px;overflow: auto;}
+</h:outputStylesheet>
+		<h:outputStylesheet>
+        .ecol1 {
+        vertical-align: top;
+        padding-right: 25px
+        }
+ 
+        .ecol2 {
+        vertical-align: top;
+        border-left: #ACBECE 1px solid;
+        padding-left: 10px
+        }
+ 
+        .rich-calendar-tool-btn {
+        font-family: Arial, Verdana;
+        }
+    </h:outputStylesheet>
+
+<h:form id="professionForm">
+			<rich:panel>
+				<f:facet name="header">
+					<h:panelGrid columns="2">
+						<h:outputText value="Ocupacion: " />
+					</h:panelGrid>
+				</f:facet>
+				<div class="userInformationText">Es necesario que ingreses al menos
+					una ocupaciòn laboral para que tengas mayores posibilidades de ser
+					contactado</div>
+				<a4j:outputPanel id="professionInfo">
+					<rich:dataGrid columns="1"
+						value="#{professionController.professionList}" var="profession"
+						rowKeyVar="row" id="ocupationDataGrid">
+						<rich:panel bodyClass="rich-laguna-panel-no-header">
+							<h:panelGrid columns="3">
+								<h:outputText value="Profecion: " />
+								<h:outputText value="#{profession.name}" />
+								<h:outputText value="#{profession.description}" />
+							</h:panelGrid>
+						</rich:panel>
+					</rich:dataGrid>
+				</a4j:outputPanel>
+					<h:panelGrid columns="2" id="ocupationPanel" rendered="true">
+						<h:outputText value="Ocupacion: " styleClass="fieldLabel" />
+						<h:selectOneMenu value="#{professionController.professionName}"  binding="#{professionController.professionName}">
+							<f:selectItems value="#{professionController.professionOptions}" />
+						</h:selectOneMenu>
+						<!-- 
+						<rich:select enableManualInput="true"
+							defaultLabel="Escribe la ocupacion a la que te dedicas"
+							value="#{professionController.professionName}" style="width:195px;">
+							<f:selectItems value="#{professionController.professionOptions}" />
+						</rich:select>
+						 -->
+					</h:panelGrid>
+					<h:panelGrid columns="2">
+						<a4j:commandButton id="btnSave" action="#{professionController.saveProfession}"
+							execute="ocupationPanel" render="professionInfo" value="Guardar" rendered="true" />
+						<h:commandButton id="btnSaveII" value="Guardar II" action="#{professionController.saveProfession}" />	
+						<a4j:commandButton
+							id="btnCancel" action="#{professionController.cancelAddProfession}"
+							render="ocupationPanel" execute="ocupationPanel" value="Cancelar" rendered="true" />
+					</h:panelGrid>
+			</rich:panel>
+<br/>
+			<rich:panel>
+				<f:facet name="header">
+					<h:outputText
+						value="Por favor, Completa los datos generales de tu registro"></h:outputText>
+				</f:facet>
+				<h:panelGrid columns="1" columnClasses="titleCell">
+					<br />
+					<h:panelGrid columns="3">
+					<h:panelGrid columns="2">
+						<h:outputText value="Nombre: " style="color: #0174DF" />
+						<rich:inplaceInput id="txtName"
+							value="#{professionController.person.firstName}" size="50"
+							defaultLabel="Click para ingrsar su nombre " />
+					</h:panelGrid>
+
+					<h:panelGrid columns="2">
+						<h:outputText value="Apellido Pateno: " style="color: #0174DF" />
+						<rich:inplaceInput id="txtFirsName"
+							value="#{professionController.person.firstName}" size="50"
+							defaultLabel="Click para ingresar su apellido paterno" />
+					</h:panelGrid>
+					<h:panelGrid columns="2">
+						<h:outputText value="Apellido Materno: " style="color: #0174DF" />
+						<rich:inplaceInput id="txtMiddleName"
+							value="#{professionController.person.middleName}" size="50"
+							defaultLabel="Click para ingresar su apellido materno " />
+					</h:panelGrid>
+				</h:panelGrid>
+				
+					<h:panelGrid columns="2">
+						<h:panelGrid columns="2">
+						<h:outputText value="Genero: " style="color: #0174DF" />
+							<rich:inplaceSelect defaultLabel="Click para indicar el genero"
+								openOnEdit="true" value="#{professionController.person.genderId}">
+								<f:selectItem itemValue="1" itemLabel="Hombre" />
+								<f:selectItem itemValue="2" itemLabel="Mujer" />
+							</rich:inplaceSelect>
+						</h:panelGrid>
+						<h:panelGrid columns="2">
+							<h:outputText value="Estado civil: " style="color: #0174DF" />
+							<rich:inplaceSelect
+								defaultLabel="Click para indicar el estado civil"
+								openOnEdit="true"
+								value="#{personProfileController.estateCivilId}">
+								<f:selectItem itemValue="1" itemLabel="Soltero" />
+								<f:selectItem itemValue="2" itemLabel="Casado" />
+							</rich:inplaceSelect>
+						</h:panelGrid>
+					</h:panelGrid>
+					
+					<h:panelGrid columns="4">
+						<h:outputText value="CURP: " style="color: #0174DF" />
+						<rich:inplaceInput id="txtIn"
+							value="#{professionController.person.nin}" size="50"
+							defaultLabel="Click para ingresar su CURP " />
+						<h:outputText value="¿Desea que este dato sea visible?: " style="color: #0174DF" />
+						<rich:inplaceSelect defaultLabel="Dato visible?" openOnEdit="true"
+							value="#{professionController.person.isNinVisible}">
+							<f:selectItem itemValue="true" itemLabel="Si" />
+							<f:selectItem itemValue="false" itemLabel="No" />
+						</rich:inplaceSelect>
+					</h:panelGrid>
+
+					<h:panelGrid columns="4">
+						<h:outputText value="RFC: " style="color: #0174DF" />
+						<rich:inplaceInput id="txtTaxId"
+							value="#{professionController.person.taxid}" size="50"
+							defaultLabel="Click para ingres su RFC " />
+						<h:outputText value="¿Desea que este dato sea visible?: " style="color: #0174DF" />
+						<rich:inplaceSelect defaultLabel="Dato visible?" openOnEdit="true"
+							value="#{professionController.person.isTaxVisible}">
+							<f:selectItem itemValue="true" itemLabel="Si" />
+							<f:selectItem itemValue="false" itemLabel="No" />
+						</rich:inplaceSelect>
+					</h:panelGrid>
+
+					<h:panelGrid columns="4">
+						<h:outputText value="Numero de Seguro social: "
+							style="color: #0174DF" />
+						<rich:inplaceInput id="txtSsn"
+							value="#{personProfileController.ssn}" size="50"
+							defaultLabel="Click para ingresar el numero del seguro social" />
+						<h:outputText value="¿Desea que este dato sea visible?: " style="color: #0174DF" />
+						<rich:inplaceSelect defaultLabel="Dato visible?" openOnEdit="true"
+							value="#{professionController.person.isTaxVisible}">
+							<f:selectItem itemValue="true" itemLabel="Si" />
+							<f:selectItem itemValue="false" itemLabel="No" />
+						</rich:inplaceSelect>
+					</h:panelGrid>
+
+						<h:panelGrid columns="6">
+							<h:outputText value="Pais de nacimiento: " style="color: #0174DF" />
+							<rich:inplaceSelect id="txtCountryBirthplace"
+								value="#{professionController.person.birthPlace.country.countryId}"
+								size="50" defaultLabel="Click para ingresar el Pais">
+								<f:selectItems value="#{professionController.countryOptions}" />
+							</rich:inplaceSelect>
+							<h:outputText value="Estado de nacimiento:"
+								style="color: #0174DF" />
+							<rich:inplaceSelect id="txtStateBirthplace"
+								value="#{professionController.person.birthPlace.state.countryId}"
+								size="50" defaultLabel="Click para ingresar lugar de nacimiento">
+								<f:selectItems value="#{professionController.stateOptions}" />
+							</rich:inplaceSelect>
+							<h:outputText value="¿Desea que este dato sea visible?: " style="color: #0174DF" />
+							<rich:inplaceSelect defaultLabel="Dato visible?" openOnEdit="true" value="#{professionController.person.isBirthPlace}">
+								<f:selectItem itemValue="true" itemLabel="Si" />
+								<f:selectItem itemValue="false" itemLabel="No" />
+							</rich:inplaceSelect>
+						</h:panelGrid>
+					</h:panelGrid>
+			</rich:panel>
+</h:form>
+	</ui:define>
+</ui:composition>

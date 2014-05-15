@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/templates/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:my="http://java.sun.com/jsf/composite/components">
+	<ui:define name="content">
+		<h:outputStylesheet name="app.css" library="css" />
+		<h:outputScript target="head" name="showMessage.js" library="js" />
+		<rich:panel>
+			<f:facet name="header">
+				<h:panelGrid columns="2">
+					<h:outputText value="Ocupacion: " />
+					<form id="formAddProfessionSelect">
+						<a4j:commandLink id="lnkAddProfession" value="Agrgar Ocupacion"
+							action="#{professionController.addProfession()}" execute="@form"
+							render="professionSelect" styleClass="addLinkCommand"></a4j:commandLink>
+					</form>
+				</h:panelGrid>
+			</f:facet>
+			<rich:panel styleClass="userInformationTextPanel">
+				<div class="userInformationText">Es necesario que ingreses al
+					menos una ocupaciòn laboral para que tengas mayores posibilidades
+					de ser contactado</div>
+			</rich:panel>
+			<br />
+			<a4j:outputPanel id="professionInfo">
+				<h:outputText value="Lista de ocupaciones a las que te dedicas:"
+					rendered="#{not empty professionController.professionName}"
+					styleClass="fieldLabel" />
+				<rich:dataGrid columns="5"
+					value="#{professionController.professionList}" var="profession"
+					rowKeyVar="row" id="ocupationDataGrid">
+					<rich:panel bodyClass="rich-laguna-panel-no-header">
+						<h:panelGrid columns="3">
+							<h:outputText value="Profecion: " styleClass="fieldLabel" />
+							<h:outputText value="#{profession.name}" styleClass="fieldText" />
+							<h:outputText value="#{profession.description}"
+								styleClass="fieldText" />
+						</h:panelGrid>
+					</rich:panel>
+				</rich:dataGrid>
+			</a4j:outputPanel>
+
+			<h:form>
+				<a4j:outputPanel id="professionSelect">
+					<rich:panel rendered="#{professionController.isProfessionRendered}">
+						<h:panelGrid columns="2" id="ocupationPanel" rendered="true">
+							<h:outputText value="Ocupacion: " styleClass="fieldLabel" />
+							<rich:select enableManualInput="true"
+								defaultLabel="Escribe la ocupacion a la que te dedicas"
+								value="#{professionController.professionName}"
+								style="width:195px;">
+								<f:selectItems value="#{professionController.professionOptions}" />
+							</rich:select>
+						</h:panelGrid>
+						<h:panelGrid columns="2">
+							<a4j:commandButton id="btnSave"
+								action="#{professionController.saveProfession}" execute="@form"
+								render="professionInfo professionSelect" value="Guardar"
+								rendered="true" />
+							<a4j:commandButton id="btnCancel"
+								action="#{professionController.cancelAddProfession()}"
+								execute="@form" render="professionSelect" value="Cancelar"
+								rendered="true" />
+						</h:panelGrid>
+					</rich:panel>
+				</a4j:outputPanel>
+				<a4j:outputPanel id="registrationCompletePanel">
+					<h:commandButton id="btnEndRegistration" value="Finalizar Registro"
+						action="#{loginController.endRegistration}"
+						rendered="#{professionController.isRegistrationIncomplete}" />
+				</a4j:outputPanel>
+			</h:form>
+		</rich:panel>
+		<br />
+		<rich:panel>
+			<f:facet name="header">
+				<h:panelGrid columns="2">
+					<h:outputText value="Opciones de Busqueda de Empleo: " />
+				</h:panelGrid>
+			</f:facet>
+			<rich:panel styleClass="userInformationTextPanel">
+				<div class="userInformationText">Es necesario que ingreses las
+					preferencias de busqueda para que le puedan llegar las mejors
+					ofertas de empleo para usted</div>
+			</rich:panel>
+			<br />
+			<rich:panel>
+				<h:panelGrid columns="1">
+					<h:panelGrid columns="2">
+						<h:outputText value="Lugar de Empleo: " style="color: #0174DF" />
+						<rich:inplaceSelect
+							defaultLabel="Click para indicar el lugar donde deseas el empleo"
+							openOnEdit="true"
+							value="#{professionController.workTypeFilter.stateId}">
+							<f:selectItems value="#{professionController.stateOptions}" />
+						</rich:inplaceSelect>
+					</h:panelGrid>
+					<h:panelGrid columns="2">
+						<h:outputText value="Tipo de Empleo: " style="color: #0174DF" />
+						<rich:inplaceSelect
+							defaultLabel="Click para indicar el tipo de empleo que estas buscando"
+							openOnEdit="true"
+							value="#{professionController.workTypeFilter.workTypeId}">
+							<f:selectItems value="#{professionController.workTypeOptions}" />
+						</rich:inplaceSelect>
+					</h:panelGrid>
+					<h:panelGrid columns="2">
+						<h:outputText value="Categoria: " style="color: #0174DF" />
+						<rich:inplaceSelect
+							defaultLabel="Click para indicar la categoria de empleo que buscas"
+							openOnEdit="true"
+							value="#{professionController.workTypeFilter.workCategoryId}">
+							<f:selectItems
+								value="#{professionController.workCategoryOptions}" />
+						</rich:inplaceSelect>
+					</h:panelGrid>
+					<h:panelGrid columns="2">
+						<h:outputText value="Desde: " style="color: #0174DF" />
+						<rich:calendar
+							value="#{professionController.workTypeFilter.publishOfferDate.date}"
+							id="calendarBirthDay"
+							locale="#{professionController.workTypeFilter.publishOfferDate.locale}"
+							popup="#{professionController.workTypeFilter.publishOfferDate.popup}"
+							datePattern="#{professionController.workTypeFilter.publishOfferDate.pattern}"
+							showApplyButton="#{professionController.workTypeFilter.publishOfferDate.showApply}"
+							cellWidth="24px" cellHeight="22px" style="width:200px"
+							disabled="#{professionController.workTypeFilter.publishOfferDate.disabled}">
+						</rich:calendar>
+					</h:panelGrid>
+					<h:panelGrid columns="2">
+						<h:outputText value="Salario: " style="color: #0174DF" />
+						<rich:inplaceInput
+							defaultLabel="Click para indicar el sueldo deseado"
+							openOnEdit="true"
+							value="#{professionController.workTypeFilter.salary}">
+						</rich:inplaceInput>
+					</h:panelGrid>
+				</h:panelGrid>
+			</rich:panel>
+
+		</rich:panel>
+	</ui:define>
+</ui:composition>

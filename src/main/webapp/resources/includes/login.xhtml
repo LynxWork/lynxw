@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:my="http://java.sun.com/jsf/composite/components">
+	<ui:composition>
+	<h:panelGrid columns="1" columnClasses="titleCell">
+		<h:outputLabel value="Ingresa:"/>
+	    <h:panelGrid columns="3" columnClasses="titleCell">
+	        <h:outputLabel for="email" value="Email:"/>
+	        <h:inputText id="email" value="">
+	            <rich:validator/>
+	        </h:inputText>
+	        <rich:message for="email" errorClass="invalid"/>
+	        <h:outputLabel for="password" value="Clave:"/>
+	        <h:inputSecret id="password" value="" >
+	            <rich:validator/>
+	        </h:inputSecret>
+	        <rich:message for="password" errorClass="invalid"/>
+	    </h:panelGrid>
+	    </h:panelGrid>
+	</ui:composition>
+</html>

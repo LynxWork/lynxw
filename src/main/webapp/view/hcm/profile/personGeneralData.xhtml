@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:composite="http://java.sun.com/jsf/composite">
+      
+<!-- INTERFACE -->
+<composite:interface>
+    <composite:attribute name="person"/>
+</composite:interface>
+
+<ui:composition:implementation>
+			<rich:panel>
+				<f:facet name="header">
+					<h:outputText
+						value="Por favor, Completa los datos generales de tu registro"></h:outputText>
+				</f:facet>
+				<h:panelGrid columns="1" columnClasses="titleCell">
+					<br />
+					<h:panelGrid columns="3">
+					<h:panelGrid columns="2">
+						<h:outputText value="Nombre: " style="color: #0174DF" />
+						<rich:inplaceInput id="txtName"
+							value="#{cc.attrs.person.firstName}" size="50"
+							defaultLabel="Click para ingrsar su nombre " />
+					</h:panelGrid>
+
+					<h:panelGrid columns="2">
+						<h:outputText value="Apellido Pateno: " style="color: #0174DF" />
+						<rich:inplaceInput id="txtFirsName"
+							value="#{cc.attrs.person.firstName}" size="50"
+							defaultLabel="Click para ingresar su apellido paterno" />
+					</h:panelGrid>
+					<h:panelGrid columns="2">
+						<h:outputText value="Apellido Materno: " style="color: #0174DF" />
+						<rich:inplaceInput id="txtMiddleName"
+							value="#{cc.attrs.person.middleName}" size="50"
+							defaultLabel="Click para ingresar su apellido materno " />
+					</h:panelGrid>
+				</h:panelGrid>
+				
+					<h:panelGrid columns="2">
+						<h:panelGrid columns="2">
+						<h:outputText value="Genero: " style="color: #0174DF" />
+							<rich:inplaceSelect defaultLabel="Click para indicar el genero"
+								openOnEdit="true" value="#{cc.attrs.person.genderId}">
+								<f:selectItem itemValue="1" itemLabel="Hombre" />
+								<f:selectItem itemValue="2" itemLabel="Mujer" />
+							</rich:inplaceSelect>
+						</h:panelGrid>
+						<h:panelGrid columns="2">
+							<h:outputText value="Estado civil: " style="color: #0174DF" />
+							<rich:inplaceSelect
+								defaultLabel="Click para indicar el estado civil"
+								openOnEdit="true"
+								value="#{cc.attrs.estateCivilId}">
+								<f:selectItem itemValue="1" itemLabel="Soltero" />
+								<f:selectItem itemValue="2" itemLabel="Casado" />
+							</rich:inplaceSelect>
+						</h:panelGrid>
+					</h:panelGrid>
+					
+					<h:panelGrid columns="4">
+						<h:outputText value="CURP: " style="color: #0174DF" />
+						<rich:inplaceInput id="txtIn"
+							value="#{cc.attrs.person.nin}" size="50"
+							defaultLabel="Click para ingresar su CURP " />
+						<h:outputText value="¿Desea que este dato sea visible?: " style="color: #0174DF" />
+						<rich:inplaceSelect defaultLabel="Dato visible?" openOnEdit="true"
+							value="#{cc.attrs.person.isNinVisible}">
+							<f:selectItem itemValue="true" itemLabel="Si" />
+							<f:selectItem itemValue="false" itemLabel="No" />
+						</rich:inplaceSelect>
+					</h:panelGrid>
+
+					<h:panelGrid columns="4">
+						<h:outputText value="RFC: " style="color: #0174DF" />
+						<rich:inplaceInput id="txtTaxId"
+							value="#{cc.attrs.person.taxid}" size="50"
+							defaultLabel="Click para ingres su RFC " />
+						<h:outputText value="¿Desea que este dato sea visible?: " style="color: #0174DF" />
+						<rich:inplaceSelect defaultLabel="Dato visible?" openOnEdit="true"
+							value="#{cc.attrs.person.isTaxVisible}">
+							<f:selectItem itemValue="true" itemLabel="Si" />
+							<f:selectItem itemValue="false" itemLabel="No" />
+						</rich:inplaceSelect>
+					</h:panelGrid>
+
+					<h:panelGrid columns="4">
+						<h:outputText value="Numero de Seguro social: "
+							style="color: #0174DF" />
+						<rich:inplaceInput id="txtSsn"
+							value="#{personProfileController.ssn}" size="50"
+							defaultLabel="Click para ingresar el numero del seguro social" />
+						<h:outputText value="¿Desea que este dato sea visible?: " style="color: #0174DF" />
+						<rich:inplaceSelect defaultLabel="Dato visible?" openOnEdit="true"
+							value="#{cc.attrs.person.isTaxVisible}">
+							<f:selectItem itemValue="true" itemLabel="Si" />
+							<f:selectItem itemValue="false" itemLabel="No" />
+						</rich:inplaceSelect>
+					</h:panelGrid>
+
+						<h:panelGrid columns="6">
+							<h:outputText value="Pais de nacimiento: " style="color: #0174DF" />
+							<rich:inplaceSelect id="txtCountryBirthplace"
+								value="#{cc.attrs.person.birthPlace.country.countryId}"
+								size="50" defaultLabel="Click para ingresar el Pais">
+								<f:selectItems value="#{cc.attrs.countryOptions}" />
+							</rich:inplaceSelect>
+							<h:outputText value="Estado de nacimiento:"
+								style="color: #0174DF" />
+							<rich:inplaceSelect id="txtStateBirthplace"
+								value="#{cc.attrs.person.birthPlace.state.countryId}"
+								size="50" defaultLabel="Click para ingresar lugar de nacimiento">
+								<f:selectItems value="#{cc.attrs.stateOptions}" />
+							</rich:inplaceSelect>
+							<h:outputText value="¿Desea que este dato sea visible?: " style="color: #0174DF" />
+							<rich:inplaceSelect defaultLabel="Dato visible?" openOnEdit="true" value="#{cc.attrs.person.isBirthPlace}">
+								<f:selectItem itemValue="true" itemLabel="Si" />
+								<f:selectItem itemValue="false" itemLabel="No" />
+							</rich:inplaceSelect>
+						</h:panelGrid>
+					</h:panelGrid>
+			</rich:panel>
+</ui:composition:implementation>
+</html>

@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/templates/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:my="http://java.sun.com/jsf/composite/components">
+	<ui:define name="content">
+		<h:outputStylesheet name="app.css" library="css" />
+		<h:outputScript target="head" name="showMessage.js" library="js" />
+
+		<h:outputStylesheet>
+        .top {vertical-align: top;} 
+        .info {height: 202px;overflow: auto;}
+</h:outputStylesheet>
+		<h:outputStylesheet>
+        .ecol1 {
+        vertical-align: top;
+        padding-right: 25px
+        }
+ 
+        .ecol2 {
+        vertical-align: top;
+        border-left: #ACBECE 1px solid;
+        padding-left: 10px
+        }
+ 
+        .rich-calendar-tool-btn {
+        font-family: Arial, Verdana;
+        }
+    </h:outputStylesheet>
+		<rich:panel>
+			<f:facet name="header">
+				<h:outputText value="Datos generales"></h:outputText>
+			</f:facet>
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<br />
+				<h:form id="generalPersonDataForm">
+					<h:outputText value="Nombre: " style="color: #0174DF" />
+
+					<br />
+
+					<h:outputText value="Apellido Pateno: " style="color: #0174DF" />
+					<rich:inplaceInput id="txtFirsName"
+						value="#{personProfileController.firsName}" size="50"
+						defaultLabel="Click para ingresar su apellido paterno" />
+					<br />
+					<h:outputText value="Apellido Materno: " style="color: #0174DF" />
+					<rich:inplaceInput id="txtMiddleName"
+						value="#{personProfileController.middleName}" size="50"
+						defaultLabel="Click para ingresar su apellido materno " />
+					<br />
+					<h:outputText value="CURP: " style="color: #0174DF" />
+					<rich:inplaceInput id="txtIn" value="#{personProfileController.in}"
+						size="50" defaultLabel="Click para ingresar su CURP " />
+
+					<br />
+					<h:outputText value="RFC: " style="color: #0174DF" />
+					<rich:inplaceInput id="txtTaxId"
+						value="#{personProfileController.taxId}" size="50"
+						defaultLabel="Click para ingres su RFC " />
+					<br />
+					<h:outputText value="Numero De Seguro Social: "
+						style="color: #0174DF" />
+					<rich:inplaceInput id="txtSsn"
+						value="#{personProfileController.ssn}" size="50"
+						defaultLabel="Click para ingresar el numero del seguro social" />
+					<br />
+					<h:outputText value="Estado Civil: " style="color: #0174DF" />
+					<rich:inplaceSelect
+						defaultLabel="Click para indicar el estao civil" openOnEdit="true"
+						value="#{personProfileController.estateCivilId}">
+						<f:selectItem itemValue="Soltero" itemLabel="Soltero" />
+						<f:selectItem itemValue="Casado" itemLabel="Casado" />
+					</rich:inplaceSelect>
+					<br />
+					<h:outputText value="Genero: " style="color: #0174DF" />
+					<rich:inplaceSelect defaultLabel="Click para indicar el genero"
+						openOnEdit="true" value="#{personProfileController.genderId}">
+						<f:selectItem itemValue="Hombre" itemLabel="Hombre" />
+						<f:selectItem itemValue="Mujer" itemLabel="Mujer" />
+					</rich:inplaceSelect>
+					<br />
+					<h:outputText value="Lugar De Nacimiento:" style="color: #0174DF" />
+					<rich:inplaceInput id="txtBirthplace"
+						value="#{personProfileController.birthplace}" size="50"
+						defaultLabel="Click para ingresar lugar de nacimiento" />
+					<br />
+					<h:outputText value="Tipo De Sangre:" style="color: #0174DF" />
+					<rich:inplaceInput id="txTBloodtype"
+						value="#{personProfileController.bloodType}" size="50"
+						defaultLabel="Click para ingresar su tipo de sangre" />
+					<!-- Input BirthDay field -->
+					<br />
+					<h:outputText value="Fecha De Nacimiento:" style="color: #0174DF" />
+					<rich:calendar value="#{personProfileController.birthDay}"
+						id="calendarBirthDay" locale="#{personProfileController.locale}"
+						popup="#{personProfileController.popup}"
+						datePattern="#{personProfileController.pattern}"
+						showApplyButton="#{personProfileController.showApply}"
+						cellWidth="24px" cellHeight="22px" style="width:200px"
+						disabled="#{personProfileController.disabled}">
+					</rich:calendar>
+					<br />
+					<input name="no mostrar fecha" type="checkbox"
+						value="¿Desea mostrar su fecha de nacimiento?"
+						style="color: #0174DF" />¿Desea mostrar su fecha de nacimiento? 
+					<!-- Input BirthDay field -->
+					<br />
+					<h:commandButton id="dtgSave" value="Enviar informacion"
+						action="#{loginController.login}" />
+					<h:commandButton id="dtgCancel" value="Cancelar"
+						action="#{loginController.login}" />
+				</h:form>
+			</h:panelGrid>
+		</rich:panel>
+		<br />
+		<!-- ######################### -->
+		<!-- product -->
+		<rich:panel>
+			<f:facet name="header">
+				<h:panelGrid columns="6">
+					<h:outputText value="Producto:" />
+					<form id="formAddProductSelect">
+						<a4j:commandLink id="lnkAddProduct" value="Agregar Producto"
+							action="#{personProfileController.addProduct()}" execute="@form"
+							render="productSelect" styleClass="addLinkCommand"></a4j:commandLink>
+					</form>
+				</h:panelGrid>
+			</f:facet>
+
+			<a4j:outputPanel id="productInfo">
+				<h:outputText value="Lista de productos:"
+					rendered="#{not empty personProfileController.productName}"
+					styleClass="fieldLabel" />
+				<rich:dataGrid columns="5"
+					value="#{personProfileController.productList}" var="product"
+					rowKeyVar="row" id="ocupationDataGrid">
+					<rich:panel bodyClass="rich-laguna-panel-no-header">
+						<h:panelGrid columns="3">
+							<h:outputText value="Producto:" styleClass="fieldLabel" />
+							<h:outputText value="#{product.productName}"
+								styleClass="fieldText" />
+							<h:outputText value="#{product.productDescription}"
+								styleClass="fieldText" />
+						</h:panelGrid>
+					</rich:panel>
+				</rich:dataGrid>
+			</a4j:outputPanel>
+
+			<a4j:outputPanel id="productSelect">
+				<rich:panel rendered="#{personProfileController.isProductRendered}">
+					<h:panelGrid columns="2" id="ocupationPanel" rendered="true">
+						<h:outputText value="Producto: " styleClass="fieldLabel" />
+						<rich:select enableManualInput="true"
+							defaultLabel="Escribe el producto"
+							value="#{personProfileController.productName}"
+							style="width:195px;">
+							<f:selectItems value="#{personProfileController.productOptions}" />
+						</rich:select>
+					</h:panelGrid>
+					<h:panelGrid columns="2">
+						<a4j:commandButton id="btnSave"
+							action="#{personProfileController.saveProduct()}" execute="@form"
+							render="productInfo productSelect" value="Guardar"
+							rendered="true" />
+						<a4j:commandButton id="prodCancel"
+							action="#{personProfileController.cancelAddProduct()}"
+							execute="@form" render="prodctSelect" value="Cancelar"
+							rendered="true" />
+					</h:panelGrid>
+				</rich:panel>
+			</a4j:outputPanel>
+			<h:outputText value="Nombre Producto: " style="color: #0174DF" />
+			<rich:inplaceInput id="txtPruductName"
+				value="#{personProfileController.productName}" size="100"
+				defaultLabel="Nombre del producto " />
+
+			<h:form id="fileUpoadForm">
+				<h:panelGrid columns="2" columnClasses="top,top">
+					<rich:fileUpload
+						fileUploadListener="#{fileUploadController.listener}" id="upload"
+						acceptedTypes="jpg, gif, png, bmp"
+						ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');"
+						maxFilesQuantity="5">
+						<a4j:ajax event="uploadcomplete" execute="@none" render="info" />
+					</rich:fileUpload>
+					<h:panelGroup id="info" layout="block">
+						<rich:panel bodyClass="info">
+							<f:facet name="header">
+								<h:outputText value="Uploaded Files Info" />
+							</f:facet>
+							<h:outputText value="No files currently uploaded"
+								rendered="#{fileUploadController.size==0}" />
+							<rich:dataGrid columns="1" value="#{fileUploadController.files}"
+								var="file" rowKeyVar="row">
+								<rich:panel bodyClass="rich-laguna-panel-no-header">
+									<h:panelGrid columns="2">
+										<a4j:mediaOutput element="img" mimeType="image/jpeg"
+											createContent="#{fileUploadController.paint}" value="#{row}"
+											style="width:100px; height:100px;" cacheable="false">
+											<f:param value="#{fileUploadController.timeStamp}"
+												name="time" />
+										</a4j:mediaOutput>
+										<h:panelGrid columns="2">
+											<h:outputText value="File Name:" />
+											<h:outputText value="#{file.name}" />
+											<h:outputText value="File Length(bytes):" />
+											<h:outputText value="#{file.length}" />
+										</h:panelGrid>
+									</h:panelGrid>
+								</rich:panel>
+							</rich:dataGrid>
+						</rich:panel>
+						<br />
+						<a4j:commandButton action="#{fileUploadBean.clearUploadData}"
+							render="info, upload" value="Clear Uploaded Data"
+							rendered="#{fileUploadBean.size>0}" />
+					</h:panelGroup>
+				</h:panelGrid>
+			</h:form>
+			<h:panelGrid columns="9" columnClasses="titleDescription">
+				<h:outputLabel value="Descripcion del servicio:"
+					style="color: #0174DF" />
+				<h:inputTextarea id="descripcion">
+				</h:inputTextarea>
+				<h:commandButton id="servSave" value="Subir Servicio"
+					action="#{loginController.login}" />
+				<h:commandButton id="servCancelar" value="Cancelar"
+					action="#{loginController.login}" />
+			</h:panelGrid>
+		</rich:panel>
+		<br />
+		<!-- ######################### -->
+		<!-- education -->
+		<rich:panel>
+			<f:facet name="header">
+				<h:panelGrid columns="6">
+					<h:outputText value="Educacion: " />
+					<form id="formAddEducationSelect">
+						<a4j:commandLink id="lnkAddEducation" value="Agregar Educacion"
+							action="#{personProfileController.addEducation()}" execute="@form"
+							render="educationSelect" styleClass="addLinkCommand"></a4j:commandLink>
+					</form>
+				</h:panelGrid>
+			</f:facet>
+			
+			<a4j:outputPanel id="educationInfo">
+				<h:outputText value="Lista de escuelas:"
+					rendered="#{not empty personProfileController.educationName}"
+					styleClass="fieldLabel" />
+				<rich:dataGrid columns="5"
+					value="#{personProfileController.educationList}" var="education"
+					rowKeyVar="row" id="educationDataGrid">
+					<rich:panel bodyClass="rich-laguna-panel-no-header">
+						<h:panelGrid columns="3">
+							<h:outputText value="educacion: " styleClass="fieldLabel" />
+							<h:outputText value="#{education.country}" styleClass="fieldText" />
+							<h:outputText value="#{education.institution}" styleClass="fieldText" />
+							<h:outputText value="#{education.degree}" styleClass="fieldText" />
+							<h:outputText value="#{education.profileId}" styleClass="fieldText" />
+						</h:panelGrid>
+					</rich:panel>
+				</rich:dataGrid>
+			</a4j:outputPanel>
+			
+			<a4j:outputPanel id="educationSelect">
+					<rich:panel rendered="#{personProfileController.isEducationRendered}">
+						<h:panelGrid columns="2" id="educationPanel" rendered="true">
+							<h:outputText value="Educacion: " styleClass="fieldLabel" />
+							<rich:select enableManualInput="true"
+								defaultLabel="Escribe la educacion:"
+								value="#{personProfileController.educationName}"
+								style="width:195px;">
+								<f:selectItems value="#{personProfileController.educationOptions}" />
+							</rich:select>
+						</h:panelGrid>
+						<h:panelGrid columns="2">
+							<a4j:commandButton id="edcSave"
+								action="#{personProfileController.saveEducation()}" execute="@form"
+								render="educationInfo educationSelect" value="Guardar"
+								rendered="true" />
+							<a4j:commandButton id="edcCancel"
+								action="#{personProfileController.cancelAddEducation()}"
+								execute="@form" render="educationSelect" value="Cancelar"
+								rendered="true" />
+						</h:panelGrid>
+					</rich:panel>
+				</a4j:outputPanel>
+		</rich:panel>
+		<br />
+		<!-- ######################### -->
+		<!-- projects -->
+		<rich:panel>
+			<f:facet name="header">
+				<h:outputText value="Proyectos"></h:outputText>
+			</f:facet>
+			<h:panelGrid columns="10" columnClasses="titleProjects">
+				<h:form id="generalProjects">
+					<h:outputText value="Nombre De Proyecto:" style="color: #0174DF" />
+					<rich:inplaceInput id="txtProjectsNamne"
+						value="#{personProfileController.projectsNamne}" size="50"
+						defaultLabel="Click para ingrsar nombre del proyecto " />
+					<br />
+					<h:outputText value="Nombre De La Compañia:" style="color: #0174DF" />
+					<rich:inplaceInput id="txtCustumerName"
+						value="#{personProfileController.custumerName}" size="50"
+						defaultLabel="Click para ingresar nombre de la compañia" />
+					<br />
+					<h:outputText value="Estatus Del Proyecto:" style="color: #0174DF" />
+					<rich:inplaceInput id="txtProjectsStatus"
+						value="#{personProfileController.projectsStatus}" size="50"
+						defaultLabel="Click para ingresar el estatus" />
+					<br />
+					<br />
+					<h:outputLabel value="Descripcion del proyecto:"
+						style="color: #0174DF" />
+					<h:inputTextarea id="txtprojectsDescription"
+						value="#{personProfileController.projectsDescription}" size="100">
+					</h:inputTextarea>
+					<br />
+					<br />
+					<h:commandButton id="proySave" value="Enviar informacion"
+						action="#{loginController.login}" />
+					<h:commandButton id="proyCancel" value="Cancelar"
+						action="#{loginController.login}" />
+				</h:form>
+			</h:panelGrid>
+		</rich:panel>
+	</ui:define>
+</ui:composition>
