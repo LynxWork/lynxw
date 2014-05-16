@@ -231,6 +231,12 @@ public class LoginController implements Serializable {
 		return "profile";
 	}
 
+	public String viewAccount(){
+		log.debug("View Account");
+		isLogin = true;
+		return "account";
+	}
+	
 	public String viewAddProfession(){
 		log.debug("Add Profession");
 		return "addProfession";
