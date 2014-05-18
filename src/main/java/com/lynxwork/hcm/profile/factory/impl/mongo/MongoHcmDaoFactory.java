@@ -17,6 +17,7 @@ import com.lynxwork.hcm.work.dao.impl.mongo.WorkCategoryDao;
 import com.lynxwork.hcm.work.dao.impl.mongo.WorkTypeDao;
 import com.lynxwork.mdm.product.dao.IProductDao;
 import com.lynxwork.mdm.product.dao.impl.mongo.ProductDao;
+import com.lynxwork.mdm.project.dao.IProjectDao;
 
 
 public class MongoHcmDaoFactory extends HcmDaoFactory{
@@ -59,6 +60,11 @@ public class MongoHcmDaoFactory extends HcmDaoFactory{
 	@Override
 	public IWorkTypeDao getWorkTypeDao() {
 		return new WorkTypeDao();
+	}
+
+	@Override
+	public IProjectDao getProjectDao() {
+		return null;
 	}
 
 	

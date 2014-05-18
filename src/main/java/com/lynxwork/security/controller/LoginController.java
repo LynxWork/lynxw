@@ -1,7 +1,9 @@
 package com.lynxwork.security.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
@@ -9,8 +11,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.richfaces.cdi.push.Push;
+
 import com.lynxwork.config.SystemConfig;
 import com.lynxwork.mdm.person.model.Person;
 import com.lynxwork.security.exception.UserRegistrationException;
@@ -150,6 +154,7 @@ public class LoginController implements Serializable {
 		log.debug("user email:" + joinEmail);
 		log.debug("user password:" + joinPassword);
 		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession sesion = (HttpSession)facesContext.getExternalContext().getSession(true);
 		UserService userService = new UserService();
 		//Create a user entity
 		User user = new User();

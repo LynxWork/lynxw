@@ -39,9 +39,10 @@
 				<br />
 				<h:form id="generalPersonDataForm">
 					<h:outputText value="Nombre: " style="color: #0174DF" />
-
+					<rich:inplaceInput id="txtName"
+						value="#{personProfileController.name}" size="50"
+						defaultLabel="Click para ingresar su nombre" />
 					<br />
-
 					<h:outputText value="Apellido Pateno: " style="color: #0174DF" />
 					<rich:inplaceInput id="txtFirsName"
 						value="#{personProfileController.firsName}" size="50"
@@ -233,101 +234,5 @@
 			</h:panelGrid>
 		</rich:panel>
 		<br />
-		<!-- ######################### -->
-		<!-- education -->
-		<rich:panel>
-			<f:facet name="header">
-				<h:panelGrid columns="6">
-					<h:outputText value="Educacion: " />
-					<form id="formAddEducationSelect">
-						<a4j:commandLink id="lnkAddEducation" value="Agregar Educacion"
-							action="#{personProfileController.addEducation()}" execute="@form"
-							render="educationSelect" styleClass="addLinkCommand"></a4j:commandLink>
-					</form>
-				</h:panelGrid>
-			</f:facet>
-			
-			<a4j:outputPanel id="educationInfo">
-				<h:outputText value="Lista de escuelas:"
-					rendered="#{not empty personProfileController.educationName}"
-					styleClass="fieldLabel" />
-				<rich:dataGrid columns="5"
-					value="#{personProfileController.educationList}" var="education"
-					rowKeyVar="row" id="educationDataGrid">
-					<rich:panel bodyClass="rich-laguna-panel-no-header">
-						<h:panelGrid columns="3">
-							<h:outputText value="educacion: " styleClass="fieldLabel" />
-							<h:outputText value="#{education.country}" styleClass="fieldText" />
-							<h:outputText value="#{education.institution}" styleClass="fieldText" />
-							<h:outputText value="#{education.degree}" styleClass="fieldText" />
-							<h:outputText value="#{education.profileId}" styleClass="fieldText" />
-						</h:panelGrid>
-					</rich:panel>
-				</rich:dataGrid>
-			</a4j:outputPanel>
-			
-			<a4j:outputPanel id="educationSelect">
-					<rich:panel rendered="#{personProfileController.isEducationRendered}">
-						<h:panelGrid columns="2" id="educationPanel" rendered="true">
-							<h:outputText value="Educacion: " styleClass="fieldLabel" />
-							<rich:select enableManualInput="true"
-								defaultLabel="Escribe la educacion:"
-								value="#{personProfileController.educationName}"
-								style="width:195px;">
-								<f:selectItems value="#{personProfileController.educationOptions}" />
-							</rich:select>
-						</h:panelGrid>
-						<h:panelGrid columns="2">
-							<a4j:commandButton id="edcSave"
-								action="#{personProfileController.saveEducation()}" execute="@form"
-								render="educationInfo educationSelect" value="Guardar"
-								rendered="true" />
-							<a4j:commandButton id="edcCancel"
-								action="#{personProfileController.cancelAddEducation()}"
-								execute="@form" render="educationSelect" value="Cancelar"
-								rendered="true" />
-						</h:panelGrid>
-					</rich:panel>
-				</a4j:outputPanel>
-		</rich:panel>
-		<br />
-		<!-- ######################### -->
-		<!-- projects -->
-		<rich:panel>
-			<f:facet name="header">
-				<h:outputText value="Proyectos"></h:outputText>
-			</f:facet>
-			<h:panelGrid columns="10" columnClasses="titleProjects">
-				<h:form id="generalProjects">
-					<h:outputText value="Nombre De Proyecto:" style="color: #0174DF" />
-					<rich:inplaceInput id="txtProjectsNamne"
-						value="#{personProfileController.projectsNamne}" size="50"
-						defaultLabel="Click para ingrsar nombre del proyecto " />
-					<br />
-					<h:outputText value="Nombre De La Compañia:" style="color: #0174DF" />
-					<rich:inplaceInput id="txtCustumerName"
-						value="#{personProfileController.custumerName}" size="50"
-						defaultLabel="Click para ingresar nombre de la compañia" />
-					<br />
-					<h:outputText value="Estatus Del Proyecto:" style="color: #0174DF" />
-					<rich:inplaceInput id="txtProjectsStatus"
-						value="#{personProfileController.projectsStatus}" size="50"
-						defaultLabel="Click para ingresar el estatus" />
-					<br />
-					<br />
-					<h:outputLabel value="Descripcion del proyecto:"
-						style="color: #0174DF" />
-					<h:inputTextarea id="txtprojectsDescription"
-						value="#{personProfileController.projectsDescription}" size="100">
-					</h:inputTextarea>
-					<br />
-					<br />
-					<h:commandButton id="proySave" value="Enviar informacion"
-						action="#{loginController.login}" />
-					<h:commandButton id="proyCancel" value="Cancelar"
-						action="#{loginController.login}" />
-				</h:form>
-			</h:panelGrid>
-		</rich:panel>
 	</ui:define>
 </ui:composition>
