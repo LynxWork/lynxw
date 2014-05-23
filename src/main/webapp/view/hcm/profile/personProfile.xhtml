@@ -54,7 +54,7 @@
 						defaultLabel="Click para ingresar su apellido materno " />
 					<br />
 					<h:outputText value="CURP: " style="color: #0174DF" />
-					<rich:inplaceInput id="txtIn" value="#{personProfileController.in}"
+					<rich:inplaceInput id="txtIn" value="#{personProfileController.nin}"
 						size="50" defaultLabel="Click para ingresar su CURP " />
 
 					<br />
@@ -63,15 +63,14 @@
 						value="#{personProfileController.taxId}" size="50"
 						defaultLabel="Click para ingres su RFC " />
 					<br />
-					<h:outputText value="Numero De Seguro Social: "
-						style="color: #0174DF" />
+					<h:outputText value="Numero De Seguro Social: " style="color: #0174DF" />
 					<rich:inplaceInput id="txtSsn"
 						value="#{personProfileController.ssn}" size="50"
 						defaultLabel="Click para ingresar el numero del seguro social" />
 					<br />
-					<h:outputText value="Estado Civil: " style="color: #0174DF" />
-					<rich:inplaceSelect
-						defaultLabel="Click para indicar el estao civil" openOnEdit="true"
+					<h:outputText value="Estado Civil:" style="color: #0174DF" />
+					<rich:inplaceSelect id="txtstateCivil"
+						defaultLabel="Click para indicar el estado civil" openOnEdit="true"
 						value="#{personProfileController.estateCivilId}">
 						<f:selectItem itemValue="Soltero" itemLabel="Soltero" />
 						<f:selectItem itemValue="Casado" itemLabel="Casado" />
@@ -86,12 +85,12 @@
 					<br />
 					<h:outputText value="Lugar De Nacimiento:" style="color: #0174DF" />
 					<rich:inplaceInput id="txtBirthplace"
-						value="#{personProfileController.birthplace}" size="50"
+						value="#{personProfileController.birthPlaceId}" size="50"
 						defaultLabel="Click para ingresar lugar de nacimiento" />
 					<br />
 					<h:outputText value="Tipo De Sangre:" style="color: #0174DF" />
 					<rich:inplaceInput id="txTBloodtype"
-						value="#{personProfileController.bloodType}" size="50"
+						value="#{personProfileController.bloodTypeId}" size="50"
 						defaultLabel="Click para ingresar su tipo de sangre" />
 					<!-- Input BirthDay field -->
 					<br />
@@ -110,10 +109,8 @@
 						style="color: #0174DF" />¿Desea mostrar su fecha de nacimiento? 
 					<!-- Input BirthDay field -->
 					<br />
-					<h:commandButton id="dtgSave" value="Enviar informacion"
-						action="#{loginController.login}" />
-					<h:commandButton id="dtgCancel" value="Cancelar"
-						action="#{loginController.login}" />
+					<h:commandButton id="dtgSave" value="Enviar informacion" action="#{personProfileController.dataGeneral()}" />
+					<h:commandButton id="dtgCancel" value="Cancelar" action="#{loginController.login}" />
 				</h:form>
 			</h:panelGrid>
 		</rich:panel>

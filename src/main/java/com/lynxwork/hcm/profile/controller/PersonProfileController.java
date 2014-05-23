@@ -6,14 +6,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
-import javax.inject.Named;
+
 import org.apache.log4j.Logger;
+
 import com.lynxwork.hcm.profile.model.Education;
 import com.lynxwork.hcm.profile.service.EducationService;
 import com.lynxwork.mdm.factory.impl.mongo.MongoMasterDataDaoFactory;
+import com.lynxwork.mdm.person.model.Person;
 import com.lynxwork.mdm.product.dao.IProductDao;
 import com.lynxwork.mdm.product.model.Product;
 import com.lynxwork.mdm.product.service.ProductService;
@@ -39,15 +42,15 @@ public class PersonProfileController implements Serializable {
 	private String name;
 	private String firsName;
 	private String middleName;
-	private String in;
+	private String nin;
 	private String taxId;
 	private String ssn;
 	private Date birthDay;
 	private boolean isEnableBirthDay;
 	private String estateCivilId;
 	private String genderId;
-	private int birthplace;
-	private int bloodType;
+	private String birthPlaceId;
+	private String bloodTypeId;
 	//Product
 	private String productId;
 	private String productName;
@@ -135,12 +138,12 @@ public class PersonProfileController implements Serializable {
 	this.middleName = middleName;
 	}
 
-	public String getIn() {
-	return in;
+	public String getNin() {
+	return nin;
 	}
 
-	public void setIn(String in) {
-	this.in = in;
+	public void setNin(String nin) {
+	this.nin = nin;
 	}
 
 	public String getTaxId() {
@@ -183,20 +186,20 @@ public class PersonProfileController implements Serializable {
 	this.genderId = genderId;
 	}
 
-	public int getBirthplace() {
-	return birthplace;
+	public String getBirthPlaceId() {
+	return birthPlaceId;
 	}
 
-	public void setBirthplace(int birthplace) {
-	this.birthplace = birthplace;
+	public void setBirthPlaceId(String birthPlaceId) {
+	this.birthPlaceId = birthPlaceId;
 	}
 
-	public int getBloodType() {
-	return bloodType;
+	public String getBloodTypeId() {
+	return bloodTypeId;
 	}
 
-	public void setBloodType(int bloodType) {
-	this.bloodType = bloodType;
+	public void setBloodTypeId(String bloodTypeId) {
+	this.bloodTypeId = bloodTypeId;
 	}
 
 
@@ -636,6 +639,19 @@ public class PersonProfileController implements Serializable {
 	}
 	
 	//PROJECTS
+	//general data
+	public String dataGeneral(){
+		Person person = new Person();
+		person.setNin(nin);
+		person.setTaxid(taxId);
+		person.setSsn(ssn);
+		person.setStateCivilId(estateCivilId);
+		person.setGenderId(genderId);
+		person.setBirthPlaceId(birthPlaceId);
+		person.setBloodTypeId(bloodTypeId);
+		person.setBirthday(birthDay);
+		return "";
+	}
 	
 	
 

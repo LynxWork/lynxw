@@ -38,6 +38,7 @@
    <to-view-id>/view/hcm/profile/test.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
+
  
  <!-- Menu -->
  <navigation-rule>

@@ -36,7 +36,7 @@ public class ImagePruduct {
         //Save loaded image from database into new image file
         FileOutputStream outputImage = new FileOutputStream("C:/Temp/bearCopy.bmp");
         out.writeTo( outputImage );
-        outputImage.close();
+        outputImage.close(); 
     }
 
 }

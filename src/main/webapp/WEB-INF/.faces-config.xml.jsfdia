@@ -4,18 +4,16 @@
   SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#index.xhtml:0" NAME="item"
    PATH="/index.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="login::#view#main#main.xhtml" NAME="output"
-    PATH="/view/main/main.xhtml" TARGET="rules:#view#main#main.xhtml"
+   <PROCESS-ITEM-OUTPUT
+    ID="login::#view#social#publication#publication.xhtml" NAME="output"
+    PATH="/view/social/publication/publication.xhtml"
+    TARGET="rules:#view#social#publication#publication.xhtml"
     TITLE="login" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
     ID="validateLogin::#view#security#access#validateLogin.xhtml"
     NAME="output1" PATH="/view/security/access/validateLogin.xhtml"
     TARGET="rules:#view#security#access#validateLogin.xhtml"
     TITLE="validateLogin" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="profile::#view#hcm#profile#personProfile.xhtml" NAME="output2"
-    PATH="/view/hcm/profile/personProfile.xhtml"
-    TARGET="rules:#view#hcm#profile#personProfile.xhtml" TITLE="profile" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
     ID="addProfession::#view#hcm#profile#addProfession.xhtml"
     NAME="output3" PATH="/view/hcm/profile/addProfession.xhtml"
@@ -33,12 +31,40 @@
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#view#security#access#validateLogin.xhtml"
   PATH="/view/security/access/validateLogin.xhtml" SHAPE="272,209,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#view#main#main.xhtml"
-  PATH="/view/main/main.xhtml" SHAPE="272,33,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#view#hcm#profile#personProfile.xhtml"
   PATH="/view/hcm/profile/personProfile.xhtml" SHAPE="272,321,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#view#hcm#profile#addProfession.xhtml"
   PATH="/view/hcm/profile/addProfession.xhtml" SHAPE="304,529,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#view#hcm#profile#test.xhtml"
   PATH="/view/hcm/profile/test.xhtml" SHAPE="304,641,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,257,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="profile::#view#hcm#profile#personProfile.xhtml" NAME="output"
+    PATH="/view/hcm/profile/personProfile.xhtml"
+    TARGET="rules:#view#hcm#profile#personProfile.xhtml" TITLE="profile" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="alert::#view#social#alert#alert.xhtml"
+    NAME="output1" PATH="/view/social/alert/alert.xhtml"
+    TARGET="rules:#view#social#alert#alert.xhtml" TITLE="alert" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="message::#view#social#message#message.xhtml"
+    NAME="output2" PATH="/view/social/message/message.xhtml"
+    TARGET="rules:#view#social#message#message.xhtml" TITLE="message" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="publication::#view#social#publication#publication.xhtml"
+    NAME="output3" PATH="/view/social/publication/publication.xhtml"
+    TARGET="rules:#view#social#publication#publication.xhtml"
+    TITLE="publication" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="account::#view#social#account#account.xhtml"
+    NAME="output4" PATH="/view/social/account/account.xhtml"
+    TARGET="rules:#view#social#account#account.xhtml" TITLE="account" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#view#social#publication#publication.xhtml"
+  PATH="/view/social/publication/publication.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#view#social#message#message.xhtml"
+  PATH="/view/social/message/message.xhtml" SHAPE="304,961,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#view#social#account#account.xhtml"
+  PATH="/view/social/account/account.xhtml" SHAPE="304,1073,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#view#social#alert#alert.xhtml"
+  PATH="/view/social/alert/alert.xhtml" SHAPE="304,625,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
