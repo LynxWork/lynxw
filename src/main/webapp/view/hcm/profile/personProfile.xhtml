@@ -10,7 +10,6 @@
 	<ui:define name="content">
 		<h:outputStylesheet name="app.css" library="css" />
 		<h:outputScript target="head" name="showMessage.js" library="js" />
-
 		<h:outputStylesheet>
         .top {vertical-align: top;} 
         .info {height: 202px;overflow: auto;}
@@ -38,47 +37,57 @@
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				<br />
 				<h:form id="generalPersonDataForm">
+				<a4j:outputPanel id="fieldsGeneralDataInfo">
 					<h:outputText value="Nombre: " style="color: #0174DF" />
 					<rich:inplaceInput id="txtName"
-						value="#{personProfileController.name}" size="50"
-						defaultLabel="Click para ingresar su nombre" />
+						value="#{personProfileController.person.firstName}" 
+						size="50"
+						defaultLabel="Click para ingresar su nombre" 
+						disabled="#{personProfileController.isGeneralDataDisabled}"/>
 					<br />
 					<h:outputText value="Apellido Pateno: " style="color: #0174DF" />
 					<rich:inplaceInput id="txtFirsName"
-						value="#{personProfileController.firsName}" size="50"
-						defaultLabel="Click para ingresar su apellido paterno" />
+						value="#{personProfileController.person.middleName}" size="50"
+						defaultLabel="Click para ingresar su apellido paterno" 
+						disabled="#{personProfileController.isGeneralDataDisabled}"/>
 					<br />
 					<h:outputText value="Apellido Materno: " style="color: #0174DF" />
 					<rich:inplaceInput id="txtMiddleName"
-						value="#{personProfileController.middleName}" size="50"
-						defaultLabel="Click para ingresar su apellido materno " />
+						value="#{personProfileController.person.lastName}" size="50"
+						defaultLabel="Click para ingresar su apellido materno " 
+						disabled="#{personProfileController.isGeneralDataDisabled}"/>
 					<br />
 					<h:outputText value="CURP: " style="color: #0174DF" />
 					<rich:inplaceInput id="txtIn" value="#{personProfileController.nin}"
-						size="50" defaultLabel="Click para ingresar su CURP " />
+						size="50" defaultLabel="Click para ingresar su CURP " 
+						disabled="#{personProfileController.isGeneralDataDisabled}"/>
 
 					<br />
 					<h:outputText value="RFC: " style="color: #0174DF" />
 					<rich:inplaceInput id="txtTaxId"
 						value="#{personProfileController.taxId}" size="50"
-						defaultLabel="Click para ingres su RFC " />
+						defaultLabel="Click para ingres su RFC " 
+						disabled="#{personProfileController.isGeneralDataDisabled}" />
 					<br />
 					<h:outputText value="Numero De Seguro Social: " style="color: #0174DF" />
 					<rich:inplaceInput id="txtSsn"
 						value="#{personProfileController.ssn}" size="50"
-						defaultLabel="Click para ingresar el numero del seguro social" />
+						defaultLabel="Click para ingresar el numero del seguro social" 
+						disabled="#{personProfileController.isGeneralDataDisabled}"/>
 					<br />
 					<h:outputText value="Estado Civil:" style="color: #0174DF" />
 					<rich:inplaceSelect id="txtstateCivil"
 						defaultLabel="Click para indicar el estado civil" openOnEdit="true"
-						value="#{personProfileController.estateCivilId}">
+						value="#{personProfileController.estateCivilId}"
+						disabled="#{personProfileController.isGeneralDataDisabled}">
 						<f:selectItem itemValue="Soltero" itemLabel="Soltero" />
 						<f:selectItem itemValue="Casado" itemLabel="Casado" />
 					</rich:inplaceSelect>
 					<br />
 					<h:outputText value="Genero: " style="color: #0174DF" />
 					<rich:inplaceSelect defaultLabel="Click para indicar el genero"
-						openOnEdit="true" value="#{personProfileController.genderId}">
+						openOnEdit="true" value="#{personProfileController.genderId}"
+						disabled="#{personProfileController.isGeneralDataDisabled}" >
 						<f:selectItem itemValue="Hombre" itemLabel="Hombre" />
 						<f:selectItem itemValue="Mujer" itemLabel="Mujer" />
 					</rich:inplaceSelect>
@@ -86,14 +95,17 @@
 					<h:outputText value="Lugar De Nacimiento:" style="color: #0174DF" />
 					<rich:inplaceInput id="txtBirthplace"
 						value="#{personProfileController.birthPlaceId}" size="50"
-						defaultLabel="Click para ingresar lugar de nacimiento" />
+						defaultLabel="Click para ingresar lugar de nacimiento" 
+						disabled="#{personProfileController.isGeneralDataDisabled}" />
 					<br />
 					<h:outputText value="Tipo De Sangre:" style="color: #0174DF" />
 					<rich:inplaceInput id="txTBloodtype"
 						value="#{personProfileController.bloodTypeId}" size="50"
-						defaultLabel="Click para ingresar su tipo de sangre" />
+						defaultLabel="Click para ingresar su tipo de sangre" 
+						disabled="#{personProfileController.isGeneralDataDisabled}" />
 					<!-- Input BirthDay field -->
 					<br />
+					<h:panelGrid columns="3">
 					<h:outputText value="Fecha De Nacimiento:" style="color: #0174DF" />
 					<rich:calendar value="#{personProfileController.birthDay}"
 						id="calendarBirthDay" locale="#{personProfileController.locale}"
@@ -101,15 +113,22 @@
 						datePattern="#{personProfileController.pattern}"
 						showApplyButton="#{personProfileController.showApply}"
 						cellWidth="24px" cellHeight="22px" style="width:200px"
-						disabled="#{personProfileController.disabled}">
+						disabled="#{personProfileController.isGeneralDataDisabled}" >
 					</rich:calendar>
-					<br />
 					<input name="no mostrar fecha" type="checkbox"
 						value="¿Desea mostrar su fecha de nacimiento?"
-						style="color: #0174DF" />¿Desea mostrar su fecha de nacimiento? 
+						disabled="#{personProfileController.isGeneralDataDisabled}"
+						style="color: #0174DF" />¿Desea mostrar su fecha de nacimiento?
+				    </h:panelGrid>
+				    </a4j:outputPanel>
 					<!-- Input BirthDay field -->
-					<br />
-					<h:commandButton id="dtgCancel" value="Cancelar" action="#{loginController.login}" />
+					<h:panelGrid columns="2" id="btnEventsGeneralDataGrid" >
+						<a4j:outputPanel id="btnEventsGeneralDataInfo">
+							<a4j:commandButton id="btnEditGeneralData" value="Editar" action="#{personProfileController.editGeneralData}" rendered="#{personProfileController.isBtnEditRendered}" execute="btnEventsGeneralDataGrid" render="btnEventsGeneralDataInfo fieldsGeneralDataInfo" />
+							<a4j:commandButton id="btnCancelGeneralData" value="Cancelar" action="#{personProfileController.cancelGeneralData}" rendered="#{personProfileController.isBtnCancelRendered}" execute="btnEventsGeneralDataGrid" render="btnEventsGeneralDataInfo fieldsGeneralDataInfo" />
+							<a4j:commandButton id="btnSaveGeneralData" value="Salvar" action="#{personProfileController.saveGeneralData}" rendered="#{personProfileController.isBtnSaveRendered}" execute="btnEventsGeneralDataGrid" render="btnEventsGeneralDataInfo fieldsGeneralDataInfo" />
+						</a4j:outputPanel>
+					</h:panelGrid>
 				</h:form>
 			</h:panelGrid>
 		</rich:panel>
@@ -146,35 +165,17 @@
 					</rich:panel>
 				</rich:dataGrid>
 			</a4j:outputPanel>
-
 			<a4j:outputPanel id="productSelect">
 				<rich:panel rendered="#{personProfileController.isProductRendered}">
 					<h:panelGrid columns="2" id="ocupationPanel" rendered="true">
-						<h:outputText value="Producto: " styleClass="fieldLabel" />
-						<rich:select enableManualInput="true"
-							defaultLabel="Escribe el producto"
-							value="#{personProfileController.productName}"
-							style="width:195px;">
-							<f:selectItems value="#{personProfileController.productOptions}" />
-						</rich:select>
-					</h:panelGrid>
-					<h:panelGrid columns="2">
-						<a4j:commandButton id="btnSave"
-							action="#{personProfileController.saveProduct()}" execute="@form"
-							render="productInfo productSelect" value="Guardar"
-							rendered="true" />
-						<a4j:commandButton id="prodCancel"
-							action="#{personProfileController.cancelAddProduct()}"
-							execute="@form" render="prodctSelect" value="Cancelar"
-							rendered="true" />
-					</h:panelGrid>
-				</rich:panel>
-			</a4j:outputPanel>
-			<h:outputText value="Nombre Producto: " style="color: #0174DF" />
-			<rich:inplaceInput id="txtPruductName"
-				value="#{personProfileController.productName}" size="100"
-				defaultLabel="Nombre del producto " />
-
+						<h:outputText value="Nombre Producto: " styleClass="fieldLabel" />
+						<rich:inplaceInput id="txtPruductName"
+							value="#{personProfileController.productName}" size="100"
+							defaultLabel="Nombre del producto " />
+				<h:outputLabel value="Descripcion del servicio:"
+					styleClass="fieldLabel" />
+				<h:inputTextarea id="descripcion">
+				</h:inputTextarea>
 			<h:form id="fileUpoadForm">
 				<h:panelGrid columns="2" columnClasses="top,top">
 					<rich:fileUpload
@@ -182,7 +183,7 @@
 						acceptedTypes="jpg, gif, png, bmp"
 						ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');"
 						maxFilesQuantity="5">
-						<a4j:ajax event="uploadcomplete" execute="@none" render="info" />
+					<a4j:ajax event="uploadcomplete" execute="@none" render="info" />
 					</rich:fileUpload>
 					<h:panelGroup id="info" layout="block">
 						<rich:panel bodyClass="info">
@@ -218,16 +219,25 @@
 					</h:panelGroup>
 				</h:panelGrid>
 			</h:form>
-			<h:panelGrid columns="9" columnClasses="titleDescription">
-				<h:outputLabel value="Descripcion del servicio:"
-					style="color: #0174DF" />
-				<h:inputTextarea id="descripcion">
-				</h:inputTextarea>
-				<h:commandButton id="servSave" value="Subir Servicio"
-					action="#{loginController.login}" />
-				<h:commandButton id="servCancelar" value="Cancelar"
-					action="#{loginController.login}" />
-			</h:panelGrid>
+						
+					</h:panelGrid>					
+					<h:panelGrid columns="2">
+						<a4j:commandButton id="btnSave"
+							action="#{personProfileController.saveProduct()}" execute="@form"
+							render="productInfo productSelect" value="Guardar"
+							rendered="true" />
+						<a4j:commandButton id="prodCancel"
+							action="#{personProfileController.cancelAddProduct()}"
+							execute="@form" render="prodctSelect" value="Cancelar"
+							rendered="true" />
+					</h:panelGrid>
+				</rich:panel>
+			</a4j:outputPanel>
+			
+
+
+
+			
 		</rich:panel>
 		<br />
 	</ui:define>
