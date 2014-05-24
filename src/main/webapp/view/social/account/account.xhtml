@@ -26,7 +26,7 @@
 												src="#{facesContext.externalContext.requestContextPath}/images/nature/pic2.jpg"
 												alt="RF logo" width="1024px" height="300px" />
 										</h:commandLink>
-										<h:panelGrid columns="3" style="position:absolute;left:500px;top:380px;">
+										<h:panelGrid columns="4" style="position:absolute;left:500px;top:380px;">
 											<h:panelGrid columns="1">
 												<h:outputText value="Ofertas" />
 												<h:commandLink id="lnkWorkOffer"
@@ -42,6 +42,7 @@
 												<h:commandLink id="lnkAlerts"
 													action="#{loginController.viewProfile}" value="10"></h:commandLink>
 											</h:panelGrid>
+											<h:commandButton id="dtgSave" value="Editar" action="#{personProfileController.dataGeneral()}" />
 										</h:panelGrid>
 										<rich:panel style="position:absolute;left:10px;top:260px;">
 											<h:commandLink id="lnkProfile"
