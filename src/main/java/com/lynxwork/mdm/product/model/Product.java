@@ -10,7 +10,9 @@ public class Product implements Serializable {
 	private String productId;
 	private String productName;
 	private String productDescription;
-	private String profileId;
+	private List<> productImageList;
+	private String productTypeId;
+	private String personId;
 	
 	public String getProductId() {
 		return productId;
@@ -30,10 +32,17 @@ public class Product implements Serializable {
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
 	}
-	public String getProfileId() {
-		return profileId;
+	public String getPersonId() {
+		return personId;
 	}
-	public void setProfileId(String profileId) {
-		this.profileId = profileId;
+	public void setPersonId(String personId) {
+		this.personId = personId;
 	}
+	public String getProductTypeId() {
+		return productTypeId;
+	}
+	public void setProductTypeId(String productTypeId) {
+		this.productTypeId = productTypeId;
+	}
+
 }
