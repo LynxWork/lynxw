@@ -16,8 +16,10 @@
 
     <!-- configuration of navigation rules LynxWork Build Sinergy-->
  <navigation-rule>
+ 
   <from-view-id>/index.xhtml</from-view-id>
   <navigation-case>
+  
    <from-outcome>login</from-outcome>
    <to-view-id>/view/social/publication/publication.xhtml</to-view-id>
   </navigation-case>
@@ -37,6 +39,13 @@
    <from-outcome>test</from-outcome>
    <to-view-id>/view/hcm/profile/test.xhtml</to-view-id>
   </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>dataGeneral</from-outcome>
+   <to-view-id>/view/hcm/profile/personProfile.xhtml</to-view-id>
+  </navigation-case>
+  
+  
  </navigation-rule>
 
  
@@ -63,9 +72,11 @@
    <from-outcome>account</from-outcome>
    <to-view-id>/view/social/account/account.xhtml</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>personProfile</from-outcome>
+   <to-view-id>/view/hcm/profile/personProfile.xhtml</to-view-id>
+  </navigation-case>
  </navigation-rule>
- 
- 
  <application>
   <message-bundle>messages_es</message-bundle>
  </application>

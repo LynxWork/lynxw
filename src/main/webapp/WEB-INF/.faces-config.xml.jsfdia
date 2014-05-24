@@ -27,6 +27,11 @@
    <PROCESS-ITEM-OUTPUT ID="test::#view#hcm#profile#test.xhtml"
     NAME="output5" PATH="/view/hcm/profile/test.xhtml"
     TARGET="rules:#view#hcm#profile#test.xhtml" TITLE="test" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="dataGeneral::#view#hcm#profile#personProfile.xhtml"
+    NAME="output2" PATH="/view/hcm/profile/personProfile.xhtml"
+    TARGET="rules:#view#hcm#profile#personProfile.xhtml"
+    TITLE="dataGeneral" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#view#security#access#validateLogin.xhtml"
@@ -57,6 +62,11 @@
    <PROCESS-ITEM-OUTPUT ID="account::#view#social#account#account.xhtml"
     NAME="output4" PATH="/view/social/account/account.xhtml"
     TARGET="rules:#view#social#account#account.xhtml" TITLE="account" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="personProfile::#view#hcm#profile#personProfile.xhtml"
+    NAME="output5" PATH="/view/hcm/profile/personProfile.xhtml"
+    TARGET="rules:#view#hcm#profile#personProfile.xhtml"
+    TITLE="personProfile" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#view#social#publication#publication.xhtml"

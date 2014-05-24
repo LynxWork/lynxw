@@ -1,7 +1,6 @@
 package com.lynxwork.security.controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 
 import javax.enterprise.context.SessionScoped;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.richfaces.cdi.push.Push;
-
 import com.lynxwork.config.SystemConfig;
 import com.lynxwork.mdm.person.model.Person;
 import com.lynxwork.security.exception.UserRegistrationException;

@@ -9,6 +9,7 @@ import java.util.Locale;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
@@ -641,6 +642,15 @@ public class PersonProfileController implements Serializable {
 	//PROJECTS
 	//general data
 	public String dataGeneral(){
+		log.debug("person nin:"+ nin);
+		log.debug("person taxId:"+ taxId);
+		log.debug("person ssn:"+ ssn);
+		log.debug("person estateCivilId:"+ estateCivilId);
+		log.debug("person genderId:"+ genderId);
+		log.debug("person birthPlaceId:"+ birthPlaceId);
+		log.debug("person bloodTypeId:"+ bloodTypeId);
+		log.debug("person birthDay:"+ birthDay);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
 		Person person = new Person();
 		person.setNin(nin);
 		person.setTaxid(taxId);
@@ -652,9 +662,5 @@ public class PersonProfileController implements Serializable {
 		person.setBirthday(birthDay);
 		return "";
 	}
-	
-	
-
-	
 	
 }
