@@ -5,7 +5,8 @@ import java.util.List;
 import com.lynxwork.mdm.product.model.Product;
 
 public interface IProductDao {
-	public List<Product> findByUserld(String productName);
+	
+	public List<Product> findByPersonld(String productName);
 	
 	Product findById(String productId);
 
