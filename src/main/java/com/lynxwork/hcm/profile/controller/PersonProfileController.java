@@ -7,20 +7,27 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.lynxwork.config.SystemConfig;
 import com.lynxwork.hcm.profile.model.Education;
 import com.lynxwork.hcm.profile.service.EducationService;
 import com.lynxwork.mdm.factory.impl.mongo.MongoMasterDataDaoFactory;
+import com.lynxwork.mdm.person.dao.IPersonDao;
 import com.lynxwork.mdm.person.model.Person;
+import com.lynxwork.mdm.person.service.PersonService;
 import com.lynxwork.mdm.product.dao.IProductDao;
 import com.lynxwork.mdm.product.model.Product;
 import com.lynxwork.mdm.product.service.ProductService;
+import com.lynxwork.persistance.exception.SaveEntityException;
+import com.lynxwork.security.model.User;
 
 
 
@@ -39,6 +46,22 @@ public class PersonProfileController implements Serializable {
 	private static final long serialVersionUID = 7250669827317454027L;
 	static final Logger log = Logger.getLogger(ProfessionController.class);
 	
+	//General Configurations
+	private User user;
+	
+	//Person
+	Person person;
+	
+	//Accion control
+	boolean isGeneralDataDisabled  = true;
+	boolean isBtnCancelRendered = false;
+	boolean isBtnSaveRendered = false;
+	boolean isBtnEditRendered = true;
+
+
+
+
+
 	//Person General data properties
 	private String name;
 	private String firsName;
@@ -106,6 +129,25 @@ public class PersonProfileController implements Serializable {
 	     isEnableBirthDay = false;
 	}
 
+	@PostConstruct
+    public void initNewMember() {
+		//init variables
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession)ctx.getExternalContext().getSession(true);
+		Object obj = session.getAttribute(SystemConfig.SESSION_CONFIG_USER);
+		if(obj!=null){
+			user = (User)obj;
+			log.debug("The user objectis ok");
+		}else{
+			log.warn("The user object is null, contact to Administration Platform");
+		}
+		
+		//Get person data
+		if(person==null){
+			person = findPerson();
+		}
+		
+	}
 
 	public String getProductName() {
 	return productName;
@@ -116,7 +158,7 @@ public class PersonProfileController implements Serializable {
 	}
 
 	public String getName() {
-	return name;
+		return name;
 	}
 
 	public void setName(String name) {
@@ -528,7 +570,7 @@ public class PersonProfileController implements Serializable {
 		productOptions = new ArrayList<SelectItem>();
     	if(productCatList.size()==0){
 			ProductService productService = new ProductService();
-			productCatList = productService.findByUserld("productId");
+			productCatList = productService.findByPersonld("productId");
 			if(productCatList.size()>0){
 		        for (Product product : productCatList) {
 		        	productOptions.add(new SelectItem(product.getProductId()));
@@ -556,14 +598,16 @@ public class PersonProfileController implements Serializable {
 		log.debug("End saveProduct");
 		return "";
 	}
+
 	public List<Product> getProductList() {
 		List<Product> productList = new ArrayList<Product>();
         MongoMasterDataDaoFactory factory  = new MongoMasterDataDaoFactory();
+        IPersonDao personDao = factory.getPersonDao();
+        String personId = personDao.findByUserId(user.getUserId()).getPersonId();
         IProductDao productDao = factory.getProductDao();
-        productList = productDao.findByUserld(productName);
+        productList = productDao.findByPersonld(personId);
 		return productList;
 	}
-
 
 	public void setProductList(List<Product> productList) {
 		this.productList = productList;
@@ -641,8 +685,9 @@ public class PersonProfileController implements Serializable {
 	
 	//PROJECTS
 	//general data
-	public String dataGeneral(){
-		log.debug("person nin:"+ nin);
+	public String viewPersonProfile(){
+		log.debug("viewPersonProfile");
+		/*log.debug("person nin:"+ nin);
 		log.debug("person taxId:"+ taxId);
 		log.debug("person ssn:"+ ssn);
 		log.debug("person estateCivilId:"+ estateCivilId);
@@ -650,7 +695,6 @@ public class PersonProfileController implements Serializable {
 		log.debug("person birthPlaceId:"+ birthPlaceId);
 		log.debug("person bloodTypeId:"+ bloodTypeId);
 		log.debug("person birthDay:"+ birthDay);
-		FacesContext facesContext = FacesContext.getCurrentInstance();
 		Person person = new Person();
 		person.setNin(nin);
 		person.setTaxid(taxId);
@@ -659,8 +703,83 @@ public class PersonProfileController implements Serializable {
 		person.setGenderId(genderId);
 		person.setBirthPlaceId(birthPlaceId);
 		person.setBloodTypeId(bloodTypeId);
-		person.setBirthday(birthDay);
+		person.setBirthday(birthDay);*/
+		return "personProfile";
+	}
+	
+	
+	public Person findPerson(){
+		MongoMasterDataDaoFactory factory  = new MongoMasterDataDaoFactory();
+		IPersonDao personDao = factory.getPersonDao();
+		Person person = personDao.findByUserId( user.getUserId() );
+		return person;
+	}
+	
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+	
+	public boolean getIsGeneralDataDisabled() {
+		return isGeneralDataDisabled;
+	}
+	public void setGeneralDataDisabled(boolean isGeneralDataDisabled) {
+		this.isGeneralDataDisabled = isGeneralDataDisabled;
+	}
+	public boolean getIsBtnCancelRendered() {
+		return isBtnCancelRendered;
+	}
+	public void setBtnCancelRendered(boolean isBtnCancelRendered) {
+		this.isBtnCancelRendered = isBtnCancelRendered;
+	}
+	public boolean getIsBtnSaveRendered() {
+		return isBtnSaveRendered;
+	}
+	public void setBtnSaveRendered(boolean isBtnSaveRendered) {
+		this.isBtnSaveRendered = isBtnSaveRendered;
+	}
+
+	public boolean getIsBtnEditRendered() {
+		return isBtnEditRendered;
+	}
+
+	public void setBtnEditRendered(boolean isBtnEditRendered) {
+		this.isBtnEditRendered = isBtnEditRendered;
+	}
+
+	public String editGeneralData(){
+		isBtnCancelRendered=true;
+		isBtnSaveRendered=true;
+		isBtnEditRendered=false;
+		isGeneralDataDisabled  = false;
 		return "";
 	}
+	
+	public String saveGeneralData(){
+		//Codigo para salvar
+		PersonService personService = new PersonService();
+		try {
+			personService.savePerson(this.person);
+		} catch (SaveEntityException e) {
+			log.error("Error al intentar salvar los datos del perfil" + e);
+		}
+		isBtnCancelRendered=false;
+		isBtnSaveRendered=false;
+		isBtnEditRendered=true;		
+		isGeneralDataDisabled  = true;
+		return "";
+	}
+	
+	public String cancelGeneralData(){
+		isBtnCancelRendered=false;
+		isBtnSaveRendered=false;
+		isBtnEditRendered=true;
+		isGeneralDataDisabled  = true;
+		return "";
+	}
+	
 	
 }
