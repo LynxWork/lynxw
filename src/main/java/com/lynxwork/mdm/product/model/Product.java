@@ -1,5 +1,7 @@
 package com.lynxwork.mdm.product.model;
+import java.io.File;
 import java.io.Serializable;
+import java.util.List;
 
 public class Product implements Serializable {
 	/**
@@ -10,7 +12,7 @@ public class Product implements Serializable {
 	private String productId;
 	private String productName;
 	private String productDescription;
-	private List<> productImageList;
+	private List<File> productImageList;
 	private String productTypeId;
 	private String personId;
 	
@@ -43,6 +45,12 @@ public class Product implements Serializable {
 	}
 	public void setProductTypeId(String productTypeId) {
 		this.productTypeId = productTypeId;
+	}
+	public List<File> getProductImageList() {
+		return productImageList;
+	}
+	public void setProductImageList(List<File> productImageList) {
+		this.productImageList = productImageList;
 	}
 
 }
