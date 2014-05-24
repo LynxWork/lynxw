@@ -12,12 +12,12 @@ import com.lynxwork.mdm.product.model.Product;
 public class ProductService {
 	static final Logger log = Logger.getLogger(ProfessionService.class);
 	
-	public List<Product> findByUserld(String productName){
+	public List<Product> findByPersonld(String productName){
 		log.debug("init findByUserld");
 		List<Product> productList = new ArrayList<Product>();
 		HcmDaoFactory daoFactory = HcmDaoFactory.getDAOFactory(SystemConfig.MASTER_DATA_PERSISTENT_REPOSITORY);
 		IProductDao productDao = daoFactory.getProductDao();
-		productList = productDao.findByUserld( productName);
+		productList = productDao.findByPersonld( productName);
 		log.debug("end findByUserld");
 		return productList;
 	}
