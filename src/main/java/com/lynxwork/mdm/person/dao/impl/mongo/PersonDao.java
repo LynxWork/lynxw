@@ -97,7 +97,7 @@ public class PersonDao implements IPersonDao{
 	 * @param lastName  Person lastName
 	 * **/
 	public Person setMapEntity(BasicDBObject obj,Person person){
-		person.setPersonId(obj.getInt("personId"));
+		person.setPersonId(obj.getString("personId"));
 		person.setFirstName(obj.getString("firsName"));
 		person.setMiddleName(obj.getString("middleName"));
 		person.setLastName(obj.getString("lastName"));
