@@ -15,6 +15,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.WriteResult;
 
 public class ProductDao implements IProductDao {
+
 	static final Logger log = Logger.getLogger(ProductDao.class);
 	private static String ENTITY_NAME ="ProductService";
 	MongoDbConnection cnn;
@@ -60,11 +61,11 @@ public class ProductDao implements IProductDao {
 	}
 
 
-	public List<Product> findByUserld (String Userld){
+	public List<Product> findByPersonld (String personld){
 		List<Product> productList = new ArrayList<Product>();
 		DBCollection findUser = db.getCollection(ENTITY_NAME);
 		BasicDBObject searchQuery = new BasicDBObject();
-		searchQuery.put("Userld", Userld);
+		searchQuery.put("Personld", personld);
 		DBCursor cursor = findUser.find(searchQuery);
 		try {
 			while (cursor.hasNext()) {
@@ -79,6 +80,8 @@ public class ProductDao implements IProductDao {
 		}
 	return productList;
 	}
+	
+	
 	/**
 	 * Mapea los campos de la entidad
 	 * @param bloodype BloodTypeDao bloodype 
@@ -87,7 +90,7 @@ public class ProductDao implements IProductDao {
 		product.setProductId( obj.getString("productId") );
 		product.setProductName( obj.getString("productName") );
 		product.setProductDescription( obj.getString("productDescription") );
-		product.setProfileId( obj.getString("profileId") );
+		product.setPersonId( obj.getString("personId") );
 	return product;
 	}
 
@@ -99,7 +102,7 @@ public class ProductDao implements IProductDao {
 		document.put("productId", product.getProductId() );
 		document.put("productName", product.getProductName() );
 		document.put("productDescription", product.getProductDescription() );
-		document.put("profileId", product.getProfileId() );
+		document.put("personId", product.getPersonId() );
 		return document;
 	}
 
