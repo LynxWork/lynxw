@@ -7,7 +7,7 @@ import com.lynxwork.hcm.profile.model.Profession;
 
 public class Person {
 	
-	private int personId;
+	private String personId;
 	private String firstName;
 	private String middleName;
 	private String lastName;
@@ -18,7 +18,7 @@ public class Person {
 	private String ssn;
 	private String isSsnVisible; //Indicate if nin is visible
 	private Date birthday;
-	private String stateCivilId;
+	private String stateCivilId; 
 	private String isStateCivilVisible; //Indicate if nin is visible
 	private String genderId;
 	private String birthPlaceId;
@@ -30,11 +30,11 @@ public class Person {
 	private BirthPlace birthPlace;
 	private String isBirthPlace; //Indicate if birthPlace is visible
 	
-	public int getPersonId() 
+	public String getPersonId() 
 	{
 		return personId;
 	}
-	public void setPersonId(int personId) {
+	public void setPersonId(String personId) {
 		this.personId = personId;
 	}
 	public String getFirstName() {
