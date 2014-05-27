@@ -20,7 +20,9 @@ import com.lynxwork.config.SystemConfig;
 import com.lynxwork.hcm.profile.model.Education;
 import com.lynxwork.hcm.profile.service.EducationService;
 import com.lynxwork.mdm.factory.impl.mongo.MongoMasterDataDaoFactory;
+import com.lynxwork.mdm.person.dao.ICivilStatusDao;
 import com.lynxwork.mdm.person.dao.IPersonDao;
+import com.lynxwork.mdm.person.model.CivilStatus;
 import com.lynxwork.mdm.person.model.Person;
 import com.lynxwork.mdm.person.service.PersonService;
 import com.lynxwork.mdm.product.dao.IProductDao;
@@ -48,9 +50,13 @@ public class PersonProfileController implements Serializable {
 	
 	//General Configurations
 	private User user;
-	
 	//Person
 	Person person;
+	//CivilStatus
+	CivilStatus civilStatus;
+	
+	
+	
 	
 	//Accion control
 	boolean isGeneralDataDisabled  = true;
@@ -714,6 +720,14 @@ public class PersonProfileController implements Serializable {
 		Person person = personDao.findByUserId( user.getUserId() );
 		return person;
 	}
+	 
+	public CivilStatus findCivil(){
+		MongoMasterDataDaoFactory factory  = new MongoMasterDataDaoFactory();
+		ICivilStatusDao civilStatusDao = factory.getCivilStatusDao();
+		CivilStatus civilStatus = civilStatusDao.find(user.getUserId());
+		return civilStatus;
+	}
+	 
 	
 	public Person getPerson() {
 		return person;
@@ -763,6 +777,7 @@ public class PersonProfileController implements Serializable {
 		PersonService personService = new PersonService();
 		try {
 			personService.savePerson(this.person);
+			personService.save(this.person);
 		} catch (SaveEntityException e) {
 			log.error("Error al intentar salvar los datos del perfil" + e);
 		}
@@ -780,6 +795,16 @@ public class PersonProfileController implements Serializable {
 		isGeneralDataDisabled  = true;
 		return "";
 	}
+
+	public CivilStatus getCivilStatus() {
+		return civilStatus;
+	}
+
+	public void setCivilStatus(CivilStatus civilStatus) {
+		this.civilStatus = civilStatus;
+	}
+
+	
 	
 	
 }
