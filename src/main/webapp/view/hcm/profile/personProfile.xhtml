@@ -58,27 +58,27 @@
 						disabled="#{personProfileController.isGeneralDataDisabled}"/>
 					<br />
 					<h:outputText value="CURP: " style="color: #0174DF" />
-					<rich:inplaceInput id="txtIn" value="#{personProfileController.nin}"
+					<rich:inplaceInput id="txtIn" 
+					    value="#{personProfileController.person.nin}"
 						size="50" defaultLabel="Click para ingresar su CURP " 
 						disabled="#{personProfileController.isGeneralDataDisabled}"/>
-
 					<br />
 					<h:outputText value="RFC: " style="color: #0174DF" />
 					<rich:inplaceInput id="txtTaxId"
-						value="#{personProfileController.taxId}" size="50"
+						value="#{personProfileController.person.taxid}" size="50"
 						defaultLabel="Click para ingres su RFC " 
 						disabled="#{personProfileController.isGeneralDataDisabled}" />
 					<br />
 					<h:outputText value="Numero De Seguro Social: " style="color: #0174DF" />
 					<rich:inplaceInput id="txtSsn"
-						value="#{personProfileController.ssn}" size="50"
+						value="#{personProfileController.person.ssn}" size="50"
 						defaultLabel="Click para ingresar el numero del seguro social" 
 						disabled="#{personProfileController.isGeneralDataDisabled}"/>
 					<br />
 					<h:outputText value="Estado Civil:" style="color: #0174DF" />
 					<rich:inplaceSelect id="txtstateCivil"
 						defaultLabel="Click para indicar el estado civil" openOnEdit="true"
-						value="#{personProfileController.estateCivilId}"
+						value="#{personProfileController.person.stateCivilId}"
 						disabled="#{personProfileController.isGeneralDataDisabled}">
 						<f:selectItem itemValue="Soltero" itemLabel="Soltero" />
 						<f:selectItem itemValue="Casado" itemLabel="Casado" />
@@ -86,7 +86,7 @@
 					<br />
 					<h:outputText value="Genero: " style="color: #0174DF" />
 					<rich:inplaceSelect defaultLabel="Click para indicar el genero"
-						openOnEdit="true" value="#{personProfileController.genderId}"
+						openOnEdit="true" value="#{personProfileController.person.genderId}"
 						disabled="#{personProfileController.isGeneralDataDisabled}" >
 						<f:selectItem itemValue="Hombre" itemLabel="Hombre" />
 						<f:selectItem itemValue="Mujer" itemLabel="Mujer" />
@@ -94,20 +94,20 @@
 					<br />
 					<h:outputText value="Lugar De Nacimiento:" style="color: #0174DF" />
 					<rich:inplaceInput id="txtBirthplace"
-						value="#{personProfileController.birthPlaceId}" size="50"
+						value="#{personProfileController.person.birthPlace}" size="50"
 						defaultLabel="Click para ingresar lugar de nacimiento" 
 						disabled="#{personProfileController.isGeneralDataDisabled}" />
 					<br />
 					<h:outputText value="Tipo De Sangre:" style="color: #0174DF" />
 					<rich:inplaceInput id="txTBloodtype"
-						value="#{personProfileController.bloodTypeId}" size="50"
+						value="#{personProfileController.person.bloodTypeId}" size="50"
 						defaultLabel="Click para ingresar su tipo de sangre" 
 						disabled="#{personProfileController.isGeneralDataDisabled}" />
 					<!-- Input BirthDay field -->
 					<br />
 					<h:panelGrid columns="3">
 					<h:outputText value="Fecha De Nacimiento:" style="color: #0174DF" />
-					<rich:calendar value="#{personProfileController.birthDay}"
+					<rich:calendar value="#{personProfileController.person.birthday}"
 						id="calendarBirthDay" locale="#{personProfileController.locale}"
 						popup="#{personProfileController.popup}"
 						datePattern="#{personProfileController.pattern}"
