@@ -41,6 +41,23 @@ public class PersonDao implements IPersonDao{
 		  log.debug( "End Save Person Entity in Mongo DB: ");
 		  return oid;
 	}
+    
+	public ObjectId savePerson(Person person) throws SaveEntityException{
+		  log.debug( "Save Person Entity in Mongo DB: ");
+		  //Se inserta 
+		  DBCollection collection = db.getCollection( ENTITY_NAME );
+		  BasicDBObject document = new BasicDBObject();
+		  ObjectId oid = new ObjectId();
+		  document = getMapEntity(document, oid,person);
+		  WriteResult wr = collection.insert(document);
+		  if(wr.getError()!=null){
+			  String msgErr = "No fue posible salvar la entidad Person mongodb ["+wr.getError()+"]";
+			  log.debug( msgErr );
+			  throw new SaveEntityException(msgErr);
+		  }
+		  log.debug( "End Save Person Entity in Mongo DB: ");
+		  return oid;
+	}
 
 	/**
 	 * Busca una entidad
