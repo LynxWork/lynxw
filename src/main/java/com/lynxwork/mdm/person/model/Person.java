@@ -1,11 +1,17 @@
 package com.lynxwork.mdm.person.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import com.lynxwork.hcm.profile.model.Profession;
 
-public class Person {
+public class Person implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1788404604715176938L;
 	
 	private String personId;
 	private String firstName;
