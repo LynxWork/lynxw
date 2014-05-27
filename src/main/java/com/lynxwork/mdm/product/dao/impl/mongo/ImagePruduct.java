@@ -6,6 +6,7 @@ import com.mongodb.gridfs.*;
 import java.io.*;
 
 public class ImagePruduct {
+	
 	public static byte[] LoadImage(String filePath) throws Exception {
         File file = new File(filePath);
         int size = (int)file.length();
