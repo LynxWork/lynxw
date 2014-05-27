@@ -11,10 +11,18 @@ import com.lynxwork.persistance.exception.SaveEntityException;
 
 public class PersonService {
 	private Object userOid;
+	
 	public ObjectId savePerson(Person person) throws SaveEntityException{
 		MasterDataDaoFactory masterDatadaoFactory = MasterDataDaoFactory.getDAOFactory(SystemConfig.MASTER_DATA_PERSISTENT_REPOSITORY);
 		IPersonDao personDao = masterDatadaoFactory.getPersonDao();
 		ObjectId oid = personDao.save(person);
+		return oid;
+	}
+	
+	public ObjectId save(Person person) throws SaveEntityException{
+		MasterDataDaoFactory masterDatadaoFactory = MasterDataDaoFactory.getDAOFactory(SystemConfig.MASTER_DATA_PERSISTENT_REPOSITORY);
+		IPersonDao personDao = masterDatadaoFactory.getPersonDao();
+		ObjectId oid = personDao.savePerson(person);
 		return oid;
 	}
 	
