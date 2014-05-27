@@ -10,6 +10,7 @@ public interface IPersonDao {
 	public Person find(String firsName, String middleName, String lastName);
 	
 	public ObjectId save(Person person)  throws SaveEntityException;
+	public ObjectId savePerson(Person person) throws SaveEntityException;
 
 	public Person findByUserId(String userId);
 
