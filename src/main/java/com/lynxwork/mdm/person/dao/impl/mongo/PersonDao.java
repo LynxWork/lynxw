@@ -106,7 +106,34 @@ public class PersonDao implements IPersonDao{
 		return person;
 	}
 
-
+	@Override
+	public boolean update(Person person){
+		boolean reval = false;
+		//Query criteria document to update
+		BasicDBObject searchQuery = new BasicDBObject().append("userId", person.getUserId());
+		//Update document fields
+		BasicDBObject newDocument = new BasicDBObject();
+		newDocument.append("$set", new BasicDBObject().append("firsName", person.getFirstName() ));
+		newDocument.append("$set", new BasicDBObject().append("middleName", person.getMiddleName() ));
+		newDocument.append("$set", new BasicDBObject().append("lastName", person.getLastName() ));
+		newDocument.append("$set", new BasicDBObject().append("nin", person.getNin() ));
+		newDocument.append("$set", new BasicDBObject().append("taxid", person.getTaxid() ));
+		newDocument.append("$set", new BasicDBObject().append("ssn", person.getSsn() ));
+		newDocument.append("$set", new BasicDBObject().append("birthday", person.getBirthday() ));
+		newDocument.append("$set", new BasicDBObject().append("stateCivilId", person.getStateCivilId() ));
+		newDocument.append("$set", new BasicDBObject().append("genderId", person.getGenderId() ));
+		newDocument.append("$set", new BasicDBObject().append("blirthplaceId", person.getBirthPlaceId() ));
+		newDocument.append("$set", new BasicDBObject().append("bloodTypeId", 110));
+		//Update Document
+		DBCollection collection = db.getCollection(ENTITY_NAME);
+		WriteResult result = collection.update(searchQuery, newDocument);
+		if(result==null){
+			reval = true;
+		}
+		return reval;
+	}
+	
+	
 	/**
 	 * Mapea los campos de la entidad
 	 * @param firsName   Person firsName
