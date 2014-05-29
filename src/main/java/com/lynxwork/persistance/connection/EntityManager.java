@@ -104,4 +104,9 @@ public class EntityManager {
 		return entity;
 	}
 	
+	public boolean update(Object obj){
+		
+		return true;
+	}
+	
 }

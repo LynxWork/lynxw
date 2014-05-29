@@ -32,6 +32,7 @@ public class QueryBuilder {
 		equal = new HashMap<String,String>();
 		equal.put(key, value);
 	}
+
 	public HashMap<String,String> getEqual(){
 		return equal;
 	}
