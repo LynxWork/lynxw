@@ -771,23 +771,22 @@ public class PersonProfileController implements Serializable {
 		isGeneralDataDisabled  = false;
 		return "";
 	}
-	
+
 	public String saveGeneralData(){
 		//Codigo para salvar
 		PersonService personService = new PersonService();
 		try {
-			personService.savePerson(this.person);
-			personService.save(this.person);
-		} catch (SaveEntityException e) {
+			personService.update(this.person);
+			isBtnCancelRendered=false;
+			isBtnSaveRendered=false;
+			isBtnEditRendered=true;		
+			isGeneralDataDisabled  = true;
+		} catch (Exception e) {
 			log.error("Error al intentar salvar los datos del perfil" + e);
 		}
-		isBtnCancelRendered=false;
-		isBtnSaveRendered=false;
-		isBtnEditRendered=true;		
-		isGeneralDataDisabled  = true;
 		return "";
 	}
-	
+
 	public String cancelGeneralData(){
 		isBtnCancelRendered=false;
 		isBtnSaveRendered=false;

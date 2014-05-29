@@ -14,4 +14,6 @@ public interface IPersonDao {
 
 	public Person findByUserId(String userId);
 
+	public boolean update(Person person);
+
 }
