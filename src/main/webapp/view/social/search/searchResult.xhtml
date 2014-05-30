@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/templates/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:my="http://java.sun.com/jsf/composite/components">
+    <ui:define name="content">
+        <h:outputStylesheet name="app.css" library="css"/>
+        <h:outputScript target="head" name="showMessage.js" library="js"/>
+		<h:form id="reg">
+		
+		<h:panelGrid columns="3">                    
+<rich:panel >
+						<f:facet name="header">
+							<h:outputText value="Publicar"></h:outputText>
+						</f:facet>
+						<h:panelGrid columns="1">
+						<rich:panel>
+							<h:panelGrid columns="1">
+								<rich:panel>
+									<h:commandLink id="lnkProfile" action="#{loginController.viewProfile}" >
+										<img src="#{facesContext.externalContext.requestContextPath}/images/img_arthur.jpg" alt="RF logo" width="130" height="130"/>
+									</h:commandLink>
+								</rich:panel>
+								<h:panelGrid columns="3">
+									<h:panelGrid columns="1">
+										<h:outputText value="Ofertas" />
+										<h:commandLink id="lnkWorkOffer" action="#{loginController.viewProfile}" value="10"></h:commandLink>
+									</h:panelGrid>
+									<h:panelGrid columns="1">
+										<h:outputText value="Mensajes" />
+										<h:commandLink id="lnkMessages" action="#{loginController.viewProfile}" value="10"></h:commandLink>
+									</h:panelGrid>
+									<h:panelGrid columns="1">
+										<h:outputText value="Alertas" />
+										<h:commandLink id="lnkAlerts" action="#{loginController.viewProfile}" value="10"></h:commandLink>
+									</h:panelGrid>
+								</h:panelGrid>
+							</h:panelGrid>
+						</rich:panel>
+						<rich:panel>
+							<h:panelGrid columns="1">
+								<h:inputTextarea rows="3" cols="30"/>
+								<h:panelGrid columns="2">
+									<h:commandButton value="Incluir Foto"></h:commandButton>
+									<h:commandButton value="Publicar"></h:commandButton>
+								</h:panelGrid>
+							</h:panelGrid>
+						</rich:panel>
+						</h:panelGrid>
+					</rich:panel>
+					
+<rich:panel >
+<h:form id="searchForm">
+					<rich:panel>
+						<f:facet name="Search">
+							<h:outputText value="Busqueda"></h:outputText>
+						</f:facet> 
+					                <h:panelGrid columns="4">
+							        <h:outputLabel for="txtSearch" value="Buscar:"/>
+							        <h:inputText id="txtSearch" value="" maxlength="50" size="50">
+							            <rich:validator/>
+							        </h:inputText>
+						            <rich:select selectFirst="true" value="Especialista" enableManualInput="true">
+						                <f:selectItem itemValue="0" itemLabel="Especialista" />
+						                <f:selectItem itemValue="1" itemLabel="Trabajo" />
+						                <f:selectItem itemValue="2" itemLabel="Materiales y Equipo" />
+						            </rich:select>
+							        <h:button  id="btnSearch" value="Buscar"></h:button>
+									</h:panelGrid>
+					</rich:panel>
+</h:form>
+					<rich:tabPanel switchType="client">
+						<rich:tab header="Publicaciones">
+							<h:panelGrid columns="2">
+								<h:panelGrid columns="1">
+									<div>Foto del perfil</div>
+									<div>Nombre Usuario</div>
+								</h:panelGrid>
+								<h:panelGrid columns="1">
+									<div>Descripcion de la publicacion</div>
+									<h:panelGrid columns="1">
+										<div>Calificacion con estrellas</div>
+										<div>Comentarios de la publicacion</div>
+									</h:panelGrid>
+								</h:panelGrid>
+							</h:panelGrid>
+							<h:panelGrid columns="2">
+								<h:panelGrid columns="1">
+									<div>Foto del perfil</div>
+									<div>Nombre Usuario</div>
+								</h:panelGrid>
+								<h:panelGrid columns="1">
+									<div>Descripcion de la publicacion</div>
+									<h:panelGrid columns="1">
+										<div>Calificacion con estrellas</div>
+										<div>Comentarios de la publicacion</div>
+									</h:panelGrid>
+								</h:panelGrid>
+							</h:panelGrid>
+						</rich:tab>
+					</rich:tabPanel>
+				</rich:panel>
+				
+				
+			<rich:panel>
+			<rich:panel>
+						<f:facet name="header">
+							<h:outputText value="Perfil" />
+						</f:facet>
+						
+					<h:panelGrid columns="1">
+					<h:outputText value="Completa tu perfil y tendras mas oportuniades de encontrar empleo" styleClass="titlePublicityArea"/>
+					<h:panelGrid columns="2">
+				        <rich:progressBar mode="client" id="progressBar" value="10">
+				            <f:facet name="initial">
+				                <h:outputText value="El perfil no ha sido completado" />
+				            </f:facet>
+				            <f:facet name="complete">
+				                <h:outputText value="Perfil Completo" />
+				            </f:facet>
+				        </rich:progressBar> 
+				        <h:outputText value="10% Completado" />
+			        </h:panelGrid>
+					</h:panelGrid>
+			</rich:panel>
+			<br/>
+				<rich:panel>
+							<f:facet name="header">
+								<h:outputText value="Publicidad" />
+							</f:facet>
+						<h:panelGrid columns="2">
+							<div id="pubFirst">
+								Publicidad principal
+							</div> 
+							<div>
+								<h:panelGrid columns="4">
+									<div id="publ1">Publicidad 1</div>
+									<div id="publ2">Publicidad 2</div>
+									<div id="publ3">Publicidad 3</div>
+									<div id="publ4">Publicidad 4</div>
+								</h:panelGrid>
+							</div>
+						</h:panelGrid>
+				</rich:panel>
+<br/>
+				<rich:panel>
+							<f:facet name="header">
+								<h:outputText value="Publicidad" />
+							</f:facet>
+						<h:panelGrid columns="2">
+							<div id="pubFirst">
+								Publicidad principal
+							</div> 
+							<div>
+								<h:panelGrid columns="4">
+									<div id="publ1">Publicidad 1</div>
+									<div id="publ2">Publicidad 2</div>
+									<div id="publ3">Publicidad 3</div>
+									<div id="publ4">Publicidad 4</div>
+								</h:panelGrid>
+							</div>
+						</h:panelGrid>
+				</rich:panel>
+<br/>
+				<rich:panel>
+							<f:facet name="header">
+								<h:outputText value="Recomendaciones" />
+							</f:facet>
+						<h:panelGrid columns="2">
+							<div id="pubFirst">
+								Publicidad principal
+							</div> 
+							<div>
+								<h:panelGrid columns="4">
+									<div id="publ1">Publicidad 1</div>
+									<div id="publ2">Publicidad 2</div>
+									<div id="publ3">Publicidad 3</div>
+									<div id="publ4">Publicidad 4</div>
+								</h:panelGrid>
+							</div>
+						</h:panelGrid>
+				</rich:panel>
+			</rich:panel>
+			</h:panelGrid>
+
+					
+		</h:form>
+	</ui:define>
+</ui:composition>
