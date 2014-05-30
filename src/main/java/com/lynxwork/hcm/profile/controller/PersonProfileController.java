@@ -46,7 +46,7 @@ public class PersonProfileController implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 7250669827317454027L;
-	static final Logger log = Logger.getLogger(ProfessionController.class);
+	static final Logger log = Logger.getLogger(PersonProfileController.class);
 	
 	//General Configurations
 	private User user;
@@ -54,17 +54,15 @@ public class PersonProfileController implements Serializable {
 	Person person;
 	//CivilStatus
 	CivilStatus civilStatus;
-	
-	
-	
-	
+
 	//Accion control
-	boolean isGeneralDataDisabled  = true;
-	boolean isBtnCancelRendered = false;
-	boolean isBtnSaveRendered = false;
-	boolean isBtnEditRendered = true;
+	private boolean isGeneralDataDisabled  = true;
+	private boolean isBtnCancelRendered = false;
+	private boolean isBtnSaveRendered = false;
+	private boolean isBtnEditRendered = true;
 
-
+	//Almacena los mensajes de las acciones ejecutadas
+	private String msgAccion = "";
 
 
 
@@ -125,36 +123,61 @@ public class PersonProfileController implements Serializable {
 	 private boolean showApply = true;
 	 private boolean useCustomDayLabels;
 	 private boolean disabled = false;
-	
-	 
+
+
 	public PersonProfileController() {
+		// init variables
+		log.info("******Get User Session Object");
+		Locale locMX = new Locale("es", "MX");
+		locale = locMX;
+		popup = true;
+		pattern = "d/M/yy HH:mm";
+		isEnableBirthDay = false;
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) ctx.getExternalContext()
+				.getSession(true);
+		Object obj = session.getAttribute(SystemConfig.SESSION_CONFIG_USER);
+		if (obj != null) {
+			user = (User) obj;
+			log.info("The user objectis ok");
+		} else {
+			log.warn("The user object is null, contact to Administration Platform");
+		}
+		log.info("******End Get User Session Object");
+		if (person == null) {
+			person = findPerson();
+			person.setUserId(user.getUserId());
+		}
+	}
+	 
+	/*
+	@PostConstruct
+    public void initNewMember() {
+		log.debug("******initNewMember");
 		 Locale locMX = new Locale("es","MX");
 	     locale = locMX;
 	     popup = true;
 	     pattern = "d/M/yy HH:mm";
 	     isEnableBirthDay = false;
-	}
+			//init variables
+			FacesContext ctx = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession)ctx.getExternalContext().getSession(true);
+			Object obj = session.getAttribute(SystemConfig.SESSION_CONFIG_USER);
+			if(obj!=null){
+				user = (User)obj;
+				log.debug("The user objectis ok");
+			}else{
+				log.warn("The user object is null, contact to Administration Platform");
+			}
+			
 
-	@PostConstruct
-    public void initNewMember() {
-		//init variables
-		FacesContext ctx = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession)ctx.getExternalContext().getSession(true);
-		Object obj = session.getAttribute(SystemConfig.SESSION_CONFIG_USER);
-		if(obj!=null){
-			user = (User)obj;
-			log.debug("The user objectis ok");
-		}else{
-			log.warn("The user object is null, contact to Administration Platform");
-		}
-		
-		//Get person data
-		if(person==null){
-			person = findPerson();
-		}
-		
-	}
+			if(person==null){
+				person = findPerson();
+			}
 
+	}
+*/
+	
 	public String getProductName() {
 	return productName;
 	}
@@ -609,9 +632,13 @@ public class PersonProfileController implements Serializable {
 		List<Product> productList = new ArrayList<Product>();
         MongoMasterDataDaoFactory factory  = new MongoMasterDataDaoFactory();
         IPersonDao personDao = factory.getPersonDao();
-        String personId = personDao.findByUserId(user.getUserId()).getPersonId();
         IProductDao productDao = factory.getProductDao();
+        try{
+        String personId = personDao.findByUserId(user.getUserId()).getPersonId();
         productList = productDao.findByPersonld(personId);
+        }catch(Exception e){
+        	log.error("Error" + e);
+        }
 		return productList;
 	}
 
@@ -717,7 +744,12 @@ public class PersonProfileController implements Serializable {
 	public Person findPerson(){
 		MongoMasterDataDaoFactory factory  = new MongoMasterDataDaoFactory();
 		IPersonDao personDao = factory.getPersonDao();
-		Person person = personDao.findByUserId( user.getUserId() );
+		Person person = new Person();
+		try{
+			person = personDao.findByUserId( user.getUserId() );
+		}catch(Exception e){
+			log.error("Error al buscar los datos generales" + e);
+		}
 		return person;
 	}
 	 
@@ -765,15 +797,19 @@ public class PersonProfileController implements Serializable {
 	}
 
 	public String editGeneralData(){
+		log.info("editGeneralData");
 		isBtnCancelRendered=true;
 		isBtnSaveRendered=true;
 		isBtnEditRendered=false;
 		isGeneralDataDisabled  = false;
+		this.msgAccion = "Puede editar sus datos personales";
 		return "";
 	}
 
 	public String saveGeneralData(){
 		//Codigo para salvar
+		log.info("saveGeneralData");
+		log.info("Person: " + person.toString());
 		PersonService personService = new PersonService();
 		try {
 			personService.update(this.person);
@@ -781,17 +817,21 @@ public class PersonProfileController implements Serializable {
 			isBtnSaveRendered=false;
 			isBtnEditRendered=true;		
 			isGeneralDataDisabled  = true;
+			this.msgAccion = "Los datos fueron almacenados con exito";
 		} catch (Exception e) {
 			log.error("Error al intentar salvar los datos del perfil" + e);
+			this.msgAccion = "Lo sentimos, por el momento no podemos almacenar la informacion";
 		}
 		return "";
 	}
 
 	public String cancelGeneralData(){
+		log.info("cancelGeneralData");
 		isBtnCancelRendered=false;
 		isBtnSaveRendered=false;
 		isBtnEditRendered=true;
 		isGeneralDataDisabled  = true;
+		this.msgAccion = "La edicion fue cancelada";
 		return "";
 	}
 
@@ -801,6 +841,16 @@ public class PersonProfileController implements Serializable {
 
 	public void setCivilStatus(CivilStatus civilStatus) {
 		this.civilStatus = civilStatus;
+	}
+
+
+	public String getMsgAccion() {
+		return msgAccion;
+	}
+
+
+	public void setMsgAccion(String msgAccion) {
+		this.msgAccion = msgAccion;
 	}
 
 	
