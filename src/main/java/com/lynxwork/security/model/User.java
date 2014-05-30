@@ -6,6 +6,7 @@ public class User {
 	
 	private String _id;
 	private String userId;
+	private String nickname;
     private String currentsPassword;
     private String passwordHint;
     private String isSystem; 
@@ -183,6 +184,12 @@ public class User {
 	}
 	public void set_id(String _id) {
 		this._id = _id;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 }

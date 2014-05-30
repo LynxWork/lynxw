@@ -3,6 +3,7 @@ package com.lynxwork.config;
 import java.util.Locale;
 
 import com.lynxwork.security.dao.SecurityDaoFactory;
+import com.lynxwork.social.factory.SocialDaoFactory;
 import com.lynxwork.hcm.factory.HcmDaoFactory;
 import com.lynxwork.mdm.factory.MasterDataDaoFactory;
 
@@ -17,6 +18,7 @@ public class SystemConfig {
 	public static final int SECURITY_PERSISTENT_REPOSITORY = SecurityDaoFactory.MONGODB;
 	public static final int MASTER_DATA_PERSISTENT_REPOSITORY = MasterDataDaoFactory.MONGODB;
 	public static final int HUMAN_CAPITAL_PERSISTENT_REPOSITORY = HcmDaoFactory.MONGODB;
+	public static final int SOCIAL_PERSISTENT_REPOSITORY = SocialDaoFactory.MONGODB;
 	//User Entity configuration properties
 	public static final String USER_IS_ENABLED = "true";
 	public static final String USER_IS_DISABLED = "false";

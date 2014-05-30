@@ -39,6 +39,9 @@ public class LoginController implements Serializable {
     @Inject
     @Push(topic = PUSH_CDI_TOPIC) Event<String> pushEvent;
     
+    private User user;
+    private Person person;
+    
     //@Inject
     //UserService userService;
     //login
@@ -124,6 +127,7 @@ public class LoginController implements Serializable {
 					FacesContext ctx = FacesContext.getCurrentInstance();
 					HttpSession session = (HttpSession)ctx.getExternalContext().getSession(true);
 					session.setAttribute(SystemConfig.SESSION_CONFIG_USER, user);
+					this.user = user;
 					isLogin = true;
 					return "login";
 				}else{
@@ -131,6 +135,7 @@ public class LoginController implements Serializable {
 					FacesContext ctx = FacesContext.getCurrentInstance();
 					HttpSession session = (HttpSession)ctx.getExternalContext().getSession(true);
 					session.setAttribute(SystemConfig.SESSION_CONFIG_USER, user);
+					this.user = user;
 					isLogin = true;
 					return "completeProfile";
 				}
@@ -262,6 +267,22 @@ public class LoginController implements Serializable {
 
 	public void setLogin(boolean isLogin) {
 		this.isLogin = isLogin;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 	
 	

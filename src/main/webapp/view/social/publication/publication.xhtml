@@ -14,6 +14,7 @@
 		
 		<h:panelGrid columns="3">                    
 <rich:panel >
+<h:form id="publicationForm">
 						<f:facet name="header">
 							<h:outputText value="Publicar"></h:outputText>
 						</f:facet>
@@ -43,15 +44,19 @@
 						</rich:panel>
 						<rich:panel>
 							<h:panelGrid columns="1">
-								<h:inputTextarea rows="3" cols="30"/>
+								<h:inputTextarea rows="3" cols="30" value="#{publicationController.publication.description}"/>
 								<h:panelGrid columns="2">
 									<h:commandButton value="Incluir Foto"></h:commandButton>
-									<h:commandButton value="Publicar"></h:commandButton>
+									<a4j:commandButton id="btnPublish"
+										action="#{publicationController.savePublication()}" execute="@form"
+										render="publicationsArea" value="Publicar"
+										rendered="true" />
 								</h:panelGrid>
 							</h:panelGrid>
 						</rich:panel>
 						</h:panelGrid>
-					</rich:panel>
+			</h:form>
+</rich:panel>
 					
 <rich:panel >
 <h:form id="searchForm">
@@ -62,7 +67,7 @@
 					                <h:panelGrid columns="4">
 							        <h:outputLabel for="txtSearch" value="Buscar:"/>
 							        <h:inputText id="txtSearch" value="" maxlength="50" size="50">
-							            <rich:validator/>
+							      	  <rich:validator/>
 							        </h:inputText>
 						            <rich:select selectFirst="true" value="Especialista" enableManualInput="true">
 						                <f:selectItem itemValue="0" itemLabel="Especialista" />
@@ -75,32 +80,39 @@
 </h:form>
 					<rich:tabPanel switchType="client">
 						<rich:tab header="Publicaciones">
+<!-- ###############################LIST OF RELEVANT PUBLICATIONS##############################3 -->
+<a4j:outputPanel id="publicationsArea">
+				<rich:dataGrid columns="1"
+					value="#{publicationController.publications}" var="publication"
+					rowKeyVar="row" id="ocupationDataGrid">
+					<rich:panel bodyClass="rich-laguna-panel-no-header">
 							<h:panelGrid columns="2">
 								<h:panelGrid columns="1">
 									<div>Foto del perfil</div>
-									<div>Nombre Usuario</div>
+									<div><h:outputText value="#{publication.user.nickname}" styleClass="fieldText" /></div>
 								</h:panelGrid>
 								<h:panelGrid columns="1">
-									<div>Descripcion de la publicacion</div>
-									<h:panelGrid columns="1">
-										<div>Calificacion con estrellas</div>
-										<div>Comentarios de la publicacion</div>
-									</h:panelGrid>
+									<div><h:outputText value="#{publication.description}" styleClass="fieldText" /></div>
+										<rich:dataGrid columns="1"
+											value="#{publication.comments}" var="comment"
+											rowKeyVar="row" id="ocupationDataGrid">
+															<h:panelGrid columns="2">
+															    <div><h:outputText value="#{comment.user.nickname}" styleClass="fieldText" /></div>
+																<div><h:outputText value="#{comment.description}" styleClass="fieldText" /></div>
+																<div><h:outputText value="#{comment.cualification}" styleClass="fieldText" /></div>
+															</h:panelGrid>
+										</rich:dataGrid>
 								</h:panelGrid>
 							</h:panelGrid>
-							<h:panelGrid columns="2">
-								<h:panelGrid columns="1">
-									<div>Foto del perfil</div>
-									<div>Nombre Usuario</div>
-								</h:panelGrid>
-								<h:panelGrid columns="1">
-									<div>Descripcion de la publicacion</div>
-									<h:panelGrid columns="1">
-										<div>Calificacion con estrellas</div>
-										<div>Comentarios de la publicacion</div>
-									</h:panelGrid>
-								</h:panelGrid>
-							</h:panelGrid>
+						<h:panelGrid columns="3">
+							<h:outputText value="Profecion: " styleClass="fieldLabel" />
+							<h:outputText value="#{profession.name}" styleClass="fieldText" />
+							<h:outputText value="#{profession.description}"
+								styleClass="fieldText" />
+						</h:panelGrid>
+					</rich:panel>
+				</rich:dataGrid>
+</a4j:outputPanel>
 						</rich:tab>
 					</rich:tabPanel>
 				</rich:panel>
