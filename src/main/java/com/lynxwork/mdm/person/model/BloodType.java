@@ -3,7 +3,6 @@ package com.lynxwork.mdm.person.model;
 import java.util.Date;
 
 public class BloodType {
-	
 	private String bloodTypeId;
 	private String bloodype;
 	private String description;

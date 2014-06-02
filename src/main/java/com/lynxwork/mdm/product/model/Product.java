@@ -10,9 +10,9 @@ public class Product implements Serializable {
 	private static final long serialVersionUID = 4441180363013089417L;
 	
 	private String productId;
-	private String productName;
-	private String productDescription;
-	private List<File> productImageList;
+	private String Name;
+	private String Description;
+	private List<File> ImageList;
 	private String productTypeId;
 	private String personId;
 	
@@ -21,18 +21,6 @@ public class Product implements Serializable {
 	}
 	public void setProductId(String productId) {
 		this.productId = productId;
-	}
-	public String getProductName() {
-		return productName;
-	}
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-	public String getProductDescription() {
-		return productDescription;
-	}
-	public void setProductDescription(String productDescription) {
-		this.productDescription = productDescription;
 	}
 	public String getPersonId() {
 		return personId;
@@ -46,11 +34,23 @@ public class Product implements Serializable {
 	public void setProductTypeId(String productTypeId) {
 		this.productTypeId = productTypeId;
 	}
-	public List<File> getProductImageList() {
-		return productImageList;
+	public String getName() {
+		return Name;
 	}
-	public void setProductImageList(List<File> productImageList) {
-		this.productImageList = productImageList;
+	public void setName(String name) {
+		Name = name;
+	}
+	public String getDescription() {
+		return Description;
+	}
+	public void setDescription(String description) {
+		Description = description;
+	}
+	public List<File> getImageList() {
+		return ImageList;
+	}
+	public void setImageList(List<File> imageList) {
+		ImageList = imageList;
 	}
 
 }

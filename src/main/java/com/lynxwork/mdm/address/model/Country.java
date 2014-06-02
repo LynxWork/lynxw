@@ -8,6 +8,7 @@ public class Country implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 5613991425834183163L;
+	
 	private String countryId;
 	private String name;
 	private String acronym;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.bson.types.ObjectId;
 
 import com.lynxwork.mdm.product.dao.IProductDao;
 import com.lynxwork.mdm.product.model.Product;
@@ -17,7 +18,7 @@ import com.mongodb.WriteResult;
 public class ProductDao implements IProductDao {
 
 	static final Logger log = Logger.getLogger(ProductDao.class);
-	private static String ENTITY_NAME ="ProductService";
+	private static String ENTITY_NAME ="Product";
 	MongoDbConnection cnn;
 	DB db;
 
@@ -27,14 +28,18 @@ public class ProductDao implements IProductDao {
 		 db = cnn.getConnection();	
 	}
 	
-	public void save(Product product){
+	public ObjectId save(Product product){
 		  //Se inserta 
+		  ObjectId oid = new ObjectId(); //Se construye el id
+		  product.setProductId(oid.toString());
 		  DBCollection collection = db.getCollection( ENTITY_NAME );
 		  BasicDBObject document = new BasicDBObject();
 		  document = getMapEntity(document,product);
 		  WriteResult wr = collection.insert(document);
 		  log.debug( "error:" + wr.getError() );
-		 }
+		return oid;
+	}
+
 	/**
 	 * Busca una entidad
 	 * @param email User email
@@ -88,9 +93,10 @@ public class ProductDao implements IProductDao {
 	 * **/
 	public Product setMapEntity(BasicDBObject obj,Product product){
 		product.setProductId( obj.getString("productId") );
-		product.setProductName( obj.getString("productName") );
-		product.setProductDescription( obj.getString("productDescription") );
+		product.setName( obj.getString("productName") );
+		product.setDescription( obj.getString("productDescription") );
 		product.setPersonId( obj.getString("personId") );
+		product.setProductTypeId( obj.getString("productTypeId") );
 	return product;
 	}
 
@@ -100,9 +106,10 @@ public class ProductDao implements IProductDao {
 	  * **/
 	public BasicDBObject getMapEntity(BasicDBObject document,Product product){
 		document.put("productId", product.getProductId() );
-		document.put("productName", product.getProductName() );
-		document.put("productDescription", product.getProductDescription() );
+		document.put("productName", product.getName() );
+		document.put("productDescription", product.getDescription() );
 		document.put("personId", product.getPersonId() );
+		document.put("productTypeId", product.getProductTypeId() );
 		return document;
 	}
 

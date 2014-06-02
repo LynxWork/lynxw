@@ -1,6 +1,7 @@
 package com.lynxwork.mdm.person.dao.impl.mongo;
 
 import org.apache.log4j.Logger;
+import org.bson.types.ObjectId;
 
 import com.lynxwork.mdm.person.dao.ICivilStatusDao;
 import com.lynxwork.mdm.person.model.CivilStatus;
@@ -87,6 +88,16 @@ public class CivilStatusDao implements ICivilStatusDao {
 		document.put("lastUpdaterIp", civil.getLastUpdaterIp() );
 		
 		return document;
+	}
+
+	@Override
+	public CivilStatus findByCivilStatusId(String civilStatusId) {
+		return null;
+	}
+
+	@Override
+	public ObjectId save(ICivilStatusDao civilStatusDao) {
+		return null;
 	}
 
 

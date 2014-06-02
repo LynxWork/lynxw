@@ -157,7 +157,6 @@ public class LoginController implements Serializable {
 		log.debug("user email:" + joinEmail);
 		log.debug("user password:" + joinPassword);
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		HttpSession sesion = (HttpSession)facesContext.getExternalContext().getSession(true);
 		UserService userService = new UserService();
 		//Create a user entity
 		User user = new User();

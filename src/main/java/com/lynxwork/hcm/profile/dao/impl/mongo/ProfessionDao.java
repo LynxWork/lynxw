@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.bson.BSONObject;
 import org.bson.types.ObjectId;
 
 import com.lynxwork.hcm.profile.dao.IProfessionDao;
@@ -17,7 +16,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.mongodb.WriteResult;
 
 public class ProfessionDao implements IProfessionDao{

@@ -1,7 +1,6 @@
 package com.lynxwork.hcm.work.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import com.lynxwork.common.model.Calendar;
 

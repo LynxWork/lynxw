@@ -1,8 +1,6 @@
 package com.lynxwork.mdm.person.service;
 
-import org.apache.log4j.Logger;
 import org.bson.types.ObjectId;
-
 import com.lynxwork.config.SystemConfig;
 import com.lynxwork.mdm.factory.MasterDataDaoFactory;
 import com.lynxwork.mdm.person.dao.IPersonDao;
