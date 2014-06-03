@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -36,6 +37,7 @@ public class PublicationController implements Serializable  {
 	private Publication publication;
 	private List<Publication> publications;
 	private User user;
+	private String ipAddress;
 	
 	@PostConstruct
     public void init() {
@@ -50,6 +52,17 @@ public class PublicationController implements Serializable  {
 			log.warn("The user object is null, contact to Administration Platform");
 		}
 		log.info("******End Get User Session Object");
+		
+		//Get ip client
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		ipAddress = request.getHeader("X-FORWARDED-FOR");
+		if (ipAddress == null) {
+		    ipAddress = request.getRemoteAddr();
+		    log.info("IP:" + ipAddress);
+		}else{
+			ipAddress="127.0.0.1";//Default
+		}
+		
 		//Get publications
 		publications = new  ArrayList<Publication>();
 		publication = new Publication();
@@ -72,10 +85,10 @@ public class PublicationController implements Serializable  {
 			publication.setCualification(new Integer(0));
 			//Audit Fields
 			publication.setCreateDate(new Date());
-			publication.setCreatoIp("");
+			publication.setCreatoIp(ipAddress);
 			publication.setCreatorId(user.getUserId());
 			publication.setLastUpdateDate(new Date());
-			publication.setLastUpdaterIp("");
+			publication.setLastUpdaterIp(ipAddress);
 			publication.setLastUpdaterId(user.getUserId());
 			service.save(publication);
 		} catch (SaveEntityException e) {

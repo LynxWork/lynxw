@@ -1,6 +1,7 @@
 package com.lynxwork.social.publication.dao.impl.mongo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -55,7 +56,9 @@ public class PublicationDao implements IPublicationDao{
 		DBCollection collection = db.getCollection(ENTITY_NAME);
 		BasicDBObject searchQuery = new BasicDBObject();
 		searchQuery.put("userId", userId);
-		DBCursor cursor = collection.find(searchQuery).limit(15);
+		BasicDBObject sortPredicate = new BasicDBObject();
+		sortPredicate.put("createDate", -1);
+		DBCursor cursor = collection.find(searchQuery).limit(15).sort(sortPredicate);
 		try {
 			while (cursor.hasNext()) {
 				BasicDBObject obj = (BasicDBObject) cursor.next();
@@ -89,6 +92,13 @@ public class PublicationDao implements IPublicationDao{
 		document.put( "userId", publication.getUserId() );
 		document.put( "description", publication.getDescription() );
 		document.put( "cualification", publication.getCualification() );
+		//Audit Fields
+		document.put( "createDate", publication.getCreateDate() );
+		document.put( "creatoIp", publication.getCreatoIp() );
+		document.put( "creatorId", publication.getCreatorId() );
+		document.put( "lastUpdateDate", publication.getLastUpdateDate() );
+		document.put( "lastUpdaterIp", publication.getLastUpdaterIp() );
+		document.put( "lastUpdaterId", publication.getLastUpdaterId() );
 		return document;
 	}
 	
