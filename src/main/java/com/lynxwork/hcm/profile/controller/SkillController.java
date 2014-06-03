@@ -12,12 +12,13 @@ import com.lynxwork.hcm.profile.model.Skill;
  *
  * @author Juan Arturo Vargas Torres
  */
-@ManagedBean(name = "professionController")
+@ManagedBean(name = "skillController")
 @SessionScoped
 public class SkillController {
 
 	private Skill skill;
 	private List<Skill> skills;
+	
 	public Skill getSkill() {
 		return skill;
 	}
@@ -31,4 +32,19 @@ public class SkillController {
 		this.skills = skills;
 	} 
 
+	public String findSkillName(){
+		return "";
+	}
+
+	public String editSkillName(){
+		return "";
+	}
+	
+	public String saveSkillName(){
+		return "";
+	}
+	
+	public String cancelSkillName(){
+		return "";
+	}
 }
