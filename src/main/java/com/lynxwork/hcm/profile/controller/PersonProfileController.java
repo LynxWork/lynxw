@@ -6,16 +6,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
-
 import com.lynxwork.config.SystemConfig;
 import com.lynxwork.hcm.profile.model.Education;
 import com.lynxwork.hcm.profile.service.EducationService;
@@ -28,7 +25,6 @@ import com.lynxwork.mdm.person.service.PersonService;
 import com.lynxwork.mdm.product.dao.IProductDao;
 import com.lynxwork.mdm.product.model.Product;
 import com.lynxwork.mdm.product.service.ProductService;
-import com.lynxwork.persistance.exception.SaveEntityException;
 import com.lynxwork.security.model.User;
 
 
@@ -52,10 +48,10 @@ public class PersonProfileController implements Serializable {
 	private User user;
 	//Person
 	Person person;
-	//CivilStatus
-	CivilStatus civilStatus;
-
-	//Accion control
+	//Product
+	Product product;
+	
+	//Accion control Genaral 
 	private boolean isGeneralDataDisabled  = true;
 	private boolean isBtnCancelRendered = false;
 	private boolean isBtnSaveRendered = false;
@@ -79,6 +75,11 @@ public class PersonProfileController implements Serializable {
 	private String genderId;
 	private String birthPlaceId;
 	private String bloodTypeId;
+	
+	//Accion control Pruduct
+		boolean isBtnSaveProductRendered  = false;
+		boolean isBtnCancelProductRendered = true;
+	
 	//Product
 	private String productId;
 	private String productName;
@@ -106,7 +107,7 @@ public class PersonProfileController implements Serializable {
 	 private String custumerName;
 	 private String projectsStatus;
 	 private String projectsDescription;
-	  
+
 	 private String summaryId;
 	 private String title;
 	 private String company;
@@ -635,6 +636,7 @@ public class PersonProfileController implements Serializable {
         IProductDao productDao = factory.getProductDao();
         try{
         String personId = personDao.findByUserId(user.getUserId()).getPersonId();
+        IProductDao productDao = factory.getProductDao();
         productList = productDao.findByPersonld(personId);
         }catch(Exception e){
         	log.error("Error" + e);
@@ -681,6 +683,13 @@ public class PersonProfileController implements Serializable {
 
 	public void setEducationOptions(List<SelectItem> educationOptions) {
 		this.educationOptions = educationOptions;
+	}
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
     //EDUCATION
@@ -795,6 +804,23 @@ public class PersonProfileController implements Serializable {
 	public void setBtnEditRendered(boolean isBtnEditRendered) {
 		this.isBtnEditRendered = isBtnEditRendered;
 	}
+	
+	public boolean isBtnSaveProductRendered() {
+		return isBtnSaveProductRendered;
+	}
+
+	public void setBtnSaveProductRendered(boolean isBtnSaveProductRendered) {
+		this.isBtnSaveProductRendered = isBtnSaveProductRendered;
+	}
+
+	public boolean isBtnCancelProductRendered() {
+		return isBtnCancelProductRendered;
+	}
+
+	public void setBtnCancelProductRendered(boolean isBtnCancelProductRendered) {
+		this.isBtnCancelProductRendered = isBtnCancelProductRendered;
+	}
+
 
 	public String editGeneralData(){
 		log.info("editGeneralData");
@@ -834,13 +860,22 @@ public class PersonProfileController implements Serializable {
 		this.msgAccion = "La edicion fue cancelada";
 		return "";
 	}
-
-	public CivilStatus getCivilStatus() {
-		return civilStatus;
+	
+	
+	public String saveProductData(){
+		ProductService productService = new ProductService();
+		try {
+			productService.saveProduct(product);
+			isBtnSaveProductRendered= false;
+		} catch (Exception e) {
+		}
+		
+		return"";
 	}
-
-	public void setCivilStatus(CivilStatus civilStatus) {
-		this.civilStatus = civilStatus;
+	 
+	public String cancelProductData(){
+		isBtnCancelProductRendered = true;
+		return"";
 	}
 
 
@@ -853,6 +888,7 @@ public class PersonProfileController implements Serializable {
 		this.msgAccion = msgAccion;
 	}
 
+	
 	
 	
 	
