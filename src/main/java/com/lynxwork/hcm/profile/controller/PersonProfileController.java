@@ -2,11 +2,9 @@ package com.lynxwork.hcm.profile.controller;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -22,9 +20,7 @@ import com.lynxwork.mdm.person.dao.IPersonDao;
 import com.lynxwork.mdm.person.model.CivilStatus;
 import com.lynxwork.mdm.person.model.Person;
 import com.lynxwork.mdm.person.service.PersonService;
-import com.lynxwork.mdm.product.dao.IProductDao;
 import com.lynxwork.mdm.product.model.Product;
-import com.lynxwork.mdm.product.service.ProductService;
 import com.lynxwork.security.model.User;
 
 
@@ -75,22 +71,6 @@ public class PersonProfileController implements Serializable {
 	private String genderId;
 	private String birthPlaceId;
 	private String bloodTypeId;
-	
-	//Accion control Pruduct
-		boolean isBtnSaveProductRendered  = false;
-		boolean isBtnCancelProductRendered = true;
-	
-	//Product
-	private String productId;
-	private String productName;
-	private String serviceDescription;
-	private String profileId;
-	//product
-	 private String isProductRendered; 
-	 private List<Product> productList; //Add Profession
-	 private List<Product> productCatList; //Profession calatoge from database
-	 private List<SelectItem> productOptions = null; //List of profession acepted
-
 	//Education General 
 	private String address;
 	private String instituton;
@@ -179,14 +159,7 @@ public class PersonProfileController implements Serializable {
 	}
 */
 	
-	public String getProductName() {
-	return productName;
-	}
-
-	public void setProductName(String productName) {
-	this.productName = productName;
-	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -474,17 +447,6 @@ public class PersonProfileController implements Serializable {
 	public void setSummary(String summary) {
 	this.summary = summary;
 	}
-
-
-	public String getServiceDescription() {
-		return serviceDescription;
-	}
-
-	public void setserviceDescription(String serviceDescription) {
-		this.serviceDescription = serviceDescription;
-	}
-
-
 	public String getProjectsId() {
 		return projectsId;
 	}
@@ -532,122 +494,7 @@ public class PersonProfileController implements Serializable {
 
 	public void setProjectsDescription(String projectsDescription) {
 		this.projectsDescription = projectsDescription;
-	}	
-	
-	public String getIsProductRendered() {
-		return isProductRendered;
 	}
-
-
-	public void setIsProductRendered(String isProductRendered) {
-		this.isProductRendered = isProductRendered;
-	}
-	
-	/**
-	 * This method add a fields for input data
-	 * */
-	public String addProduct(){
-		log.debug("Init addProdutct");
-		isProductRendered = "true";
-		log.debug("End addProduct");
-		return "";
-	}
-	
-	/**
-	 * This method cancel the data of profession addeded
-	 * */
-	public String cancelAddProduct(){
-		log.debug("Init cancelAddProduct");
-		isProductRendered = "false";
-		log.debug("End cancelAddProduct");
-		return "";
-	}
-	
-
-	public String getProductId() {
-		return productId;
-	}
-
-
-	public void setProductId(String productId) {
-		this.productId = productId;
-	}
-
-
-	public String getProfileId() {
-		return profileId;
-	}
-
-
-	public void setProfileId(String profileId) {
-		this.profileId = profileId;
-	}
-
-
-	public List<Product> getProductCatList() {
-		
-		return productCatList;
-	}
-
-
-	public void setProductCatList(List<Product> productCatList) {
-		this.productCatList = productCatList;
-	}
-
-
-	public List<SelectItem> getProductOptions() {
-		productCatList = new ArrayList<Product>();
-		productOptions = new ArrayList<SelectItem>();
-    	if(productCatList.size()==0){
-			ProductService productService = new ProductService();
-			productCatList = productService.findByPersonld("productId");
-			if(productCatList.size()>0){
-		        for (Product product : productCatList) {
-		        	productOptions.add(new SelectItem(product.getProductId()));
-		        }
-	        }
-		}
-		return productOptions;
-	}
-
-
-	public void setProductOptions(List<SelectItem> productOptions) {
-		this.productOptions = productOptions;
-	}
-	
-	public String saveProduct(){
-		log.debug("Init saveProduct");
-		log.debug("Product id:" + productName);
-		//log.debug("Person First Name:" + person.toString());
-		ProductService productService = new ProductService();
-		if(productName!=null && productName.length()>0){
-			Product p = productService.findById(productName);
-			p.setProductName(getProductName());
-			productList.add(p);
-		}
-		log.debug("End saveProduct");
-		return "";
-	}
-
-	public List<Product> getProductList() {
-		List<Product> productList = new ArrayList<Product>();
-        MongoMasterDataDaoFactory factory  = new MongoMasterDataDaoFactory();
-        IPersonDao personDao = factory.getPersonDao();
-        IProductDao productDao = factory.getProductDao();
-        try{
-        String personId = personDao.findByUserId(user.getUserId()).getPersonId();
-        IProductDao productDao = factory.getProductDao();
-        productList = productDao.findByPersonld(personId);
-        }catch(Exception e){
-        	log.error("Error" + e);
-        }
-		return productList;
-	}
-
-	public void setProductList(List<Product> productList) {
-		this.productList = productList;
-	}
-	
 	//EDUCATION
 	public String getEducationName() {
 		return educationName;
@@ -805,23 +652,7 @@ public class PersonProfileController implements Serializable {
 		this.isBtnEditRendered = isBtnEditRendered;
 	}
 	
-	public boolean isBtnSaveProductRendered() {
-		return isBtnSaveProductRendered;
-	}
-
-	public void setBtnSaveProductRendered(boolean isBtnSaveProductRendered) {
-		this.isBtnSaveProductRendered = isBtnSaveProductRendered;
-	}
-
-	public boolean isBtnCancelProductRendered() {
-		return isBtnCancelProductRendered;
-	}
-
-	public void setBtnCancelProductRendered(boolean isBtnCancelProductRendered) {
-		this.isBtnCancelProductRendered = isBtnCancelProductRendered;
-	}
-
-
+	
 	public String editGeneralData(){
 		log.info("editGeneralData");
 		isBtnCancelRendered=true;
@@ -860,25 +691,6 @@ public class PersonProfileController implements Serializable {
 		this.msgAccion = "La edicion fue cancelada";
 		return "";
 	}
-	
-	
-	public String saveProductData(){
-		ProductService productService = new ProductService();
-		try {
-			productService.saveProduct(product);
-			isBtnSaveProductRendered= false;
-		} catch (Exception e) {
-		}
-		
-		return"";
-	}
-	 
-	public String cancelProductData(){
-		isBtnCancelProductRendered = true;
-		return"";
-	}
-
-
 	public String getMsgAccion() {
 		return msgAccion;
 	}
