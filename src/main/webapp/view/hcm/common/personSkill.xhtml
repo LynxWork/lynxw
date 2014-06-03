@@ -11,7 +11,7 @@
 <composite:interface>
     <composite:attribute name="skill"/>
     <composite:attribute name="skills"/>
-    <composite:attribute name="findlevelKnowledgeAction" method-signature="java.lang.String action()" />
+    <composite:attribute name="findSkillNameAction" method-signature="java.lang.String action()" />
     <composite:attribute name="editSkillAction" method-signature="java.lang.String action()" />
 	<composite:attribute name="saveSkillAction" method-signature="java.lang.String action()" />
 	<composite:attribute name="cancelSkillAction" method-signature="java.lang.String action()" />
@@ -38,7 +38,7 @@
 		<h:form>
 			<a4j:outputPanel id="addSkillPanel">
 				<h:panelGrid columns="3">
-			        <rich:autocomplete mode="cachedAjax" minChars="3" autocompleteMethod="#{cc.attrs.findlevelKnowledgeAction}" value="#{cc.attrs.skill.name}"/>
+			        <rich:autocomplete mode="cachedAjax" minChars="3" autocompleteMethod="#{cc.attrs.findSkillNameAction}" value="#{cc.attrs.skill.name}"/>
 				</h:panelGrid>
 				<a4j:commandButton id="btnSave"
 					action="#{cc.attrs.saveSkillAction}" execute="@form"
