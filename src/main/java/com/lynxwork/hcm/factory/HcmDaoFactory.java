@@ -8,6 +8,7 @@ import com.lynxwork.hcm.profile.dao.ISummaryDao;
 import com.lynxwork.hcm.profile.factory.impl.mongo.MongoHcmDaoFactory;
 import com.lynxwork.hcm.work.dao.IWorkCategoryDao;
 import com.lynxwork.hcm.work.dao.IWorkTypeDao;
+import com.lynxwork.mdm.person.dao.ICivilStatusDao;
 import com.lynxwork.mdm.product.dao.IProductDao;
 import com.lynxwork.mdm.project.dao.IProjectDao;
 
@@ -31,8 +32,7 @@ public abstract  class HcmDaoFactory {
 	public abstract IWorkCategoryDao getWorkCategoryDao();
 	public abstract IWorkTypeDao getWorkTypeDao();
 	public abstract IProductDao getProductDao();
-	public abstract IProjectDao getProjectDao(); 
-	
-	
-
+	public abstract IProjectDao getProjectDao();
+    public abstract ICivilStatusDao getCivilStatusDao();
+		
 }

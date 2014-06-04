@@ -1,13 +1,9 @@
 package com.lynxwork.social.publication.dao.impl.mongo;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.bson.types.ObjectId;
-
-import com.lynxwork.hcm.profile.model.Profession;
 import com.lynxwork.persistance.connection.MongoDbConnection;
 import com.lynxwork.persistance.exception.SaveEntityException;
 import com.lynxwork.social.publication.dao.IPublicationDao;

@@ -83,14 +83,14 @@
 							disabled="#{personProfileController.isGeneralDataDisabled}" />
 						<br />
 						<h:outputText value="Estado Civil:" style="color: #0174DF" />
-						<rich:inplaceSelect id="txtstateCivil"
+						<rich:select enableManualInput="true" id="txtstateCivil"
 							defaultLabel="Click para indicar el estado civil"
 							openOnEdit="true"
 							value="#{personProfileController.person.stateCivilId}"
-							disabled="#{personProfileController.isGeneralDataDisabled}">
-							<f:selectItem itemValue="Soltero" itemLabel="Soltero" />
-							<f:selectItem itemValue="Casado" itemLabel="Casado" />
-						</rich:inplaceSelect>
+							style="width:195px;"
+                            disabled="#{personProfileController.isGeneralDataDisabled}">
+							<f:selectItems value="#{personProfileController.stateCivilOptions}" />
+						</rich:select>
 						<br />
 						<h:outputText value="Genero: " style="color: #0174DF" />
 						<rich:inplaceSelect defaultLabel="Click para indicar el genero"
@@ -166,7 +166,7 @@
 
 						<!-- 2222 -->
 						<a4j:commandLink id="lnkAddProduct" value="Agregar Producto"
-							action="#{personProfileController.addProduct()}" execute="@form"
+							action="#{productController.addProduct()}" execute="@form"
 							render="productSelect" styleClass="addLinkCommand"></a4j:commandLink>
 					</form>
 				</h:panelGrid>
@@ -174,7 +174,7 @@
 			<!-- 44444 -->
 			<a4j:outputPanel id="ProductInfo">
 				<rich:dataGrid columns="5"
-					value="#{personProfileController.productList}" var="product"
+					value="#{productController.productList}" var="product"
 					rowKeyVar="row" id="ocupationDataGrid">
 					<rich:panel bodyClass="rich-laguna-panel-no-header">
 						<h:panelGrid columns="3">
@@ -189,17 +189,17 @@
 			<!-- 555 -->
 			<a4j:outputPanel id="productSelect">
 
-				<rich:panel rendered="#{personProfileController.isProductRendered}">
+				<rich:panel rendered="#{productController.isProductRendered}">
 					<h:panelGrid columns="3" id="ocupationPanel" rendered="true">
 						<h:form id="productForm">
 							<h:outputText value="Nombre Producto: " styleClass="fieldLabel" />
 							<rich:inplaceInput id="txtPruductName"
-								value="#{personProfileController.product.name}" size="100"
+								value="#{productController.product.name}" size="100"
 								defaultLabel="Nombre del producto " />
 							<br />
 							<h:outputLabel value="Descripcion:" styleClass="fieldLabel" />
 							<h:inputTextarea
-								value="#{personProfileController.product.description}"
+								value="#{productController.product.description}"
 								size="100" />
 							<br />
 						</h:form>
@@ -257,11 +257,11 @@
 				<h:panelGrid columns="2" id="btnEventsProductDataGrid">
 					<a4j:outputPanel id="btnEventsProductDataInfo">
 						<a4j:commandButton id="btnSaveProductData" value="Guardar"
-							action="#{personProfileController.saveProduct()}" rendered="true"
+							action="#{productController.saveProduct()}" rendered="true"
 							execute="btnEventsProductDataGrid" render="productSelect" />
 						<!-- 77777 -->
 						<a4j:commandButton id="btnCancelProductData" value="Cancelar"
-							action="#{personProfileController.cancelProductData()}"
+							action="#{productController.cancelProductData()}"
 							rendered="true" execute="btnEventsProductDataGrid"
 							render="productSelect" />
 					</a4j:outputPanel>

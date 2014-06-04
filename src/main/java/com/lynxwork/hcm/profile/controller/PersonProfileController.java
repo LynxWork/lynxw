@@ -2,7 +2,7 @@ package com.lynxwork.hcm.profile.controller;
 
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import javax.faces.bean.ManagedBean;
@@ -19,11 +19,9 @@ import com.lynxwork.mdm.person.dao.ICivilStatusDao;
 import com.lynxwork.mdm.person.dao.IPersonDao;
 import com.lynxwork.mdm.person.model.CivilStatus;
 import com.lynxwork.mdm.person.model.Person;
+import com.lynxwork.mdm.person.service.CivilStatusService;
 import com.lynxwork.mdm.person.service.PersonService;
-import com.lynxwork.mdm.product.model.Product;
 import com.lynxwork.security.model.User;
-
-
 
 /**
  * Pagina utilizada para el login del usuario de la aplicacion
@@ -39,38 +37,24 @@ public class PersonProfileController implements Serializable {
 	 */
 	private static final long serialVersionUID = 7250669827317454027L;
 	static final Logger log = Logger.getLogger(PersonProfileController.class);
-	
 	//General Configurations
 	private User user;
 	//Person
 	Person person;
-	//Product
-	Product product;
-	
+	//StateCivil 
+	private List<SelectItem> stateCivilOptions = null; //List of StateCivil acepted
+	private List<CivilStatus> stateCivilCatList; //Profession calatoge from database
+	private List<CivilStatus> stateCivilList; //Add Profession
 	//Accion control Genaral 
 	private boolean isGeneralDataDisabled  = true;
 	private boolean isBtnCancelRendered = false;
 	private boolean isBtnSaveRendered = false;
 	private boolean isBtnEditRendered = true;
-
 	//Almacena los mensajes de las acciones ejecutadas
 	private String msgAccion = "";
-
-
-
-	//Person General data properties
-	private String name;
-	private String firsName;
-	private String middleName;
-	private String nin;
-	private String taxId;
-	private String ssn;
-	private Date birthDay;
+    //Person General data properties
 	private boolean isEnableBirthDay;
-	private String estateCivilId;
-	private String genderId;
-	private String birthPlaceId;
-	private String bloodTypeId;
+	
 	//Education General 
 	private String address;
 	private String instituton;
@@ -159,96 +143,6 @@ public class PersonProfileController implements Serializable {
 	}
 */
 	
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-	this.name = name;
-	}
-
-	public String getFirsName() {
-	return firsName;
-	}
-
-	public void setFirsName(String firsName) {
-	this.firsName = firsName;
-	}
-
-	public String getMiddleName() {
-	return middleName;
-	}
-
-	public void setMiddleName(String middleName) {
-	this.middleName = middleName;
-	}
-
-	public String getNin() {
-	return nin;
-	}
-
-	public void setNin(String nin) {
-	this.nin = nin;
-	}
-
-	public String getTaxId() {
-	return taxId;
-	}
-
-	public void setTaxId(String taxId) {
-	this.taxId = taxId;
-	}
-
-	public String getSsn() {
-	return ssn;
-	}
-
-	public void setSsn(String ssn) {
-	this.ssn = ssn;
-	}
-
-	public Date getBirthDay() {
-	return birthDay;
-	}
-
-	public void setBirthDay(Date birthDay) {
-	this.birthDay = birthDay;
-	}
-
-	public String getEstateCivilId() {
-	return estateCivilId;
-	}
-
-	public void setEstateCivilId(String estateCivilId) {
-	this.estateCivilId = estateCivilId;
-	}
-
-	public String getGenderId() {
-	return genderId;
-	}
-
-	public void setGenderId(String genderId) {
-	this.genderId = genderId;
-	}
-
-	public String getBirthPlaceId() {
-	return birthPlaceId;
-	}
-
-	public void setBirthPlaceId(String birthPlaceId) {
-	this.birthPlaceId = birthPlaceId;
-	}
-
-	public String getBloodTypeId() {
-	return bloodTypeId;
-	}
-
-	public void setBloodTypeId(String bloodTypeId) {
-	this.bloodTypeId = bloodTypeId;
-	}
-
-
 	public Locale getLocale() {
 	return locale;
 	}
@@ -531,14 +425,6 @@ public class PersonProfileController implements Serializable {
 	public void setEducationOptions(List<SelectItem> educationOptions) {
 		this.educationOptions = educationOptions;
 	}
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
     //EDUCATION
 	public String addEducation(){
 		log.debug("Init addProfession");
@@ -699,6 +585,43 @@ public class PersonProfileController implements Serializable {
 	public void setMsgAccion(String msgAccion) {
 		this.msgAccion = msgAccion;
 	}
+
+	public List<SelectItem> getStateCivilOptions() {
+		stateCivilCatList = new ArrayList<CivilStatus>();
+		stateCivilOptions = new ArrayList<SelectItem>();
+    	if(stateCivilCatList.size()==0){
+    		CivilStatusService civilStatusService = new CivilStatusService();
+    		stateCivilCatList = civilStatusService.findByCountry(user.getLastLocale());
+			if(stateCivilCatList.size()>0){
+		        for (CivilStatus civilStatus : stateCivilCatList) {
+		        	stateCivilOptions.add(new SelectItem(civilStatus.getCivilStatusId(), civilStatus.getCivilStatus()));
+		        }
+	        }
+		}
+		return stateCivilOptions;
+	}
+
+	public void setStateCivilOptions(List<SelectItem> stateCivilOptions) {
+		this.stateCivilOptions = stateCivilOptions;
+	}
+
+	public List<CivilStatus> getStateCivilCatList() {
+		return stateCivilCatList;
+	}
+
+	public void setStateCivilCatList(List<CivilStatus> stateCivilCatList) {
+		this.stateCivilCatList = stateCivilCatList;
+	}
+
+	public List<CivilStatus> getStateCivilList() {
+		return stateCivilList;
+	}
+
+	public void setStateCivilList(List<CivilStatus> stateCivilList) {
+		this.stateCivilList = stateCivilList;
+	}
+
+
 
 	
 	

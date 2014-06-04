@@ -15,12 +15,12 @@ import com.lynxwork.persistance.exception.SaveEntityException;
 public class ProductService {
 	static final Logger log = Logger.getLogger(ProfessionService.class);
 	
-	public List<Product> findByPersonld(String productName){
+	public List<Product> findByProductld(String countryId){
 		log.debug("init findByUserld");
 		List<Product> productList = new ArrayList<Product>();
 		HcmDaoFactory daoFactory = HcmDaoFactory.getDAOFactory(SystemConfig.MASTER_DATA_PERSISTENT_REPOSITORY);
 		IProductDao productDao = daoFactory.getProductDao();
-		productList = productDao.findByPersonld( productName);
+		productList = productDao.findByPersonld( countryId);
 		log.debug("end findByUserld");
 		return productList;
 	}
