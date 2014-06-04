@@ -32,6 +32,10 @@ public class SkillController {
 		this.skills = skills;
 	} 
 
+	/**
+	 * Find a Skill by Name 
+	 * @author Juan Arturo Vargas Torres
+	 */
 	public String findSkillName(){
 		return "";
 	}
