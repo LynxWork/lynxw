@@ -65,6 +65,10 @@
    <from-outcome>account</from-outcome>
    <to-view-id>/view/social/account/account.xhtml</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>productType</from-outcome>
+   <to-view-id>/view/hcm/profile/productType.xhtml</to-view-id>
+  </navigation-case>
  </navigation-rule>
  
  
@@ -73,6 +77,14 @@
    <navigation-case>
 	   <from-outcome>personProfile</from-outcome>
 	   <to-view-id>/view/hcm/profile/personProfile.xhtml</to-view-id>
+   </navigation-case>
+ </navigation-rule>
+ 
+ <navigation-rule>
+  <from-view-id>/view/social/account/account.xhtml</from-view-id>
+   <navigation-case>
+	   <from-outcome>productType</from-outcome>
+	   <to-view-id>/view/hcm/profile/productType.xhtml</to-view-id>
    </navigation-case>
  </navigation-rule>
 
@@ -89,10 +101,6 @@
 	    <var>text</var>
 	</resource-bundle>
  </application>
- 
-
-
-
- 
+  
  
 </faces-config>
