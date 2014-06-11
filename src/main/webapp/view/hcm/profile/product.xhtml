@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/templates/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:my="http://java.sun.com/jsf/composite/components">
+
+	<ui:define name="contentt">
+		<h:outputStylesheet name="app.css" library="css" />
+		<h:outputScript target="head" name="showMessage.js" library="js" />
+		<h:outputStylesheet>
+        .top {vertical-align: top;} 
+        .info {height: 202px;overflow: auto;}
+</h:outputStylesheet>
+		<h:outputStylesheet>
+        .ecol1 {
+        vertical-align: top;
+        padding-right: 25px
+        }
+ 
+        .ecol2 {
+        vertical-align: top;
+        border-left: #ACBECE 1px solid;
+        padding-left: 10px
+        }
+ 
+        .rich-calendar-tool-btn {
+        font-family: Arial, Verdana;
+        }
+    </h:outputStylesheet>
+		<rich:panel>
+			<!-- 1111 -->
+			<f:facet name="header">
+				<h:panelGrid columns="6">
+					<h:outputText value="Producto:" />
+					<form id="formAddProductSelect">
+
+						<!-- 2222 -->
+						<a4j:commandLink id="lnkAddProduct" value="Agregar Producto"
+							action="#{productController.addProduct()}" execute="@form"
+							render="productSelect" styleClass="addLinkCommand"></a4j:commandLink>
+					</form>
+				</h:panelGrid>
+			</f:facet>
+			<!-- 44444 -->
+			<a4j:outputPanel id="ProductInfo">
+				<rich:dataGrid columns="5"
+					value="#{productController.productList}" var="product"
+					rowKeyVar="row" id="ocupationDataGrid">
+					<rich:panel bodyClass="rich-laguna-panel-no-header">
+						<h:panelGrid columns="3">
+							<h:outputText value="Producto:" styleClass="fieldLabel" />
+							<h:outputText value="#{product.name}" styleClass="fieldText" />
+							<h:outputText value="#{product.description}"
+								styleClass="fieldText" />
+						</h:panelGrid>
+					</rich:panel>
+				</rich:dataGrid>
+			</a4j:outputPanel>
+			<!-- 555 -->
+			<a4j:outputPanel id="productSelect">
+
+				<rich:panel rendered="#{productController.isProductRendered}">
+					<h:panelGrid columns="3" id="ocupationPanel" rendered="true">
+						<h:form id="productForm">
+							<h:outputText value="Nombre Producto: " styleClass="fieldLabel" />
+							<rich:inplaceInput id="txtPruductName"
+								value="#{productController.name}" size="100"
+								defaultLabel="Nombre del producto " />
+							<br />
+							<h:outputLabel value="Descripcion:" styleClass="fieldLabel" />
+							<h:inputTextarea
+								value="#{productController.description}"
+								size="100" />
+							<br />
+						</h:form>
+						<!-- empieza imagenes  -->
+						<h:form id="fileUpoadForm">
+							<h:panelGrid columns="3" columnClasses="top,top">
+								<rich:fileUpload
+									fileUploadListener="#{fileUploadController.listener}"
+									id="upload" acceptedTypes="jpg, gif, png, bmp"
+									ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');"
+									maxFilesQuantity="5">
+									<a4j:ajax event="uploadcomplete" execute="@none" render="info" />
+								</rich:fileUpload>
+								<h:panelGroup id="info" layout="block">
+									<rich:panel bodyClass="info">
+										<f:facet name="header">
+											<h:outputText value="Uploaded Files Info" />
+										</f:facet>
+										<h:outputText value="No files currently uploaded"
+											rendered="#{fileUploadController.size==0}" />
+										<rich:dataGrid columns="1"
+											value="#{fileUploadController.files}" var="file"
+											rowKeyVar="row">
+											<rich:panel bodyClass="rich-laguna-panel-no-header">
+												<h:panelGrid columns="2">
+													<a4j:mediaOutput element="img" mimeType="image/jpeg"
+														createContent="#{fileUploadController.paint}"
+														value="#{row}" style="width:100px; height:100px;"
+														cacheable="false">
+														<f:param value="#{fileUploadController.timeStamp}"
+															name="time" />
+													</a4j:mediaOutput>
+													<h:panelGrid columns="2">
+														<h:outputText value="File Name:" />
+														<h:outputText value="#{file.name}" />
+														<h:outputText value="File Length(bytes):" />
+														<h:outputText value="#{file.length}" />
+													</h:panelGrid>
+												</h:panelGrid>
+											</rich:panel>
+										</rich:dataGrid>
+									</rich:panel>
+									<br />
+									<a4j:commandButton action="#{fileUploadBean.clearUploadData}"
+										render="info, upload" value="Clear Uploaded Data"
+										rendered="#{fileUploadBean.size>0}" />
+								</h:panelGroup>
+							</h:panelGrid>
+						</h:form>
+						<!-- 66666 -->
+
+					</h:panelGrid>
+				</rich:panel>
+
+				<h:panelGrid columns="2" id="btnEventsProductDataGrid">
+					<a4j:outputPanel id="btnEventsProductDataInfo">
+						<a4j:commandButton id="btnSaveProductData" value="Guardar"
+							action="#{productController.saveProduct()}" rendered="true"
+							execute="btnEventsProductDataGrid" render="productSelect" />
+						<!-- 77777 -->
+						<a4j:commandButton id="btnCancelProductData" value="Cancelar"
+							action="#{productController.cancelProductData()}"
+							rendered="true" execute="btnEventsProductDataGrid"
+							render="productSelect" />
+					</a4j:outputPanel>
+				</h:panelGrid>
+
+
+			</a4j:outputPanel>
+		</rich:panel>
+	</ui:define>
+</ui:composition>
