@@ -1,15 +1,21 @@
 package com.lynxwork.mdm.person.model;
 
-public class Gender {
-	private int genderId;
+import java.io.Serializable;
+
+public class Gender implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6750698028423803540L;
+	private String genderId;
 	private String gender;
 	private String description;
 	private String observations;
 	
-	public int getGenderId() {
+	public String getGenderId() {
 		return genderId;
 	}
-	public void setGenderId(int genderId) {
+	public void setGenderId(String genderId) {
 		this.genderId = genderId;
 	}
 	public String getGender() {

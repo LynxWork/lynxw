@@ -22,6 +22,7 @@ public class CivilStatusService {
 		return oid;
 	}
 	
+	/*
 	public CivilStatus findByCivilStatusId(String civilStatusId){
 		CivilStatus civilStatus = new CivilStatus();
 		MasterDataDaoFactory masterDatadaoFactory = MasterDataDaoFactory.getDAOFactory(SystemConfig.MASTER_DATA_PERSISTENT_REPOSITORY);
@@ -29,14 +30,14 @@ public class CivilStatusService {
 		civilStatusDao.findByCivilStatusId(civilStatusId);
 		return civilStatus;
 	}
-	
-	public List<CivilStatus> findByCountry(String civilStatusId){
-		log.debug("init findByCountry");
+	*/
+	public List<CivilStatus> findByCountry(String countryId){
+		log.info("init findByCountry");
 		List<CivilStatus> civilStatusList = new ArrayList<CivilStatus>();
-		HcmDaoFactory daoFactory = HcmDaoFactory.getDAOFactory(SystemConfig.HUMAN_CAPITAL_PERSISTENT_REPOSITORY);
+		HcmDaoFactory daoFactory = HcmDaoFactory.getDAOFactory(SystemConfig.MASTER_DATA_PERSISTENT_REPOSITORY);
 		ICivilStatusDao civilStatusDao = daoFactory.getCivilStatusDao();
-		civilStatusList = civilStatusDao.findByCivilStatusId(civilStatusId);
-		log.debug("end findByCountry");
+		civilStatusList = civilStatusDao.findByCountry(countryId);
+		log.info("end findByCountry");
 		return civilStatusList;
 	}
 	

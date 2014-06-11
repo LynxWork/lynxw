@@ -1,8 +1,9 @@
 package com.lynxwork.mdm.person.dao.impl.mongo;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.log4j.Logger;
 import org.bson.types.ObjectId;
-
 import com.lynxwork.mdm.person.dao.ICivilStatusDao;
 import com.lynxwork.mdm.person.model.CivilStatus;
 import com.lynxwork.persistance.connection.MongoDbConnection;
@@ -38,7 +39,6 @@ public class CivilStatusDao implements ICivilStatusDao {
 			DBCursor cursor = findUser.find(searchQuery);
 			try {
 				while (cursor.hasNext()) {
-					log.debug(cursor.next());
 					BasicDBObject obj = (BasicDBObject) cursor.next();
 					civil= setMapEntity(obj,civil);
 					break;
@@ -49,6 +49,30 @@ public class CivilStatusDao implements ICivilStatusDao {
 		return civil;
 	}
 
+	
+	@Override
+	public List<CivilStatus> findByCountry(String countryId){
+		log.debug("init findByCountry");
+		List<CivilStatus> civilStatusList = new ArrayList <CivilStatus>();
+		DBCollection findUser =db.getCollection(ENTITY_NAME);
+		BasicDBObject searchQuery = new BasicDBObject();
+		searchQuery.put("countryId", countryId);
+		DBCursor cursor = findUser.find(searchQuery);
+		try {
+			while (cursor.hasNext()) {
+				BasicDBObject obj = (BasicDBObject) cursor.next();
+				CivilStatus civilStatus = new CivilStatus();
+				civilStatus = setMapEntity(obj,civilStatus);
+				civilStatusList.add(civilStatus);
+				break;
+			}
+		} finally {
+			   cursor.close();
+		}
+		return civilStatusList;
+	}
+	
+	
 	
 	/**
 	 * Mapea los campos de la entidad
@@ -90,10 +114,6 @@ public class CivilStatusDao implements ICivilStatusDao {
 		return document;
 	}
 
-	@Override
-	public CivilStatus findByCivilStatusId(String civilStatusId) {
-		return null;
-	}
 
 	@Override
 	public ObjectId save(ICivilStatusDao civilStatusDao) {

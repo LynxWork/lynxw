@@ -15,10 +15,16 @@ import com.lynxwork.hcm.work.dao.IWorkCategoryDao;
 import com.lynxwork.hcm.work.dao.IWorkTypeDao;
 import com.lynxwork.hcm.work.dao.impl.mongo.WorkCategoryDao;
 import com.lynxwork.hcm.work.dao.impl.mongo.WorkTypeDao;
+import com.lynxwork.mdm.person.dao.IBloodTypeDao;
 import com.lynxwork.mdm.person.dao.ICivilStatusDao;
+import com.lynxwork.mdm.person.dao.IGenderDao;
+import com.lynxwork.mdm.person.dao.impl.mongo.BloodTypeDao;
+import com.lynxwork.mdm.person.dao.impl.mongo.CivilStatusDao;
+import com.lynxwork.mdm.person.dao.impl.mongo.GenderDao;
 import com.lynxwork.mdm.product.dao.IProductDao;
 import com.lynxwork.mdm.product.dao.impl.mongo.ProductDao;
 import com.lynxwork.mdm.project.dao.IProjectDao;
+import com.lynxwork.mdm.project.dao.impl.mongo.ProjectDao;
 
 
 public class MongoHcmDaoFactory extends HcmDaoFactory{
@@ -65,14 +71,20 @@ public class MongoHcmDaoFactory extends HcmDaoFactory{
 
 	@Override
 	public IProjectDao getProjectDao() {
-		return null;
+		return new ProjectDao();
 	}
 
 	@Override
 	public ICivilStatusDao getCivilStatusDao() {
-		return null;
+		return new CivilStatusDao();
+	}
+	@Override
+	 public IGenderDao getGenderDao(){
+	return new GenderDao();
 	}
 
-	
-
+	@Override
+	public IBloodTypeDao getBloodTypeDao() {
+		return new BloodTypeDao() ;
+	}
 }

@@ -1,5 +1,8 @@
 package com.lynxwork.mdm.person.dao.impl.mongo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import com.lynxwork.mdm.person.dao.IGenderDao;
@@ -16,7 +19,7 @@ import com.mongodb.WriteResult;
 public class GenderDao implements IGenderDao {
 	
 	static final Logger log = Logger.getLogger(GenderDao.class);
-	private static String ENTITY_NAME ="user";
+	private static String ENTITY_NAME ="Gender";
 	MongoDbConnection cnn;
 	DB db;
 
@@ -49,7 +52,7 @@ public class GenderDao implements IGenderDao {
 			DBCursor cursor = findGender.find(searchQuery);
 			try {
 				while (cursor.hasNext()) {
-					log.debug(cursor.next());
+					
 					BasicDBObject obj = (BasicDBObject) cursor.next();
 					gender1 = setMapEntity(obj,gender1);
 					break;
@@ -60,6 +63,27 @@ public class GenderDao implements IGenderDao {
 		return gender1;
 	}
 
+	@Override
+	public List<Gender> findByCountry(String countryId){
+		log.debug("init findByCountry");
+		List<Gender> genderList = new ArrayList <Gender>();
+		DBCollection findUser =db.getCollection(ENTITY_NAME);
+		BasicDBObject searchQuery = new BasicDBObject();
+		searchQuery.put("countryId", countryId);
+		DBCursor cursor = findUser.find(searchQuery);
+		try {
+			while (cursor.hasNext()) {
+				BasicDBObject obj = (BasicDBObject) cursor.next();
+				Gender gender = new Gender();
+				gender = setMapEntity(obj,gender);
+				genderList.add(gender);
+				break;
+			}
+		} finally {
+			   cursor.close();
+		}
+		return genderList;
+	}
 	
 	
 	/**
@@ -68,8 +92,7 @@ public class GenderDao implements IGenderDao {
 	 * @param gender Gender gender
 	 * **/
 	public Gender setMapEntity(BasicDBObject obj,Gender gender){
-		
-		gender.setGenderId( obj.getInt("genderId") );
+		gender.setGenderId( obj.getString("genderId") );
 		gender.setGender( obj.getString("gender") );
 		gender.setDescription( obj.getString("description") );
 		gender.setObservations( obj.getString("observations") );

@@ -5,21 +5,29 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
+
 import com.lynxwork.config.SystemConfig;
 import com.lynxwork.hcm.profile.model.Education;
 import com.lynxwork.hcm.profile.service.EducationService;
 import com.lynxwork.mdm.factory.impl.mongo.MongoMasterDataDaoFactory;
 import com.lynxwork.mdm.person.dao.ICivilStatusDao;
 import com.lynxwork.mdm.person.dao.IPersonDao;
+import com.lynxwork.mdm.person.model.BloodType;
 import com.lynxwork.mdm.person.model.CivilStatus;
+import com.lynxwork.mdm.person.model.Gender;
 import com.lynxwork.mdm.person.model.Person;
+import com.lynxwork.mdm.person.service.BloodTypeService;
 import com.lynxwork.mdm.person.service.CivilStatusService;
+import com.lynxwork.mdm.person.service.GenderService;
 import com.lynxwork.mdm.person.service.PersonService;
 import com.lynxwork.security.model.User;
 
@@ -37,14 +45,23 @@ public class PersonProfileController implements Serializable {
 	 */
 	private static final long serialVersionUID = 7250669827317454027L;
 	static final Logger log = Logger.getLogger(PersonProfileController.class);
+	
 	//General Configurations
 	private User user;
 	//Person
 	Person person;
 	//StateCivil 
-	private List<SelectItem> stateCivilOptions = null; //List of StateCivil acepted
-	private List<CivilStatus> stateCivilCatList; //Profession calatoge from database
-	private List<CivilStatus> stateCivilList; //Add Profession
+	private List<SelectItem> stateCivilOptions = null; //List of CivilStatus acepted
+	private List<CivilStatus> stateCivilCatList; //CivilStatus calatoge from database
+	private List<CivilStatus> stateCivilList; //Add CivilStatus
+	//Gender
+	private List<SelectItem> genderOptions = null; //List of Gender acepted
+	private List<Gender> genderCatList; //Gender calatoge from database
+	private List<Gender> genderList; //Add Gender
+	//bloodType 
+	private List<SelectItem> bloodTypeOptions = null; //List of BloodType acepted
+	private List<BloodType> bloodTypeCatList; //BloodType calatoge from database
+	private List<BloodType> bloodTypeList; //Add BloodType
 	//Accion control Genaral 
 	private boolean isGeneralDataDisabled  = true;
 	private boolean isBtnCancelRendered = false;
@@ -88,9 +105,14 @@ public class PersonProfileController implements Serializable {
 	 private boolean showApply = true;
 	 private boolean useCustomDayLabels;
 	 private boolean disabled = false;
+	 
 
 
-	public PersonProfileController() {
+	 
+	
+	@PostConstruct
+    public void init() {
+		log.debug("******initNewMember");
 		// init variables
 		log.info("******Get User Session Object");
 		Locale locMX = new Locale("es", "MX");
@@ -114,34 +136,7 @@ public class PersonProfileController implements Serializable {
 			person.setUserId(user.getUserId());
 		}
 	}
-	 
-	/*
-	@PostConstruct
-    public void initNewMember() {
-		log.debug("******initNewMember");
-		 Locale locMX = new Locale("es","MX");
-	     locale = locMX;
-	     popup = true;
-	     pattern = "d/M/yy HH:mm";
-	     isEnableBirthDay = false;
-			//init variables
-			FacesContext ctx = FacesContext.getCurrentInstance();
-			HttpSession session = (HttpSession)ctx.getExternalContext().getSession(true);
-			Object obj = session.getAttribute(SystemConfig.SESSION_CONFIG_USER);
-			if(obj!=null){
-				user = (User)obj;
-				log.debug("The user objectis ok");
-			}else{
-				log.warn("The user object is null, contact to Administration Platform");
-			}
-			
-
-			if(person==null){
-				person = findPerson();
-			}
-
-	}
-*/
+	
 	
 	public Locale getLocale() {
 	return locale;
@@ -458,27 +453,9 @@ public class PersonProfileController implements Serializable {
 		return "";
 	}
 	
-	//PROJECTS
 	//general data
 	public String viewPersonProfile(){
 		log.debug("viewPersonProfile");
-		/*log.debug("person nin:"+ nin);
-		log.debug("person taxId:"+ taxId);
-		log.debug("person ssn:"+ ssn);
-		log.debug("person estateCivilId:"+ estateCivilId);
-		log.debug("person genderId:"+ genderId);
-		log.debug("person birthPlaceId:"+ birthPlaceId);
-		log.debug("person bloodTypeId:"+ bloodTypeId);
-		log.debug("person birthDay:"+ birthDay);
-		Person person = new Person();
-		person.setNin(nin);
-		person.setTaxid(taxId);
-		person.setSsn(ssn);
-		person.setStateCivilId(estateCivilId);
-		person.setGenderId(genderId);
-		person.setBirthPlaceId(birthPlaceId);
-		person.setBloodTypeId(bloodTypeId);
-		person.setBirthday(birthDay);*/
 		return "personProfile";
 	}
 	
@@ -587,9 +564,12 @@ public class PersonProfileController implements Serializable {
 	}
 
 	public List<SelectItem> getStateCivilOptions() {
+		log.info("init getStateCivilOptions:");
 		stateCivilCatList = new ArrayList<CivilStatus>();
 		stateCivilOptions = new ArrayList<SelectItem>();
-    	if(stateCivilCatList.size()==0){
+		log.info("Country:" + user.getLastLocale());
+		try{
+    	if( stateCivilCatList.size()==0){
     		CivilStatusService civilStatusService = new CivilStatusService();
     		stateCivilCatList = civilStatusService.findByCountry(user.getLastLocale());
 			if(stateCivilCatList.size()>0){
@@ -598,6 +578,10 @@ public class PersonProfileController implements Serializable {
 		        }
 	        }
 		}
+    	}catch(Exception e){
+    		e.printStackTrace();
+    		log.error("No es poible encontrar el estado civil, contacte al administrador del sistema" + e);
+    	}
 		return stateCivilOptions;
 	}
 
@@ -619,6 +603,97 @@ public class PersonProfileController implements Serializable {
 
 	public void setStateCivilList(List<CivilStatus> stateCivilList) {
 		this.stateCivilList = stateCivilList;
+	}
+
+	public List<BloodType> getBloodTypeCatList() {
+		return bloodTypeCatList;
+	}
+
+	public void setBloodTypeCatList(List<BloodType> bloodTypeCatList) {
+		this.bloodTypeCatList = bloodTypeCatList;
+	}
+
+	public List<SelectItem> getBloodTypeOptions() {
+		log.info("init getStateCivilOptions:");
+		bloodTypeCatList = new ArrayList<BloodType>();
+		bloodTypeOptions = new ArrayList<SelectItem>();
+		log.info("Country:" + user.getLastLocale());
+		try{
+    	if( bloodTypeCatList.size()==0){
+    		BloodTypeService bloodTypeService = new BloodTypeService();
+    		bloodTypeCatList = bloodTypeService.findByCountry(user.getLastLocale());
+			if(bloodTypeCatList.size()>0){
+		        for (BloodType bloodType : bloodTypeCatList) {
+		        	bloodTypeOptions.add(new SelectItem(bloodType.getBloodTypeId(), bloodType.getBloodType()));
+		        }
+	        }
+		}
+    	}catch(Exception e){
+    		e.printStackTrace();
+    		log.error("No es poible encontrar el estado civil, contacte al administrador del sistema" + e);
+    	}
+			return bloodTypeOptions;
+	}
+
+	public void setBloodTypeOptions(List<SelectItem> bloodTypeOptions) {
+		this.bloodTypeOptions = bloodTypeOptions;
+	}
+
+	public List<BloodType> getBloodTypeList() {
+		return bloodTypeList;
+	}
+
+	public void setBloodTypeList(List<BloodType> bloodTypeList) {
+		this.bloodTypeList = bloodTypeList;
+	}
+
+
+	public List<SelectItem> getGenderOptions() {
+		log.info("init getStateCivilOptions:");
+		genderCatList = new ArrayList<Gender>();
+		genderOptions = new ArrayList<SelectItem>();
+		log.info("Country:" + user.getLastLocale());
+		try{
+    	if( genderCatList.size()==0){
+    		GenderService genderService = new GenderService();
+    		genderCatList = genderService.findByCountry(user.getLastLocale());
+			if(genderCatList.size()>0){
+		        for (Gender gender : genderCatList) {
+		        	genderOptions.add(new SelectItem(gender.getGenderId(), gender.getGender()));
+		        }
+	        }
+		}
+    	}catch(Exception e){
+    		e.printStackTrace();
+    		log.error("No es poible encontrar el estado civil, contacte al administrador del sistema" + e);
+    	}
+		
+		return genderOptions;
+	}
+
+
+	public void setGenderOptions(List<SelectItem> genderOptions) {
+		this.genderOptions = genderOptions;
+	}
+
+
+	public List<Gender> getGenderCatList() {
+		return genderCatList;
+	}
+
+
+	public void setGenderCatList(List<Gender> genderCatList) {
+		this.genderCatList = genderCatList;
+	}
+
+
+	public List<Gender> getGenderList() {
+		return genderList;
+	}
+
+
+	public void setGenderList(List<Gender> genderList) {
+		this.genderList = genderList;
 	}
 
 

@@ -1,18 +1,23 @@
 package com.lynxwork.mdm.person.model;
 
-import java.util.Date;
-
-public class BloodType {
+import java.io.Serializable;
+public class BloodType implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5516528077850010344L;
+	
 	private String bloodTypeId;
-	private String bloodype;
+	private String bloodType;
 	private String description;
 	private String observations;
-	private Date createData;
-	private int creatorId;
-	private int creatoIp;
+	private String createData;
+	private String creatorId;
+	private String creatoIp;
 	private String lastUpdateDate;
-	private Date lastUpdaterId;
+	private String lastUpdaterId;
 	private String lastUpdaterIp;
+	private String countryId;
 	
 	public String getBloodTypeId() {
 		return bloodTypeId;
@@ -20,11 +25,11 @@ public class BloodType {
 	public void setBloodTypeId(String bloodTypeId) {
 		this.bloodTypeId = bloodTypeId;
 	}
-	public String getBloodype() {
-		return bloodype;
+	public String getBloodType() {
+		return bloodType;
 	}
-	public void setBloodype(String bloodype) {
-		this.bloodype = bloodype;
+	public void setBloodType(String bloodType) {
+		this.bloodType = bloodType;
 	}
 	public String getDescription() {
 		return description;
@@ -38,28 +43,28 @@ public class BloodType {
 	public void setObservations(String observations) {
 		this.observations = observations;
 	}
-	public Date getCreateData() {
+	public String getCreateData() {
 		return createData;
 	}
-	public void setCreateData(Date createData) {
+	public void setCreateData(String createData) {
 		this.createData = createData;
 	}
-	public int getCreatorId() {
+	public String getCreatorId() {
 		return creatorId;
 	}
-	public void setCreatorId(int creatorId) {
+	public void setCreatorId(String creatorId) {
 		this.creatorId = creatorId;
 	}
-	public int getCreatoIp() {
+	public String getCreatoIp() {
 		return creatoIp;
 	}
-	public void setCreatoIp(int creatoIp) {
+	public void setCreatoIp(String creatoIp) {
 		this.creatoIp = creatoIp;
 	}
-	public Date getLastUpdaterId() {
+	public String getLastUpdaterId() {
 		return lastUpdaterId;
 	}
-	public void setLastUpdaterId(Date lastUpdaterId) {
+	public void setLastUpdaterId(String lastUpdaterId) {
 		this.lastUpdaterId = lastUpdaterId;
 	}
 	public String getLastUpdateDate() {
@@ -73,6 +78,12 @@ public class BloodType {
 	}
 	public void setLastUpdaterIp(String lastUpdaterIp) {
 		this.lastUpdaterIp = lastUpdaterIp;
+	}
+	public String getCountryId() {
+		return countryId;
+	}
+	public void setCountryId(String countryId) {
+		this.countryId = countryId;
 	}
 	
 	

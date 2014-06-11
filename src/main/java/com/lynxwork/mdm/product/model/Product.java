@@ -12,9 +12,9 @@ public class Product implements Serializable {
 	private String productId;
 	private String name;
 	private String description;
-	private List<File> ImageList;
 	private String productTypeId;
 	private String personId;
+	private List<File> ImageList;
 	
 	public String getProductId()
 	{

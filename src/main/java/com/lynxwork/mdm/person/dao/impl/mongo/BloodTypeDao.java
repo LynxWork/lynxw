@@ -1,5 +1,8 @@
 package com.lynxwork.mdm.person.dao.impl.mongo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import com.lynxwork.mdm.person.dao.IBloodTypeDao;
@@ -32,6 +35,28 @@ public class BloodTypeDao implements IBloodTypeDao {
 		  WriteResult wr = collection.insert(document);
 		  log.debug( "error:" + wr.getError() );
 		 }
+	public List<BloodType> findByCountry(String countryId){
+		log.debug("init findByCountry");
+		List<BloodType> bloodTypeList = new ArrayList <BloodType>();
+		DBCollection findUser =db.getCollection(ENTITY_NAME);
+		BasicDBObject searchQuery = new BasicDBObject();
+		searchQuery.put("countryId", countryId);
+		DBCursor cursor = findUser.find(searchQuery);
+		try {
+			while (cursor.hasNext()) {
+				BasicDBObject obj = (BasicDBObject) cursor.next();
+				BloodType bloodType = new BloodType();
+				bloodType = setMapEntity(obj,bloodType);
+				bloodTypeList.add(bloodType);
+				break;
+			}
+		} finally {
+			   cursor.close();
+		}
+		return bloodTypeList;
+	}
+	
+
 	/**
 	 * Busca una entidad
 	 * @param email User email
@@ -65,16 +90,16 @@ public class BloodTypeDao implements IBloodTypeDao {
 	 * **/
 	public BloodType setMapEntity(BasicDBObject obj,BloodType bloodType){
 		bloodType.setBloodTypeId( obj.getString("bloodTypeId") );
-		bloodType.setBloodype( obj.getString("bloodype") );
+		bloodType.setBloodType( obj.getString("bloodType") );
 		bloodType.setDescription( obj.getString("description") );
 		bloodType.setObservations( obj.getString("observations") );
-		bloodType.setCreateData( obj.getDate("createData") );
-		bloodType.setCreatorId( obj.getInt("creatorId") );
-		bloodType.setCreatoIp( obj.getInt("creatoIp") );
+		bloodType.setCreateData( obj.getString("createData") );
+		bloodType.setCreatorId( obj.getString("creatorId") );
+		bloodType.setCreatoIp( obj.getString("creatoIp") );
 		bloodType.setLastUpdateDate( obj.getString("lastUpdateDate") );
-		bloodType.setLastUpdaterId( obj.getDate("lastUpdaterId") );
+		bloodType.setLastUpdaterId( obj.getString("lastUpdaterId") );
 		bloodType.setLastUpdaterIp( obj.getString("lastUpdaterIp") );
-		
+		bloodType.setCountryId( obj.getString("countryId") );
 		
 	return bloodType;
 	}
@@ -85,7 +110,7 @@ public class BloodTypeDao implements IBloodTypeDao {
 	  * **/
 	public BasicDBObject getMapEntity(BasicDBObject document,BloodType bloodType){
 		document.put("bloodTypeId", bloodType.getBloodTypeId() );
-		document.put("bloodype", bloodType.getBloodype() );
+		document.put("bloodType", bloodType.getBloodType() );
 		document.put("description", bloodType.getDescription() );
 		document.put("observations", bloodType.getObservations() );
 		document.put("createData", bloodType.getCreateData() );
@@ -93,6 +118,7 @@ public class BloodTypeDao implements IBloodTypeDao {
 		document.put("creatoIp", bloodType.getCreatoIp() );
 		document.put("lastUpdaterId", bloodType.getLastUpdaterId() );
 		document.put("lastUpdaterIp", bloodType.getLastUpdaterIp() );
+		document.put("countryId", bloodType.getCountryId() );
 		return document;
 	}
 

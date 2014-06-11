@@ -15,6 +15,10 @@ import com.lynxwork.hcm.work.dao.IWorkCategoryDao;
 import com.lynxwork.hcm.work.dao.IWorkTypeDao;
 import com.lynxwork.hcm.work.dao.impl.mongo.WorkCategoryDao;
 import com.lynxwork.hcm.work.dao.impl.mongo.WorkTypeDao;
+import com.lynxwork.mdm.person.dao.IBloodTypeDao;
+import com.lynxwork.mdm.person.dao.ICivilStatusDao;
+import com.lynxwork.mdm.person.dao.impl.mongo.BloodTypeDao;
+import com.lynxwork.mdm.person.dao.impl.mongo.CivilStatusDao;
 import com.lynxwork.mdm.product.dao.IProductDao;
 import com.lynxwork.mdm.product.dao.impl.mongo.ProductDao;
 
@@ -59,6 +63,14 @@ public abstract class MongoHcmDaoFactory extends HcmDaoFactory{
 	@Override
 	public IProductDao getProductDao() {
 		return new ProductDao();
+	}
+	@Override
+	public ICivilStatusDao getCivilStatusDao(){
+		return new CivilStatusDao();
+	}
+	@Override
+	public IBloodTypeDao getBloodTypeDao(){
+		return new BloodTypeDao();
 	}
 
 }
