@@ -452,7 +452,7 @@ public class PersonProfileController implements Serializable {
 		log.debug("End cancelAddProfession");
 		return "";
 	}
-	
+
 	//general data
 	public String viewPersonProfile(){
 		log.debug("viewPersonProfile");
