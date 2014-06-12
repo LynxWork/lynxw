@@ -61,23 +61,22 @@
    <from-outcome>account</from-outcome>
    <to-view-id>/view/social/account/account.xhtml</to-view-id>
   </navigation-case>
-  <navigation-case>
-   <from-outcome>product</from-outcome>
-   <to-view-id>/view/hcm/profile/product.xhtml</to-view-id>
-  </navigation-case>
+  
  </navigation-rule>
  
  <navigation-rule>
-  <from-view-id>/view/social/account/account.xhtml</from-view-id>
-   <navigation-case>
-	   <from-outcome>personProfile</from-outcome>
-	   <to-view-id>/view/hcm/profile/personProfile.xhtml</to-view-id>
-   </navigation-case>
-   <navigation-case>
-	   <from-outcome>product</from-outcome>
-	   <to-view-id>/view/hcm/profile/product.xhtml</to-view-id>
-   </navigation-case>
- </navigation-rule>
+<from-view-id>/view/social/account/account.xhtml</from-view-id>
+<navigation-case>
+<from-outcome>personProfile</from-outcome>
+<to-view-id>/view/hcm/profile/personProfile.xhtml</to-view-id>
+</navigation-case>
+<navigation-case>
+<from-outcome>product</from-outcome>
+<to-view-id>/view/hcm/profile/product.xhtml</to-view-id>
+</navigation-case>
+</navigation-rule>
+ 
+ 
  
  <application>
   <message-bundle>messages_es</message-bundle>

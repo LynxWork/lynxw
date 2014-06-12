@@ -32,7 +32,7 @@
         }
     </h:outputStylesheet>
 
-		<rich:panel>
+		<rich:panel style="width:924px; height:500px">
 			<f:facet name="header">
 				<h:outputText value="Datos generales"></h:outputText>
 			</f:facet>
@@ -42,46 +42,59 @@
 						value="#{personProfileController.msgAccion}"
 						style="color: #0174DF" />
 				</a4j:outputPanel>
-				<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:panelGrid columns="2" columnClasses="titleCell">
 					<br />
 					<a4j:outputPanel id="fieldsGeneralDataInfo">
+					<div>
 						<h:outputText value="Nombre: " style="color: #0174DF" />
 						<rich:inplaceInput id="txtName"
 							value="#{personProfileController.person.firstName}" size="50"
 							defaultLabel="Click para ingresar su nombre"
 							disabled="#{personProfileController.isGeneralDataDisabled}" />
+						</div>	
 						<br />
+						<div>
 						<h:outputText value="Apellido Pateno: " style="color: #0174DF" />
 						<rich:inplaceInput id="txtFirsName"
 							value="#{personProfileController.person.middleName}" size="50"
 							defaultLabel="Click para ingresar su apellido paterno"
 							disabled="#{personProfileController.isGeneralDataDisabled}" />
+						</div>
 						<br />
+						<div>
 						<h:outputText value="Apellido Materno: " style="color: #0174DF" />
 						<rich:inplaceInput id="txtMiddleName"
 							value="#{personProfileController.person.lastName}" size="50"
 							defaultLabel="Click para ingresar su apellido materno "
 							disabled="#{personProfileController.isGeneralDataDisabled}" />
+						</div>
 						<br />
+						<div>
 						<h:outputText value="CURP: " style="color: #0174DF" />
 						<rich:inplaceInput id="txtIn"
 							value="#{personProfileController.person.nin}" size="50"
 							defaultLabel="Click para ingresar su CURP "
 							disabled="#{personProfileController.isGeneralDataDisabled}" />
+						</div>
 						<br />
+						<div>
 						<h:outputText value="RFC: " style="color: #0174DF" />
 						<rich:inplaceInput id="txtTaxId"
 							value="#{personProfileController.person.taxid}" size="50"
 							defaultLabel="Click para ingres su RFC "
 							disabled="#{personProfileController.isGeneralDataDisabled}" />
+						</div>
 						<br />
+						<div>
 						<h:outputText value="Numero De Seguro Social: "
 							style="color: #0174DF" />
 						<rich:inplaceInput id="txtSsn"
 							value="#{personProfileController.person.ssn}" size="50"
 							defaultLabel="Click para ingresar el numero del seguro social"
 							disabled="#{personProfileController.isGeneralDataDisabled}" />
+						</div>
 						<br />
+						<div>
 						<h:outputText value="Estado Civil:" style="color: #0174DF" />
 						<rich:select enableManualInput="true" id="txtstateCivil"
 							defaultLabel="Click para indicar el estado civil"
@@ -91,7 +104,9 @@
                             disabled="#{personProfileController.isGeneralDataDisabled}">
 							<f:selectItems value="#{personProfileController.stateCivilOptions}" />
 						</rich:select>
+						</div>
 						<br />
+						<div>
 						<h:outputText value="Genero: " style="color: #0174DF" />
 						<rich:select enableManualInput="true" id="txtgender"
 							defaultLabel="Click para indicar el genero"
@@ -101,13 +116,17 @@
                             disabled="#{personProfileController.isGeneralDataDisabled}">
 							<f:selectItems value="#{personProfileController.genderOptions}" />
 						</rich:select>
+						</div>
 						<br />
+						<div>
 						<h:outputText value="Lugar De Nacimiento:" style="color: #0174DF" />
 						<rich:inplaceInput id="txtBirthplace"
 							value="#{personProfileController.person.birthPlace}" size="50"
 							defaultLabel="Click para ingresar lugar de nacimiento"
 							disabled="#{personProfileController.isGeneralDataDisabled}" />
+						</div>
 						<br />
+						<div>
 						<h:outputText value="Tipo De Sangre:" style="color: #0174DF" />
 						<rich:select enableManualInput="true" id="txtbloodType"
 						    defaultLabel="Click para ingresar su tipo de sangre"
@@ -115,7 +134,8 @@
 							value="#{personProfileController.person.bloodTypeId}" size="50"
 						    disabled="#{personProfileController.isGeneralDataDisabled}">
 							<f:selectItems value="#{personProfileController.bloodTypeOptions}" />
-						</rich:select>	
+						</rich:select>
+						</div>	
 						<!-- Input BirthDay field -->
 						<br />
 						<h:panelGrid columns="3">
@@ -133,6 +153,17 @@
 								disabled="#{personProfileController.isGeneralDataDisabled}"
 								style="color: #0174DF" />¿Desea mostrar su fecha de nacimiento?
 				    </h:panelGrid>
+
+
+						<!-- ######################### -->
+						<br />
+						<my:personSkill skill="#{skillController.skill}"
+							skills="#{skillController.skills}"
+							findSkillNameAction="#{skillController.findSkillName()}"
+							editSkillAction="#{skillController.editSkill()}"
+							saveSkillAction="#{skillController.saveSkill()}"
+							cancelSkillAction="#{skillController.cancelSkill()}" />
+						<!-- ######################### -->
 					</a4j:outputPanel>
 					<!-- Input BirthDay field -->
 					<h:panelGrid columns="2" id="btnEventsGeneralDataGrid">

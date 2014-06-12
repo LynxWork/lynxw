@@ -27,11 +27,6 @@
    <PROCESS-ITEM-OUTPUT ID="test::#view#hcm#profile#test.xhtml"
     NAME="output5" PATH="/view/hcm/profile/test.xhtml"
     TARGET="rules:#view#hcm#profile#test.xhtml" TITLE="test" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="dataGeneral::#view#hcm#profile#personProfile.xhtml"
-    NAME="output2" PATH="/view/hcm/profile/personProfile.xhtml"
-    TARGET="rules:#view#hcm#profile#personProfile.xhtml"
-    TITLE="dataGeneral" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#view#security#access#validateLogin.xhtml"
@@ -62,11 +57,6 @@
    <PROCESS-ITEM-OUTPUT ID="account::#view#social#account#account.xhtml"
     NAME="output4" PATH="/view/social/account/account.xhtml"
     TARGET="rules:#view#social#account#account.xhtml" TITLE="account" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="personProfile::#view#hcm#profile#personProfile.xhtml"
-    NAME="output5" PATH="/view/hcm/profile/personProfile.xhtml"
-    TARGET="rules:#view#hcm#profile#personProfile.xhtml"
-    TITLE="personProfile" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#view#social#publication#publication.xhtml"
@@ -74,7 +64,21 @@
  <PROCESS-ITEM NAME="rules:#view#social#message#message.xhtml"
   PATH="/view/social/message/message.xhtml" SHAPE="304,961,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#view#social#account#account.xhtml"
-  PATH="/view/social/account/account.xhtml" SHAPE="304,1073,0,0" model-entity="JSFProcessGroup"/>
+  PATH="/view/social/account/account.xhtml" SHAPE="304,1073,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#view#social#account#account.xhtml:0"
+   NAME="item" PATH="/view/social/account/account.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="personProfile::#view#hcm#profile#personProfile.xhtml"
+    NAME="output" PATH="/view/hcm/profile/personProfile.xhtml"
+    TARGET="rules:#view#hcm#profile#personProfile.xhtml"
+    TITLE="personProfile" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="product::#view#hcm#profile#product.xhtml"
+    NAME="output1" PATH="/view/hcm/profile/product.xhtml"
+    TARGET="rules:#view#hcm#profile#product.xhtml" TITLE="product" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#view#social#alert#alert.xhtml"
   PATH="/view/social/alert/alert.xhtml" SHAPE="304,625,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#view#hcm#profile#product.xhtml"
+  PATH="/view/hcm/profile/product.xhtml" SHAPE="528,1281,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
