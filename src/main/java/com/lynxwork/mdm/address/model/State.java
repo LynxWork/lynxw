@@ -7,7 +7,8 @@ public class State implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4570811340302053760L;
+private static final long serialVersionUID = 4570811340302053760L;
+
 	private String stateId;
 	private String name;
 	private String code;

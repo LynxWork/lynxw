@@ -192,8 +192,8 @@ public class ProductController implements Serializable {
 	
 	//product
 		public String viewProduct(){
-			log.debug("viewProduct");
-			return "viewProduct";
+			log.debug("Product");
+			return "product";
 		}
 		
 }
