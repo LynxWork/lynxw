@@ -32,7 +32,7 @@
         }
     </h:outputStylesheet>
 
-		<rich:panel style="width:924px; height:500px">
+		<rich:panel style="width:924px; height:700px">
 			<f:facet name="header">
 				<h:outputText value="Datos generales"></h:outputText>
 			</f:facet>
@@ -153,17 +153,6 @@
 								disabled="#{personProfileController.isGeneralDataDisabled}"
 								style="color: #0174DF" />¿Desea mostrar su fecha de nacimiento?
 				    </h:panelGrid>
-
-
-						<!-- ######################### -->
-						<br />
-						<my:personSkill skill="#{skillController.skill}"
-							skills="#{skillController.skills}"
-							findSkillNameAction="#{skillController.findSkillName()}"
-							editSkillAction="#{skillController.editSkill()}"
-							saveSkillAction="#{skillController.saveSkill()}"
-							cancelSkillAction="#{skillController.cancelSkill()}" />
-						<!-- ######################### -->
 					</a4j:outputPanel>
 					<!-- Input BirthDay field -->
 					<h:panelGrid columns="2" id="btnEventsGeneralDataGrid">
@@ -187,6 +176,15 @@
 					</h:panelGrid>
 				</h:panelGrid>
 			</h:form>
+			<!-- ######################### -->
+						<br />
+						<my:personSkill skill="#{skillController.skill}"
+							skills="#{skillController.skills}"
+							findSkillNameAction="#{skillController.findSkillName()}"
+							editSkillAction="#{skillController.editSkillName()}"
+							saveSkillAction="#{skillController.saveSkillName()}"
+							cancelSkillAction="#{skillController.cancelSkillName()}" />
+						<!-- ######################### -->
 		</rich:panel>
 		
 	</ui:define>

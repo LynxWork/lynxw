@@ -58,7 +58,6 @@ public class UserDao implements IUserDao{
 			searchQuery.put("email", email);
 			searchQuery.put("currentsPassword",currentsPassword);
 			DBCursor cursor = findUser.find(searchQuery);
-			log.info("Mongo Collection Size: " + cursor.size());
 			try {
 				while (cursor.hasNext()) {
 					BasicDBObject obj = (BasicDBObject) cursor.next();

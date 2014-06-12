@@ -1,7 +1,14 @@
 package com.lynxwork.hcm.profile.model;
 
-public class SkillType {
+import java.io.Serializable;
 
+public class SkillType implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7084088760201245603L;
+	
 	private String skillTypeId;
 	private String name;
 	private String description;
