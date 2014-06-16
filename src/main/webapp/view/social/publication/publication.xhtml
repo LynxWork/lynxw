@@ -12,8 +12,8 @@
         <h:outputScript target="head" name="showMessage.js" library="js"/>
 		<h:form id="reg">
 		
-		<h:panelGrid columns="3">                    
-<rich:panel >
+<h:panelGrid columns="3" style="position:absolute;left:5px;top:5px;">                    
+<rich:panel  style="position:absolute;left:5px;top:5px;">
 <h:form id="publicationForm">
 						<f:facet name="header">
 							<h:outputText value="Publicar"></h:outputText>
@@ -58,9 +58,10 @@
 			</h:form>
 </rich:panel>
 					
+					
 <rich:panel >
 <h:form id="searchForm">
-					<rich:panel>
+					<rich:panel style="position:absolute;left:250px;top:5px;">
 						<f:facet name="Search">
 							<h:outputText value="Busqueda"></h:outputText>
 						</f:facet> 
@@ -69,7 +70,7 @@
 							        <h:inputText id="txtSearch" value="" maxlength="50" size="50">
 							      	  <rich:validator/>
 							        </h:inputText>
-						            <rich:select selectFirst="true" value="Especialista" enableManualInput="true">
+						            <rich:select selectFirst="true" value="Especialista" enableManualInput="false">
 						                <f:selectItem itemValue="0" itemLabel="Especialista" />
 						                <f:selectItem itemValue="1" itemLabel="Trabajo" />
 						                <f:selectItem itemValue="2" itemLabel="Materiales y Equipo" />
@@ -78,7 +79,7 @@
 									</h:panelGrid>
 					</rich:panel>
 </h:form>
-					<rich:tabPanel switchType="client">
+					<rich:tabPanel switchType="client" style="position:absolute;left:250px;top:65px; width:600px; height:1000px">
 						<rich:tab header="Publicaciones">
 <!-- ###############################LIST OF RELEVANT PUBLICATIONS##############################3 -->
 <a4j:outputPanel id="publicationsArea">
@@ -95,7 +96,7 @@
 									<div><h:outputText value="#{publication.description}" styleClass="fieldText" /></div>
 										<rich:dataGrid columns="1"
 											value="#{publication.comments}" var="comment"
-											rowKeyVar="row" id="ocupationDataGrid">
+											rowKeyVar="row" id="ocupationDataGrid" style="width:495px; height:1000px">
 															<h:panelGrid columns="2">
 															    <div><h:outputText value="#{comment.user.nickname}" styleClass="fieldText" /></div>
 																<div><h:outputText value="#{comment.description}" styleClass="fieldText" /></div>
@@ -118,7 +119,7 @@
 				</rich:panel>
 				
 				
-			<rich:panel>
+			<rich:panel style="position:absolute;left:860px;top:65px; width:300px; height:600px">
 			<rich:panel>
 						<f:facet name="header">
 							<h:outputText value="Perfil" />
