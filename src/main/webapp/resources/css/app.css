@@ -49,6 +49,7 @@ p {
     height: 72px;
     left:0; 
     border:1px solid #CCCCCC;
+    z-index: 3;
 }
 #header .logo {
     float: none;
@@ -128,31 +129,35 @@ p {
 }
 
 
-
-#page-content {
+/*
     background: url('#{facesContext.externalContext.requestContextPath}/images/page-bg.png') 0 0 repeat-y;
-    height: 100%;
-    min-height: 650px;
-    top: 85px;
-    position:relative;
+    position:absolute;
     padding: 13px 20px 5px;
+        min-height: 0px;
+*/
+#page-content {
+    height: 90%;
+    width:90%;
+    top: 85px;
+    position:absolute;
+  	margin:0 auto 0 auto;
 }
 #page-content .left-menu {
     float: left;
     margin-right: 10px;
-    min-height: 450px;
-    width: 235px;
+    min-height: 0px;
+    width: 0px;
 }
 #page-content .content-container {
-    float: right;
-    width: 800x;
+    float: none;
+    width: 1200px;
 }
 #page-content .content-container fieldset.example-cnt {
     background: #ffffff;
     border: 1px solid #dddddd;
     border-top: 0;
     margin: 0;
-    min-height: 470px;
+    min-height: 0px;
     padding: 15px 20px 10px;
 }
 
