@@ -27,7 +27,6 @@ public class BloodTypeDao implements IBloodTypeDao {
 	}
 	
 	public void save(BloodType bloodType){
-		  boolean resval = false;
 		  //Se inserta 
 		  DBCollection collection = db.getCollection( ENTITY_NAME );
 		  BasicDBObject document = new BasicDBObject();
@@ -95,7 +94,7 @@ public class BloodTypeDao implements IBloodTypeDao {
 		bloodType.setObservations( obj.getString("observations") );
 		bloodType.setCreateData( obj.getString("createData") );
 		bloodType.setCreatorId( obj.getString("creatorId") );
-		bloodType.setCreatoIp( obj.getString("creatoIp") );
+		bloodType.setCreatorIp( obj.getString("creatorIp") );
 		bloodType.setLastUpdateDate( obj.getString("lastUpdateDate") );
 		bloodType.setLastUpdaterId( obj.getString("lastUpdaterId") );
 		bloodType.setLastUpdaterIp( obj.getString("lastUpdaterIp") );
@@ -115,7 +114,7 @@ public class BloodTypeDao implements IBloodTypeDao {
 		document.put("observations", bloodType.getObservations() );
 		document.put("createData", bloodType.getCreateData() );
 		document.put("creatorId", bloodType.getCreatorId() );
-		document.put("creatoIp", bloodType.getCreatoIp() );
+		document.put("creatorIp", bloodType.getCreatorIp() );
 		document.put("lastUpdaterId", bloodType.getLastUpdaterId() );
 		document.put("lastUpdaterIp", bloodType.getLastUpdaterIp() );
 		document.put("countryId", bloodType.getCountryId() );

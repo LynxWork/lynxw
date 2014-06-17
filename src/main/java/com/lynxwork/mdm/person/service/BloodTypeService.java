@@ -12,7 +12,6 @@ import com.lynxwork.mdm.person.model.BloodType;
 
 public class BloodTypeService {
 	static final Logger log = Logger.getLogger(BloodTypeService.class);
-	
 	public List<BloodType> findByCountry(String countryId){
 		log.info("init findByCountry");
 		List<BloodType> bloodTypeList = new ArrayList<BloodType>();

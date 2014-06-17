@@ -13,7 +13,7 @@ public class BloodType implements Serializable {
 	private String observations;
 	private String createData;
 	private String creatorId;
-	private String creatoIp;
+	private String creatorIp;
 	private String lastUpdateDate;
 	private String lastUpdaterId;
 	private String lastUpdaterIp;
@@ -55,11 +55,11 @@ public class BloodType implements Serializable {
 	public void setCreatorId(String creatorId) {
 		this.creatorId = creatorId;
 	}
-	public String getCreatoIp() {
-		return creatoIp;
+	public String getCreatorIp() {
+		return creatorIp;
 	}
-	public void setCreatoIp(String creatoIp) {
-		this.creatoIp = creatoIp;
+	public void setCreatorIp(String creatorIp) {
+		this.creatorIp = creatorIp;
 	}
 	public String getLastUpdaterId() {
 		return lastUpdaterId;

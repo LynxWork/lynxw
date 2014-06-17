@@ -21,10 +21,12 @@ import com.lynxwork.hcm.profile.service.EducationService;
 import com.lynxwork.mdm.factory.impl.mongo.MongoMasterDataDaoFactory;
 import com.lynxwork.mdm.person.dao.ICivilStatusDao;
 import com.lynxwork.mdm.person.dao.IPersonDao;
+import com.lynxwork.mdm.person.model.BirthPlace;
 import com.lynxwork.mdm.person.model.BloodType;
 import com.lynxwork.mdm.person.model.CivilStatus;
 import com.lynxwork.mdm.person.model.Gender;
 import com.lynxwork.mdm.person.model.Person;
+import com.lynxwork.mdm.person.service.BirthPlaceService;
 import com.lynxwork.mdm.person.service.BloodTypeService;
 import com.lynxwork.mdm.person.service.CivilStatusService;
 import com.lynxwork.mdm.person.service.GenderService;
@@ -62,6 +64,11 @@ public class PersonProfileController implements Serializable {
 	private List<SelectItem> bloodTypeOptions = null; //List of BloodType acepted
 	private List<BloodType> bloodTypeCatList; //BloodType calatoge from database
 	private List<BloodType> bloodTypeList; //Add BloodType
+	//birthplace
+	private List<SelectItem> birthPlaceOptions = null; //List of BirthPlace acepted
+	private List<BirthPlace> birthPlaceCatList; //BirthPlace calatoge from database
+	private List<BirthPlace> birthPlaceList; //Add BirthPlace
+	
 	//Accion control Genaral 
 	private boolean isGeneralDataDisabled  = true;
 	private boolean isBtnCancelRendered = false;
@@ -104,12 +111,7 @@ public class PersonProfileController implements Serializable {
 	 private String pattern;
 	 private boolean showApply = true;
 	 private boolean useCustomDayLabels;
-	 private boolean disabled = false;
-	 
-
-
-	 
-	
+	 private boolean disabled = false;	
 	@PostConstruct
     public void init() {
 		log.debug("******initNewMember");
@@ -694,6 +696,55 @@ public class PersonProfileController implements Serializable {
 
 	public void setGenderList(List<Gender> genderList) {
 		this.genderList = genderList;
+	}
+
+
+	public List<SelectItem> getBirthPlaceOptions() {
+		log.info("init getStateCivilOptions:");
+		birthPlaceList = new ArrayList<BirthPlace>();
+		birthPlaceOptions = new ArrayList<SelectItem>();
+		log.info("Country:" + user.getLastLocale());
+		try{
+    	if( birthPlaceCatList.size()==0){
+    		BirthPlaceService birthPlaceService = new BirthPlaceService();
+    		birthPlaceCatList = birthPlaceService.findByCountry(user.getLastLocale());
+			if(birthPlaceCatList.size()>0){
+		        for (BirthPlace birthPlace : birthPlaceCatList) {
+		        	genderOptions.add(new SelectItem(birthPlace.getCountry(), birthPlace.getState()));
+		        }
+	        }
+		}
+    	}catch(Exception e){
+    		e.printStackTrace();
+    		log.error("No es poible encontrar el estado civil, contacte al administrador del sistema" + e);
+    	}
+		
+		return birthPlaceOptions;
+	}
+
+
+	public void setBirthPlaceOptions(List<SelectItem> birthPlaceOptions) {
+		this.birthPlaceOptions = birthPlaceOptions;
+	}
+
+
+	public List<BirthPlace> getBirthPlaceCatList() {
+		return birthPlaceCatList;
+	}
+
+
+	public void setBirthPlaceCatList(List<BirthPlace> birthPlaceCatList) {
+		this.birthPlaceCatList = birthPlaceCatList;
+	}
+
+
+	public List<BirthPlace> getBirthPlaceList() {
+		return birthPlaceList;
+	}
+
+
+	public void setBirthPlaceList(List<BirthPlace> birthPlaceList) {
+		this.birthPlaceList = birthPlaceList;
 	}
 
 

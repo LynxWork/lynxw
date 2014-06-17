@@ -1,41 +1,42 @@
 package com.lynxwork.mdm.person.model;
 
 import java.io.Serializable;
-import java.util.Date;
+
 import com.lynxwork.mdm.address.model.Country;
 import com.lynxwork.mdm.address.model.State;
+
 public class BirthPlace implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5480202302417877612L;
-	
 	private Country country;
-	private State state;
-	private String descriptions;
-	private String observations;
-	private String createDate;
-	private String countryId;
-	private String creatorId;
-	private String creatorIp;
-	private Date lastUpdateDate;
-	private String lastUpdaterId;
-	private String lastUpdaterIp;
+	private State   state;
+	private String  description;
+	private String  observation;
+	private String  createDate;
+	private String  countryId;
+	private String  creatorId;
+	private String  creatorIp;
+	private String  lastUpdateDate;
+	private String  lastUpdaterId;
+	private String  lastUpdaterIp;
 	
 	
 	
 	
-	public String getDescriptions() {
-		return descriptions;
+	
+	public String getDescription() {
+		return description;
 	}
-	public void setDescriptions(String descriptions) {
-		this.descriptions = descriptions;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public String getObservations() {
-		return observations;
+	public String getObservation() {
+		return observation;
 	}
-	public void setObservations(String observations) {
-		this.observations = observations;
+	public void setObservation(String observation) {
+		this.observation = observation;
 	}
 	public String getCreateDate() {
 		return createDate;
@@ -61,10 +62,10 @@ public class BirthPlace implements Serializable {
 	public void setCreatorIp(String creatorIp) {
 		this.creatorIp = creatorIp;
 	}
-	public Date getLastUpdateDate() {
+	public String getLastUpdateDate() {
 		return lastUpdateDate;
 	}
-	public void setLastUpdateDate(Date lastUpdateDate) {
+	public void setLastUpdateDate(String lastUpdateDate) {
 		this.lastUpdateDate = lastUpdateDate;
 	}
 	public String getLastUpdaterId() {
@@ -79,6 +80,7 @@ public class BirthPlace implements Serializable {
 	public void setLastUpdaterIp(String lastUpdaterIp) {
 		this.lastUpdaterIp = lastUpdaterIp;
 	}
+	
 	public Country getCountry() {
 		return country;
 	}
@@ -91,5 +93,4 @@ public class BirthPlace implements Serializable {
 	public void setState(State state) {
 		this.state = state;
 	}
-	
 }

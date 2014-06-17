@@ -120,10 +120,13 @@
 						<br />
 						<div>
 						<h:outputText value="Lugar De Nacimiento:" style="color: #0174DF" />
-						<rich:inplaceInput id="txtBirthplace"
-							value="#{personProfileController.person.birthPlace}" size="50"
-							defaultLabel="Click para ingresar lugar de nacimiento"
+						<rich:select enableManualInput="true" id="txtBirthplace"
+						    defaultLabel="Click para ingresar lugar de nacimiento"
+						    openOnEdit="true"
+							value="#{personProfileController.person.birthPlace}"
+							style="width:195px;"
 							disabled="#{personProfileController.isGeneralDataDisabled}" />
+							<f:selectItems value="#{personProfileController.birthPlaceOptions}" />
 						</div>
 						<br />
 						<div>
